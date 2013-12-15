@@ -54,7 +54,7 @@ class SignPresenter extends BasePresenter
 			}
 			$this->getUser()->login($values->login, $values->password);
 			
-			$this->getApplication()->restoreRequest($this->backlink);
+			$this->restoreRequest($this->backlink);
 			$this->flashMessage('You have been succesfully logged in.', 'success');
             $this->redirect(307, 'Home:');
 		} catch (NS\AuthenticationException $e) {

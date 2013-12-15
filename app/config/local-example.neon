@@ -1,0 +1,10 @@
+nette:
+	database:
+		default:
+			dsn: 'mysql:host=127.0.0.1;dbname=DATABASE'
+			user: USERNAME
+			password: PASSWORD
+
+	security:
+		users:
+			LOGIN: PASSWORD

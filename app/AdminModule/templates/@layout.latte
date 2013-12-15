@@ -15,25 +15,25 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css" type="text/css" />
 	<script src="{$basePath}/js/netteForms.js"></script>
-	{control texyla}	
+	{control texyla}
 	<script>
 		$(function(){
 			$(".delete-dialog").click(function(){
 				return confirm("Are you sure you want to delete this item?");
 			});
 		});
-	</script>	
+	</script>
 </head>
 
 <body>
-<div id="all">	
+<div id="all">
 	<header>
 		<a n:href="Home:" id="logo">
 			Miranda NG
 			<br><span class="subtitle">Administration of website</a>
-		
+
 		<menu class="main" n:inner-foreach="$menu as $id => $item">
-			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" {if $id[0] == "/"}href="{$id}"{else}n:href="$id"{/if}>{$item}</a></li>
+			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" href="{if $id[0] == "/"}{$id}{else}{plink $id}{/if}">{$item}</a></li>
 		</menu>
 
 		<p class="rfloat loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href="Sign:out">Logout</a></p>
@@ -41,7 +41,7 @@
 
 	<section class="admin">
 		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-	
+
 		<h1 n:ifset="$title" n:if="!isset($noTitle)">{$title}</h1>
 		{include #content}
 	</section>

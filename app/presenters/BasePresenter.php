@@ -95,7 +95,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			"filesDeletePath" => $this->link("Texyla:delete"),
 		));
 
-		$texyla = new TexylaLoader($filter, $baseUri."webtemp");
+		$texyla = new TexylaLoader($filter, $baseUri."webtemp", $this->context->parameters["wwwDir"]);
 		return $texyla;
 	}
 	

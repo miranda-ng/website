@@ -6,7 +6,7 @@
 
 $this->allowed['emoticon'] = true;
 
-$this->emoticonModule->root = '/emoticons/texy/';
+$this->emoticonModule->root = '/js/texyla/emoticons/texy/';
 $this->emoticonModule->fileRoot = dirname(__FILE__);
 $this->emoticonModule->icons = array(
 	':-)' => 'smile.gif',

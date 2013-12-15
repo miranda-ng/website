@@ -84,9 +84,12 @@ class Macros
 	{				
 		$name = $data[0];
 		$media = isset($data[1]) ? $data[1] : "screen,projection,tv";
-				
-		$in = WWW_DIR . "/iss/" . $name . ".iss";	
-		$dir = WWW_DIR . "/css";
+
+		// FIXME: write it better
+		$wwwDir = __DIR__ . "/../";
+		
+		$in = $wwwDir . "/iss/" . $name . ".iss";	
+		$dir = $wwwDir . "/css";
 		if (!file_exists($dir) && !mkdir($dir))
 			throw new \RuntimeException("Can't create '$dir' directory for css.");
 		

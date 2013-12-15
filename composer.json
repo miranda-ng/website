@@ -1,0 +1,23 @@
+{
+	"name": "robyer/miranda-ng",
+	"description": "Miranda-ng.org website",
+	"homepage": "http://miranda-ng.org",
+	"type": "project",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Robert Pösel",
+			"email": "robyer@seznam.cz",
+			"homepage": "http://www.robyer.cz"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0",
+		"nette/nette": "2.1.0-RC3",
+		"dg/texy": ">=2.3",
+		"enumag/ivory": "@dev",
+		"janmarek/webloader": "@dev",
+		"dg/ftp-deployment": ">=1.1",
+		"dg/adminer-custom": "1.*"
+	}
+}

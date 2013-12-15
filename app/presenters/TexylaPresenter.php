@@ -23,6 +23,12 @@ class TexylaPresenter extends BasePresenter
 	/** @var string */
 	private $tempUri;
 
+	/** @var \Texy @inject */
+	public $texy;
+
+	/** @var \Nette\Http\IRequest @inject */
+	public $httpRequest;
+
 
 	/**
 	 * Startup
@@ -30,11 +36,10 @@ class TexylaPresenter extends BasePresenter
 	public function startup()
 	{
 		parent::startup();
-		$texy = $this->getService('Texy');
-		$this->baseFolderPath = $texy->imageModule->fileRoot;
-		$this->baseFolderUri = $texy->imageModule->root;
-		$this->tempDir = TEMP_DIR;
-		$this->tempUri = $this->template->basePath . "/temp";
+		$this->baseFolderPath = $this->texy->imageModule->fileRoot;
+		$this->baseFolderUri = $this->texy->imageModule->root;
+		$this->tempDir = $this->context->parameters["wwwDir"] . "/cache";
+		$this->tempUri = $this->template->basePath . "/cache";
 	}
 
 
@@ -44,9 +49,7 @@ class TexylaPresenter extends BasePresenter
 	 */
 	public function actionPreview()
 	{
-		$texy = $this->getService('Texy');
-		$httpRequest = $this->context->httpRequest;
-		$html = $texy->process($httpRequest->getPost("texy"));
+		$html = $this->texy->process($this->httpRequest->getPost("texy"));
 		$this->sendResponse(new TextResponse($html));
 	}
 
@@ -207,15 +210,13 @@ class TexylaPresenter extends BasePresenter
 	 */
 	public function actionUpload()
 	{
-		$httpRequest = $this->context->httpRequest;
-		
 		// check user rights
 //		if (!Environment::getUser()->isAllowed("files", "upload")) {
 //			$this->sendError("Access denied.");
 //		}
 
 		// path
-		$folder = $httpRequest->getPost("folder");
+		$folder = $this->httpRequest->getPost("folder");
 
 		try {
 			$folderPath = $this->getFolderPath($folder);
@@ -224,7 +225,7 @@ class TexylaPresenter extends BasePresenter
 		}
 
 		// file
-		$file = $httpRequest->getFile("file");
+		$file = $this->httpRequest->getFile("file");
 
 		// check
 		if ($file === null || !$file->isOk()) {

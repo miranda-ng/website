@@ -1,0 +1,22 @@
+nette:
+	application:
+		debugger: true
+		catchExceptions: false
+
+	routing:
+		debugger: true
+
+	security:
+		debugger: true
+
+	container:
+		debugger: true
+
+	session:
+		debugger: false
+
+	debugger:
+		strictMode: true
+		showLocation: true
+		maxLen: 250
+		maxDepth: 3

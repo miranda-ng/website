@@ -13,13 +13,17 @@ use Nette\Templating\FileTemplate, Nette\Latte\Engine;
  */
 class MyTexy extends Texy
 {
+	private $templatesDir;
+	
 	/**
 	 * Construct
 	 */
-	public function __construct($baseUri)
+	public function __construct($wwwDir, $baseUrl)
 	{
 		parent::__construct();
 
+		$this->templatesDir = __DIR__ . "/templates";
+		
 		// output
 		$this->setOutputMode(self::HTML5);
 		$this->htmlOutputModule->removeOptional = false;
@@ -35,17 +39,24 @@ class MyTexy extends Texy
 		$this->allowed['phrase/sub'] = true;   // __subscript__
 		$this->allowed['phrase/cite'] = true;   // ~~cite~~
 		$this->allowed['deprecated/codeswitch'] = true; // `=code
+		
 
 		// images
-		$this->imageModule->fileRoot = WWW_DIR . "/files";
-		$this->imageModule->root = $baseUri . "/files/";
-
+		$this->imageModule->fileRoot = $wwwDir . "/files";
+		$this->imageModule->root = $baseUrl . "/files/";
+		
+		// smileys
+		$this->allowed['emoticon'] = true;
+		require $wwwDir . "/js/texyla/emoticons/texy/cfg.php";
+		
 		// flash, youtube.com, stream.cz, gravatar handlers
 		$this->addHandler('image', array($this, 'youtubeHandler'));
 		$this->addHandler('image', array($this, 'streamHandler'));
 		$this->addHandler('image', array($this, 'flashHandler'));
 		$this->addHandler("phrase", array($this, "netteLink"));
+		$this->addHandler("phrase", array($this, "targetLink"));
 		$this->addHandler('image', array($this, 'gravatarHandler'));
+		$this->addHandler("image", array($this, "facebookHandler"));
 	}
 
 
@@ -95,6 +106,28 @@ class MyTexy extends Texy
 	}
 
 
+	/**
+	 * @param TexyHandlerInvocation  handler invocation
+	 * @param string
+	 * @param string
+	 * @param TexyModifier
+	 * @param TexyLink
+	 * @return TexyHtml|string|FALSE
+	 */
+	public static function targetLink($invocation, $phrase, $content, $modifier, $link) {
+		// vychozí zpracování Texy
+		$el = $invocation->proceed();
+
+		// ověř, že $el je objekt TexyHtml a že jde o element 'a'
+		if ($el instanceof TexyHtml && $el->getName() === 'a') {
+			// uprav jej
+			$el->attrs['target'] = '_blank';
+		}
+
+		return $el;
+	}
+
+
 
 	/**
 	 * YouTube handler for images
@@ -114,7 +147,7 @@ class MyTexy extends Texy
 			return $invocation->proceed();
 		}
 
-		$template = $this->createTemplate()->setFile(APP_DIR . "/templates/inc/@youtube.latte");
+		$template = $this->createTemplate()->setFile($this->templatesDir . "/@youtube.latte");
 		$template->id = $parts[1];
 		if ($image->width) $template->width = $image->width;
 		if ($image->height) $template->height = $image->height;
@@ -140,7 +173,7 @@ class MyTexy extends Texy
 			return $invocation->proceed();
 		}
 
-		$template = $this->createTemplate()->setFile(APP_DIR . "/templates/inc/@flash.latte");
+		$template = $this->createTemplate()->setFile($this->templatesDir . "/@flash.latte");
 		$template->url = Texy::prependRoot($image->URL, $this->imageModule->root);
 		$template->width = $image->width;
 		$template->height = $image->height;
@@ -169,7 +202,7 @@ class MyTexy extends Texy
 			return $invocation->proceed();
 		}
 
-		$template = $this->createTemplate()->setFile(APP_DIR . "/templates/inc/@stream.latte");
+		$template = $this->createTemplate()->setFile($this->templatesDir . "/@stream.latte");
 		$template->id = $parts[1];
 		if ($image->width) $template->width = $image->width;
 		if ($image->height) $template->height = $image->height;
@@ -197,8 +230,34 @@ class MyTexy extends Texy
 			return $invocation->proceed();
 		}
 
-		$template = $this->createTemplate()->setFile(APP_DIR . "/templates/inc/@gravatar.latte");
+		$template = $this->createTemplate()->setFile($this->templatesDir . "/@gravatar.latte");
 		$template->email = $parts[1];
+		if ($image->width) $template->width = $image->width;
+		if ($image->height) $template->height = $image->height;
+
+		return $this->protect((string) $template, Texy::CONTENT_BLOCK);
+	}
+
+	/**
+	 * Facebook video handler for images
+	 *
+	 * @example [* facebook:10200287993704048 *]
+	 *
+	 * @param TexyHandlerInvocation  handler invocation
+	 * @param TexyImage
+	 * @param TexyLink
+	 * @return TexyHtml|string|FALSE
+	 */
+	public function facebookHandler($invocation, $image, $link)
+	{
+		$parts = explode(':', $image->URL, 2);
+
+		if (count($parts) !== 2 || $parts[0] !== "facebook") {
+			return $invocation->proceed();
+		}
+
+		$template = $this->createTemplate()->setFile($this->templatesDir . "/@facebook.latte");
+		$template->id = $parts[1];
 		if ($image->width) $template->width = $image->width;
 		if ($image->height) $template->height = $image->height;
 
