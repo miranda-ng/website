@@ -9,7 +9,7 @@
 	<meta name="author" content="Robert Pösel">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 	<meta name="googlebot" content="snippet,archive">
-	<meta name="description" content="{ifset #description}{include #description|striptags|trim|truncate,250}{else}Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast.{/ifset}">
+	<meta name="description" content="{ifset #description}{include #description|striptags|trim|truncate,250}{else}{_"Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast."}{/ifset}">
 	<meta name="keywords" content="miranda, messenger, chat, windows, facebook, skype, twitter, jabber, icq, irc, chat">
 	<title>{ifset #title}{include #title|striptags|trim} - {/ifset}{$sufix}</title>
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
@@ -26,7 +26,7 @@
 	<header>
 		<a n:href="Home:" id="logo">
 			Miranda NG
-			<br><span class="subtitle">Next Generation of Miranda IM</span></a>
+			<br><span class="subtitle">{_"Next Generation of Miranda IM"}</span></a>
 
 		<menu class="main" n:inner-foreach="$menu as $id => $item">
 			{var $href = ($id[0] == "/") ? $id : $presenter->link($id)}
@@ -40,7 +40,7 @@
 			</a>
 		</div>
 
-		<p n:if="$user->isLoggedIn()" class="loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href=":Admin:Sign:out">Logout</a></p>
+		<p n:if="$user->isLoggedIn()" class="loginbox">{_"Logged in as"} <strong>{$user->id}</strong> | <a n:href=":Admin:Sign:out">{_"Logout"}</a></p>
 	</header>
 
 	<section>
@@ -59,7 +59,7 @@
 
 	<footer>
 		<p class="copyright">
-			Copyright &copy; {$copy} Miranda NG. Website by <a href="http://www.robyer.cz" target="_blank">Robert Pösel</a>.
+			Copyright &copy; {$copy} Miranda NG. {_"Website by"} <a href="http://www.robyer.cz" target="_blank">Robert Pösel</a>.
 		</p>
 	</footer>
 

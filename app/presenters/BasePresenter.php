@@ -53,19 +53,19 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		);
 
 		$this->template->menu = array(
-			"Home:" => "Home",
-			"News:" => "News",
-			//"About:" => "About",
-			"Downloads:" => "Downloads",
-			"Development:" => "Development",
+			"Home:" => $this->translator->translate("Home"),
+			"News:" => $this->translator->translate("News"),
+			//"About:" => $this->translator->translate("About"),
+			"Downloads:" => $this->translator->translate("Downloads"),
+			"Development:" => $this->translator->translate("Development"),
 			//"//wiki.miranda-ng.org/index.php?title=Download" => "Downloads",
-			"//wiki.miranda-ng.org" => "Wiki",
+			"//wiki.miranda-ng.org" => $this->translator->translate("Wiki"),
 			//"Forums:" => "Forums",
-			"//forum.miranda-ng.org/" => "Forum",
+			"//forum.miranda-ng.org/" => $this->translator->translate("Forum"),
 		);
 
 		if ($this->user->isLoggedIn()) {
-			$this->template->menu["Admin:Home:"] = "Admin";
+			$this->template->menu["Admin:Home:"] = $this->translator->translate("Admin");
 		}
 
 		$quotes = array();

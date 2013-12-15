@@ -36,9 +36,10 @@
 			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" href="{if $id[0] == "/"}{$id}{else}{plink $id}{/if}">{$item}</a></li>
 		</menu>
 
-		<div class="languages" n:inner-foreach="$langs as $lang">
-			<a n:class="$presenter->lang == $lang->id ? active" n:href="this, lang => $lang->id" title="{$lang->title}">
+		<div class="languages">
+			<a n:foreach="$langs as $lang" n:class="$presenter->lang == $lang->id ? active" n:href="this, lang => $lang->id" title="{$lang->title}">
 				<img src="{$basePath}/images/flags/{$lang->icon}.png" alt="{$lang->title}">
+				{$lang->title}
 			</a>
 		</div>
 

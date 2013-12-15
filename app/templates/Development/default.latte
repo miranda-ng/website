@@ -6,15 +6,15 @@
 
 {!$page->content|texy}
 
-<h2>Latest changes</h2>
+<h2>{_"Latest changes"}</h2>
 
 <table>
-<tr><th>Date</th>
-<th>Author</th>
-<th>Change</th>
+<tr><th>{_"Date"}</th>
+<th>{_"Author"}</th>
+<th>{_"Change"}</th>
 </tr>
 <?php
-	
+
 	error_reporting(E_ALL && ~E_NOTICE);
 	include "libs/lastRSS.php";
 	$rss = new \lastRSS;
@@ -24,7 +24,7 @@
 	$rss->stripHTML = TRUE;
 	$rss->cache_dir = TEMP_DIR;
 	$rss->CDATA = 'content';
-	
+
 	$value = "http://trac.miranda-ng.org/log/?format=rss&limit=30&mode=stop_on_copy&verbose=on";
 	$data = array();
 	if ($rs = $rss->get($value)) {
@@ -34,15 +34,15 @@
 				<td><?php echo $item["pubDate"]; ?></td>
 				<td><?php echo $item["dc:creator"]; ?></td>
 				<td><a href="<?php echo $item["link"];?>"><?php echo nl2br(trim($item["description"]));?></a></td>
-				</tr>						
+				</tr>
 			<?php
 		}
 
 	} else {
 		echo "Error when downloading<br>";
 	}
-	
+
 ?>
 </table>
 
-<a href="http://trac.miranda-ng.org/log/" title="Revision log" class="rfloat">&raquo; Show complete log</a>
+<a href="http://trac.miranda-ng.org/log/" title="Revision log" class="rfloat">&raquo; {_"Show complete log"}</a>
