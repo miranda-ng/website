@@ -96,7 +96,7 @@ class Macros
 		$out = $dir . '/' . $name . '.css';		
 		
 		if (self::issCheck(dirname($in), $out)) {
-			$ivory = new \Ivory\StyleSheets\Compiler();
+			$ivory = new \Ivory\Compiler();
 			$ivory->outputDirectory = $dir;
 			//$ivory->setDefaultUnit('px');
 			$ivory->addFunction('img', function (array $value) {
