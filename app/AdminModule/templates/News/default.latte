@@ -1,9 +1,17 @@
 {block content}
 
-<a class="" n:href="add">Add news</a>
+<h1 n:inner-block="title">{_"News"}</h1>
+
+<a n:if="$original" class="rfloat" n:href="add">{_"Add news"}</a>
+
+{if !$original}<b>(!!!)</b> = {_"missing translation"}{/if}
+<hr>
 
 <ol n:inner-foreach="$news as $new">
-	<li>{$new->title}, {$new->date|date,'j.n.Y'}
-		<p><a n:href="edit, $new->id">Edit</a> | <a class="delete-dialog" n:href="delete, $new->id">Delete</a></p>
+	{var $new_content = $presenter->getNewsData($new)}
+	<li><b n:if="!$original && $new_content->lang == en">(!!!) </b>
+		{$new_content->title}, {$new->date|date,'j.n.Y'}
+		<p><a n:href="edit, $new->id">{_"Edit"}</a>
+			{if $original}| <a class="delete-dialog" n:href="delete, $new->id">{_"Delete"}</a>{/if}</p>
 	</li>
 </ol>

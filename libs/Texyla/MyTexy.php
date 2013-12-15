@@ -14,7 +14,7 @@ use Nette\Templating\FileTemplate, Nette\Latte\Engine;
 class MyTexy extends Texy
 {
 	private $templatesDir;
-	
+
 	/**
 	 * Construct
 	 */
@@ -23,13 +23,16 @@ class MyTexy extends Texy
 		parent::__construct();
 
 		$this->templatesDir = __DIR__ . "/templates";
-		
+
 		// output
+		$this->encoding = 'utf-8';
 		$this->setOutputMode(self::HTML5);
 		$this->htmlOutputModule->removeOptional = false;
 		self::$advertisingNotice = false;
 
 		// headings
+		$this->headingModule->top = 2;
+		$this->headingModule->generateID = true;
 		$this->headingModule->balancing = TexyHeadingModule::FIXED;
 
 		// phrases
@@ -39,16 +42,19 @@ class MyTexy extends Texy
 		$this->allowed['phrase/sub'] = true;   // __subscript__
 		$this->allowed['phrase/cite'] = true;   // ~~cite~~
 		$this->allowed['deprecated/codeswitch'] = true; // `=code
-		
 
 		// images
 		$this->imageModule->fileRoot = $wwwDir . "/files";
 		$this->imageModule->root = $baseUrl . "/files/";
-		
+
+		// security
+		$this->urlSchemeFilters[Texy::FILTER_ANCHOR] = '#https?:|ftp:|mailto:|xmpp:#A';
+		$this->urlSchemeFilters[Texy::FILTER_IMAGE] = '#https?:#A';
+
 		// smileys
 		$this->allowed['emoticon'] = true;
 		require $wwwDir . "/js/texyla/emoticons/texy/cfg.php";
-		
+
 		// flash, youtube.com, stream.cz, gravatar handlers
 		$this->addHandler('image', array($this, 'youtubeHandler'));
 		$this->addHandler('image', array($this, 'streamHandler'));

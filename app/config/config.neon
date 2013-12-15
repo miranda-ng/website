@@ -31,7 +31,6 @@ gettextTranslator:
 	lang: en
 	files:
 		front: %appDir%/langs # for module Front and other non-specified modules
-		admin: %appDir%/AdminModule/langs # for module Admin
 	# optional with defaults
 	layout: horizontal # or: vertical
 	height: 450

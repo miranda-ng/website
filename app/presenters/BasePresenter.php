@@ -19,10 +19,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$data = null;
 		$data_default = null;
 
-		$res = $this->context->database->table("{$table}_content")->where("{$table}_id", $item->id)->where("lang", array($this->lang, self::LANG_DEFAULT))->order("lang = ?", $this->lang)->limit(1)->fetch();
+		$res = $this->context->database->table("{$table}_content")->where("{$table}_id", $item->id)->where("lang", array($this->lang, self::LANG_DEFAULT))->order("lang = ? DESC", $this->lang)->limit(1)->fetch();
 		return $res;
 
-
+/*
 		$item2 = clone $item;
 		$res = $item->related("{$table}_content")->where("lang", $this->lang)->limit(1)->fetch();
 		if (!$res) {
@@ -36,7 +36,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			return $data_default;
 		}
 
-		return NULL;
+		return NULL;*/
 	}
 
 	public function getNewsData($item)
@@ -59,7 +59,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->template->sufix = $this->context->parameters["title"];
 
 		$this->template->news_panel = $this->context->database->table("news")->order("date DESC")->limit(3);
-		$this->template->langs = $this->context->database->table("languages")->order("code");
+		$this->template->langs = $this->context->database->table("languages")->order("code = ? DESC, code", self::LANG_DEFAULT);
 
 		$this->template->menu = array(
 			"Home:" => $this->translator->translate("Home"),
@@ -103,7 +103,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
         $template->setTranslator($this->translator);
 
-		return \Macros::setupTemplate($template);
+		return \Macros::setupTemplate($template, $this->context->parameters["wwwDir"]);
 	}
 
 	/**

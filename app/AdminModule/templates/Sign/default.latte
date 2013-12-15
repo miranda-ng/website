@@ -11,7 +11,7 @@
 	<meta name="googlebot" content="snippet,archive">
 	<meta name="description" content="{$description}" n:ifset="$description">
 	<meta name="keywords" content="{$keywords}" n:ifset="$keywords">
-	<title>{ifset $title}{$title} - {/ifset}{$sufix}</title>
+	<title>{$sufix}</title>
 	<link rel="stylesheet" href="{$basePath}/css/admin.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
@@ -21,10 +21,10 @@
 	<div id="login">
 		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
-		<p>To enter administration you must login.</p>
+		<p>{_"To enter administration you must login."}</p>
 		{control signInForm}
 
-		<a n:href=":Home:" style="padding-left: 10px;">Home page</a>
+		<a n:href=":Home:" style="padding-left: 10px;">{_"Home page"}</a>
 	</div>
 </body>
 </html>

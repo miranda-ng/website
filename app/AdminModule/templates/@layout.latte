@@ -5,7 +5,7 @@
 	<meta name="author" content="{$author}" n:ifset="$author">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 	<meta name="description" content="{$description}" n:ifset="$description">
-	<title>{ifset $title}{$title} - {/ifset}{$sufix}</title>
+	<title>{ifset #title}{include #title|striptags} - {/ifset}{$sufix}</title>
 	<link rel="stylesheet" href="{$basePath}/css/admin.css">
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
 	<link rel="stylesheet" href="{$basePath}/js/texyla/css/style.css">
@@ -19,7 +19,7 @@
 	<script>
 		$(function(){
 			$(".delete-dialog").click(function(){
-				return confirm("Are you sure you want to delete this item?");
+				return confirm({_"Are you sure you want to delete this item?"});
 			});
 		});
 	</script>
@@ -30,7 +30,7 @@
 	<header>
 		<a n:href="Home:" id="logo">
 			Miranda NG
-			<br><span class="subtitle">Administration of website</a>
+			<br><span class="subtitle">{_"Administration of website"}</a>
 
 		<menu class="main" n:inner-foreach="$menu as $id => $item">
 			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" href="{if $id[0] == "/"}{$id}{else}{plink $id}{/if}">{$item}</a></li>
@@ -43,19 +43,18 @@
 			</a>
 		</div>
 
-		<p class="loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href="Sign:out">Logout</a></p>
+		<p class="loginbox">{_"Logged in as"} <strong>{$user->id}</strong> | <a n:href="Sign:out">{_"Logout"}</a></p>
 	</header>
 
 	<section class="admin">
 		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
-		<h1 n:ifset="$title" n:if="!isset($noTitle)">{$title}</h1>
 		{include #content}
 	</section>
 
 	<footer>
 		<p class="copyright">
-			Copyright &copy; {$copy} Miranda NG. Website by <a href="http://www.robyer.cz" target="_blank">Robert Pösel</a>.
+			Copyright &copy; {$copy} Miranda NG. {_"Website by"} <a href="http://www.robyer.cz" target="_blank">Robert Pösel</a>.
 		</p>
 	</footer>
 </div>

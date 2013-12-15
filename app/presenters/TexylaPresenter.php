@@ -38,8 +38,8 @@ class TexylaPresenter extends BasePresenter
 		parent::startup();
 		$this->baseFolderPath = $this->texy->imageModule->fileRoot;
 		$this->baseFolderUri = $this->texy->imageModule->root;
-		$this->tempDir = $this->context->parameters["wwwDir"] . "/cache";
-		$this->tempUri = $this->template->basePath . "/cache";
+		$this->tempDir = $this->context->parameters["wwwDir"] . "/webtemp";
+		$this->tempUri = $this->template->basePath . "/webtemp";
 	}
 
 

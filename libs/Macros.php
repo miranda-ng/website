@@ -2,15 +2,15 @@
 
 class Macros
 {
-	
+
 	public static function setupMacros($compiler) {
-		
+
 		$set = new \Nette\Latte\Macros\MacroSet($compiler);
-				
+
 		$set->addMacro('icon','echo ' . __NAMESPACE__ . '\Macros::getIcon($basePath, %node.array);');
 		$set->addMacro('iss','echo ' . __NAMESPACE__ . '\Macros::issCompile($basePath, %node.array);');
 		//$set->addMacro('thumbnail','echo ' . __NAMESPACE__ . '\Macros::thumbnail($dataPath, %node.array);');
-		
+
 		/*
 		Pokud makro není párové, třetí parametr metody addMacro() vynecháme.
 
@@ -23,10 +23,10 @@ class Macros
 
 		Příklad:
 			$set->addMacro('if', 'if (%node.args):', 'endif');
-		*/			
+		*/
 	}
 
-	public static function setupTemplate($template)
+	public static function setupTemplate($template, $wwwDir)
 	{
 		$template->registerHelper('filetype', __NAMESPACE__ . '\Macros::filetype');
 		$template->registerHelper('filesize', __NAMESPACE__ . '\Macros::filesize');
@@ -34,26 +34,13 @@ class Macros
 		$template->registerHelper('filename', __NAMESPACE__ . '\Macros::filename');
 		$template->registerHelper('fileurl', __NAMESPACE__ . '\Macros::fileurl');
 		$template->registerHelper('cke_thumbnails', __NAMESPACE__ . '\Macros::cke_thumbnails');
-		
-		
+
+
 		/* Texy! for articles. */
-		$texy = new Texy();
-		$texy->encoding = 'utf-8';
-        $texy->allowedTags = Texy::NONE;
-        $texy->allowedStyles = Texy::NONE;
-        $texy->setOutputMode(Texy::HTML5);
-		$texy->headingModule->top = 2;
-		$texy->headingModule->generateID = true;
-		
-		// Zabezpečení
-		$texy->urlSchemeFilters[Texy::FILTER_ANCHOR] = '#https?:|ftp:|mailto:|xmpp:#A';
-		$texy->urlSchemeFilters[Texy::FILTER_IMAGE] = '#https?:#A';		
-		// ...
-		// TODO: Nastavit texy pro články.
-		
+		$texy = new MyTexy($wwwDir, $template->baseUrl);
 		$template->registerHelper('texy', callback($texy, 'process'));
 		$template->registerHelper('texy_title', callback($texy, 'processTypo'));
-		
+
 		return $template;
     }
 
@@ -81,20 +68,20 @@ class Macros
 	 * @return string
 	 */
 	public static function issCompile($basePath, $data)
-	{				
+	{
 		$name = $data[0];
 		$media = isset($data[1]) ? $data[1] : "screen,projection,tv";
 
 		// FIXME: write it better
 		$wwwDir = __DIR__ . "/../";
-		
-		$in = $wwwDir . "/iss/" . $name . ".iss";	
+
+		$in = $wwwDir . "/iss/" . $name . ".iss";
 		$dir = $wwwDir . "/css";
 		if (!file_exists($dir) && !mkdir($dir))
 			throw new \RuntimeException("Can't create '$dir' directory for css.");
-		
-		$out = $dir . '/' . $name . '.css';		
-		
+
+		$out = $dir . '/' . $name . '.css';
+
 		if (self::issCheck(dirname($in), $out)) {
 			$ivory = new \Ivory\Compiler();
 			$ivory->outputDirectory = $dir;
@@ -109,10 +96,10 @@ class Macros
 					return array('expression', array('string', "'" . "fonts/" . "'"), array('binary', '.'), $value);
 				}
 			});
-			
+
 			$ivory->addFunction('colorEdit', function (array $value, $color, $substract = false) {
 				if (isset($value[0]) && $value[0] == 'color') {
-					
+
 					if ($substract) {
 						return array(
 							'color',
@@ -132,10 +119,10 @@ class Macros
 					}
 				}
 			});
-			
+
 			$ivory->addFunction('colorAdd', function (array $value, $color) {
 				if (isset($value[0]) && $value[0] == 'color') {
-					
+
 					return array(
 						'color',
 						min(max($value[1] + $color[1], 0),255),
@@ -145,35 +132,35 @@ class Macros
 					);
 				}
 			});
-			
+
 			$ivory->compileFile($in);
 		}
-		
+
 		$ret = \Nette\Utils\Html::el("link");
 		$ret->rel = "stylesheet";
 		$ret->href = $basePath . '/css/' . $name . '.css?t=' . filemtime($out);
 		$ret->media = $media;
-		
+
 		return $ret;
 	}
-	
+
 	public static function getIcon($basePath, $params) {
 		$name = array_shift($params);
 		if (strpos($name, '.') === false) // if filename is without extension, add it
 			$name .= ".png";
-		
+
 		$img = \Nette\Utils\Html::el("img");
 		$img->src = $basePath . "/images/icons/" . $name;
-		
+
 		$img->addAttributes($params);
-				
+
 		if (isset($params["class"]))
-			$img->class .= " ";		
+			$img->class .= " ";
 		$img->class .= "icon";
-		
+
 		return $img;
-	}	
-	
+	}
+
 	public static function cke_thumbnails($text)
 	{
 		$path = dirname(__FILE__) . '/..';
@@ -214,9 +201,9 @@ class Macros
 			$info = pathinfo($url);
 
 			if (!in_array(strtolower($info['extension']), array('jpg', 'jpeg', 'png', 'gif'))) continue;
-			
+
 			$thumb = '/data/thumbs/' /*. substr($info['dirname'], 8) . '/'*/ . $info['filename'] . '_' . $width . 'x' . $height . '.' . $info['extension'];
-			
+
 			if (!file_exists($path . $thumb) || filemtime($path . $url) > filemtime($path . $thumb)) {
 				@mkdir(pathinfo($path . $thumb, PATHINFO_DIRNAME), 0777, TRUE);
 				$img = \Nette\Image::fromFile($path . $url);
@@ -237,21 +224,21 @@ class Macros
 
 		return $text;
 	}
-	
-	public static function thumbnail($dataUrl, array $data) {				
+
+	public static function thumbnail($dataUrl, array $data) {
 		$file = UPLOAD_DIR . $data[0];
-		
-		$file = urldecode($file);		
-		
+
+		$file = urldecode($file);
+
 		if (!is_file($file)) {
 			//throw new \InvalidArgumentException("Invalid or not readable file '$file'.");
-			
-			//return '<img src="/images/picture.jpg" alt="" class="thumbnail">';		
-			return NULL;			
+
+			//return '<img src="/images/picture.jpg" alt="" class="thumbnail">';
+			return NULL;
 		}
 		if (!isset($data["width"]) && !isset($data["height"])) {
 			list($data["width"], $data["height"], $type) = getimagesize($file);
-		} else {			
+		} else {
 			list(,, $type) = getimagesize($file);
 		}
 
@@ -271,7 +258,7 @@ class Macros
 			$image = \Nette\Image::fromFile($file);
 			//if (\Nette\Debug::catchError()) die(1);
 
-			$image->resize($data["width"], $data["height"], $data["flags"]);					
+			$image->resize($data["width"], $data["height"], $data["flags"]);
 			$x = $image->width > $data["width"] ? floor(($image->width - $data["width"]) / 2) : 0;
 			$y = $image->height > $data["height"] ? floor(($image->height - $data["height"]) / 2) : 0;
 
@@ -293,24 +280,24 @@ class Macros
 			$img->title = $data["title"];
 
 		// TODO: $img->addAttributes($params)
-			
+
 		return $img;
 	}
-	
+
 	public static function fileurl($filePath, $file) {
 		return $filePath . $file;
 	}
-	
+
 	public static function fileexists($file) {
 		$file = UPLOAD_DIR . urldecode($file);
 		return (is_file($file));
 	}
-	
-	public static function filesize($file) {	
+
+	public static function filesize($file) {
 		$size = @filesize(FILES_DIR . "/" . urldecode($file));
 		return \Nette\Templating\Helpers::bytes($size);
 	}
-	
+
 	public static function filetype($file) {
 		$types = array(
 			'pdf' => "PDF dokument",
@@ -323,18 +310,18 @@ class Macros
 			'audio' => "Audio",
 			'program' => "Program",
 			'text' => "Textov?Ĺ soubor",
-			'unknown' => "Nezn?°m?Ĺ soubor",			
+			'unknown' => "Nezn?°m?Ĺ soubor",
 		);
-		
+
 		$ext = strtolower(pathinfo(UPLOAD_DIR . $file, PATHINFO_EXTENSION));
 		return $types[self::extension($ext)];
 	}
-	
+
 	public static function filename($file) {
 		return pathinfo(UPLOAD_DIR . urldecode($file), PATHINFO_BASENAME);
 	}
-	
-	public static function fileicon($file) {				
+
+	public static function fileicon($file) {
 		$ext = strtolower(pathinfo(UPLOAD_DIR . urldecode($file), PATHINFO_EXTENSION));
 
 		return (string) \Nette\Utils\Html::el('img', array(
@@ -343,7 +330,7 @@ class Macros
 			//'class' => 'icon',
 		));
 	}
-	
+
 	private static function extension($ext) {
 		switch ($ext) {
             case 'pdf':
@@ -390,8 +377,8 @@ class Macros
             default:
                 return 'unknown';
         }
-	}	
-	
+	}
+
 	private static function fixTime($time) {
 /*		if (!$time) {
 			return FALSE;
@@ -403,22 +390,22 @@ class Macros
             return strtotime($time);
         }
 	}
-	
+
 	public static function age($time) {
 		if (!$time) {
             return false;
         } else {
 			$time = self::fixTime($time);
 		}
-		
+
 		if (!$time || $time > time()) {
 			return false;
 		}
-		
+
 		// TODO: Lepší výpočet věku?
 		return floor((date("Ymd") - date("Ymd", strtotime($datum))) / 10000);
 	}
-	
+
     public static function timeAgoInWords($time)
     {
 		if (!$time) {

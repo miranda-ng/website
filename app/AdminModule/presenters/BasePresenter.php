@@ -4,23 +4,27 @@ namespace AdminModule;
 
 abstract class BasePresenter extends \BasePresenter
 {
+	/** @var GettextTranslator\Gettext @inject */
+    public $translator;
+
+	public function startup() {
+		parent::startup();
+		$this->session->start();
+	}
 
 	public function beforeRender() {
 		parent::beforeRender();
-		
-		$this->template->sufix = 'Administration - Miranda NG';
+
+		$this->template->sufix = $this->translator->translate('Administration') .  ' - Miranda NG';
 		$this->template->menu = array(
-			"Home:" => "Admin",
-			"Pages:" => "Pages",
-			"News:" => "News",
-			":Home:" => "Home",
+			"Home:" => $this->translator->translate("Admin"),
+			"Pages:" => $this->translator->translate("Pages"),
+			"News:" => $this->translator->translate("News"),
+			":Home:" => $this->translator->translate("Home"),
 		);
+
+		$this->template->original = $this->lang == self::LANG_DEFAULT;
 	}
-
-	
-	/** @var bool */
-	public $oldLayoutMode = false;
-
 
 	/**
 	 * Texyla loader factory
@@ -29,14 +33,15 @@ abstract class BasePresenter extends \BasePresenter
 	protected function createComponentTexyla()
 	{
 		$baseUri = $this->context->httpRequest->url->baseUrl;
+		$params = array("lang" => self::LANG_DEFAULT);
 		$filter = new \WebLoader\Filter\VariablesFilter(array(
 			"baseUri" => $baseUri,
-			"previewPath" => $this->link("Texyla:preview"),
-			"filesPath" => $this->link("Texyla:listFiles"),
-			"filesUploadPath" => $this->link("Texyla:upload"),
-			"filesMkDirPath" => $this->link("Texyla:mkDir"),
-			"filesRenamePath" => $this->link("Texyla:rename"),
-			"filesDeletePath" => $this->link("Texyla:delete"),
+			"previewPath" => $this->link("Texyla:preview", $params),
+			"filesPath" => $this->link("Texyla:listFiles", $params),
+			"filesUploadPath" => $this->link("Texyla:upload", $params),
+			"filesMkDirPath" => $this->link("Texyla:mkDir", $params),
+			"filesRenamePath" => $this->link("Texyla:rename", $params),
+			"filesDeletePath" => $this->link("Texyla:delete", $params),
 		));
 
 		$texyla = new \TexylaLoader($filter, $baseUri."webtemp", $this->context->parameters["wwwDir"]);

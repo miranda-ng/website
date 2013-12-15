@@ -15,13 +15,13 @@ class SignPresenter extends BasePresenter
 
 	public function beforeRender() {
 		parent::beforeRender();
-		
+
 		if ($this->getUser()->isLoggedIn()) {
-			$this->flashMessage('You are already logged in.', 'success');
+			$this->flashMessage($this->translator->translate('You are already logged in.'), 'success');
 			$this->redirect(307, 'Home:');
-		}		
+		}
 	}
-	
+
 	/**
 	 * Sign in form component factory.
 	 * @return Nette\Application\UI\Form
@@ -29,16 +29,18 @@ class SignPresenter extends BasePresenter
 	protected function createComponentSignInForm()
 	{
 		$form = new UI\Form;
+		$form->setTranslator($this->translator);
+
 		$form->addText('login', 'Login:')
 			->setRequired('Enter your login.');
-		
+
 		$form->addPassword('password', 'Password:')
 			->setRequired('Enter your password.');
-		
+
 		$form->addCheckbox('remember', 'Remember login');
-		
+
 		$form->addSubmit('submit', 'Login');
-		
+
 		$form->onSuccess[] = callback($this, 'signInFormSubmitted');
 		return $form;
 	}
@@ -53,19 +55,19 @@ class SignPresenter extends BasePresenter
 				$this->getUser()->setExpiration('+ 20 minutes', TRUE);
 			}
 			$this->getUser()->login($values->login, $values->password);
-			
+
 			$this->restoreRequest($this->backlink);
-			$this->flashMessage('You have been succesfully logged in.', 'success');
+			$this->flashMessage($this->translator->translate('You have been succesfully logged in.'), 'success');
             $this->redirect(307, 'Home:');
 		} catch (NS\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
 	}
-	
+
 	public function actionOut()
 	{
 		$this->getUser()->logout();
-		$this->flashMessage('You have been logged out.');
+		$this->flashMessage($this->translator->translate('You have been logged out.'));
 		$this->redirect(307, 'default');
 	}
 
