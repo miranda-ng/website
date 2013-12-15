@@ -27,29 +27,36 @@
 		<a n:href="Home:" id="logo">
 			Miranda NG
 			<br><span class="subtitle">Next Generation of Miranda IM</span></a>
-		
+
 		<menu class="main" n:inner-foreach="$menu as $id => $item">
 			{var $href = ($id[0] == "/") ? $id : $presenter->link($id)}
 			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" href="{$href}">{$item}</a></li>
 		</menu>
-		
-		<p n:if="$user->isLoggedIn()" class="rfloat loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href=":Admin:Sign:out">Logout</a></p>
+
+		<div class="languages">
+			<a n:foreach="$langs as $lang" n:class="$presenter->lang == $lang->id ? active" n:href="this, lang => $lang->id" title="{$lang->title}">
+				<img src="{$basePath}/images/flags/{$lang->icon}.png" alt="{$lang->title}">
+				{$lang->title}
+			</a>
+		</div>
+
+		<p n:if="$user->isLoggedIn()" class="loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href=":Admin:Sign:out">Logout</a></p>
 	</header>
-	
-	<section>	
+
+	<section>
 		<div id="top" n:ifset="#top" n:class="isset($top_class) ? $top_class">
 			{include #top}
-		</div>			
-	
+		</div>
+
 		<article n:ifset="#content">
 			{include #content}
 		</article>
-		
+
 		<aside n:class="isset($aside_class) ? $aside_class">
 			{include "panel.latte"}
 		</aside>
 	</section>
-	
+
 	<footer>
 		<p class="copyright">
 			Copyright &copy; {$copy} Miranda NG. Website by <a href="http://www.robyer.cz" target="_blank">Robert Pösel</a>.

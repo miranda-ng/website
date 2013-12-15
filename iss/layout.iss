@@ -647,7 +647,38 @@ table tr td:first-child { white-space: nowrap; }
 }
 
 .loginbox {
-	margin: 0 20px 0 0;
+	margin: 5px 20px 0 0;
+	float: right;
+	clear: right;
+}
+
+.languages {
+	margin: -2px 20px 0 0;
+	float: right;
+	
+	a {
+		display: inline-block;
+		vertical-align: middle;
+		text-align: middle;
+		padding: 5px;
+		border: solid 1px transparent;
+		@border-radius-simple: 2px;
+		text-decoration: none;
+		
+		&.active {
+			background: white;
+			border-color: #aaa;
+			@box-shadow: inset 0px 0px 1px #888;
+		}
+		&:hover {
+			border-color: #888;
+			text-decoration: none;
+		}
+
+		img {
+		
+		}
+	}
 }
 
 iframe.facebook {

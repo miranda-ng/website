@@ -792,7 +792,38 @@ list-style-position: inside;
 margin-left: 13px;
 }
 .loginbox {
-margin: 0 20px 0 0;
+margin: 5px 20px 0 0;
+float: right;
+clear: right;
+}
+.languages {
+margin: -2px 20px 0 0;
+float: right;
+}
+.languages a {
+display: inline-block;
+vertical-align: middle;
+text-align: middle;
+padding: 5px;
+border: solid 1px transparent;
+-webkit-border-radius: 2px 2px;
+-khtml-border-radius: 2px/2px;
+-moz-border-radius: 2px/2px;
+border-radius: 2px/2px;
+behavior: url('/PIE.htc');
+text-decoration: none;
+}
+.languages a.active {
+background: white;
+border-color: #aaaaaa;
+-webkit-box-shadow: inset 0 0 1px #888888;
+-moz-box-shadow: inset 0 0 1px #888888;
+box-shadow: inset 0 0 1px #888888;
+behavior: url('/PIE.htc');
+}
+.languages a:hover {
+border-color: #888888;
+text-decoration: none;
 }
 iframe.facebook {
 border: none;

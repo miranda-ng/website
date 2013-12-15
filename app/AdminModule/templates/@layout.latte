@@ -36,7 +36,13 @@
 			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" href="{if $id[0] == "/"}{$id}{else}{plink $id}{/if}">{$item}</a></li>
 		</menu>
 
-		<p class="rfloat loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href="Sign:out">Logout</a></p>
+		<div class="languages" n:inner-foreach="$langs as $lang">
+			<a n:class="$presenter->lang == $lang->id ? active" n:href="this, lang => $lang->id" title="{$lang->title}">
+				<img src="{$basePath}/images/flags/{$lang->icon}.png" alt="{$lang->title}">
+			</a>
+		</div>
+
+		<p class="loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href="Sign:out">Logout</a></p>
 	</header>
 
 	<section class="admin">

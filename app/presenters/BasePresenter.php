@@ -24,10 +24,32 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
 		$this->template->news_panel = $this->context->database->table("news")->order("date DESC")->limit(3);
 
-		$this->template->langs = array(
-			"en" => "English",
-			"cs" => "Czech",
-			"ru" => "Russian",
+		$this->template->langs = $langs = array(
+			(object)array(
+				"id" => "en",
+				"icon" => "us",
+				"title" => "English",
+			),
+			(object)array(
+				"id" => "ru",
+				"icon" => "ru",
+				"title" => "Russian",
+			),
+			(object)array(
+				"id" => "cs",
+				"icon" => "cz",
+				"title" => "Čeština",
+			),
+			(object)array(
+				"id" => "de",
+				"icon" => "de",
+				"title" => "German",
+			),
+			(object)array(
+				"id" => "pl",
+				"icon" => "pl",
+				"title" => "Polish",
+			),
 		);
 
 		$this->template->menu = array(
