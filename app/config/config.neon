@@ -24,4 +24,16 @@ services:
 	urlScript: @httpRequest::getUrl()
 	texy: MyTexy(%wwwDir%, @urlScript::getBaseUrl())
 
+extensions:
+	gettextTranslator: GettextTranslator\DI\Extension
+
+gettextTranslator:
+	lang: en
+	files:
+		front: %appDir%/langs # for module Front and other non-specified modules
+		admin: %appDir%/AdminModule/langs # for module Admin
+	# optional with defaults
+	layout: horizontal # or: vertical
+	height: 450
+
 factories:
