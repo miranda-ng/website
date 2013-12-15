@@ -2,16 +2,18 @@
 <h1 n:block="title">{_"News"}{if $page} ({$page}/{$pageCount}){/if}</h1>
 
 <div class="news" n:foreach="$news as $item">
-	<h2><a n:tag-if="$item->content" n:href="show, $item->link">{$item->title}</a></h2>
-	<p class="date">{$item->date|date,'j.n.Y'} | {$item->author}</p>
+	{var $item_data = $presenter->getNewsData($item)}
 
-	{if $item->description}
-		{!$item->description|texy}
+	<h2><a n:tag-if="$item_data->content" n:href="show, $item->link">{$item_data->title}</a></h2>
+	<p class="date">{$item->date|date,'j.n.Y'} | {$item_data->author}</p>
+
+	{if $item_data->description}
+		{!$item_data->description|texy}
 	{else}
-		<p>{!$item->content|texy|striptags|truncate, 200}</p>
+		<p>{!$item_data->content|texy|striptags|truncate, 200}</p>
 	{/if}
 
-	<a n:if="$item->content" n:href="show, $item->link" class="more">{_"Continue reading"} &raquo;</a>
+	<a n:if="$item_data->content" n:href="show, $item->link" class="more">{_"Continue reading"} &raquo;</a>
 </div>
 
 {control vp}

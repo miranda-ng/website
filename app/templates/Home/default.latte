@@ -16,7 +16,8 @@
 {/block}
 
 {block content}
-{!$page->content|texy}
+{var $page_content = $presenter->getPagesData($page)}
+{!$page_content->content|texy}
 
 {*
 <p>Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast.</p>

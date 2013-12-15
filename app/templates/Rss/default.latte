@@ -8,10 +8,11 @@
 	<description>{_"News on Miranda NG website"} - http://www.miranda-ng.org</description>
 	<lastBuildDate>{= date("r")}</lastBuildDate>
 	<item n:foreach="$data as $a">
-		<title>{$a->title}</title>
+		{var $a_data = $presenter->getNewsData($a)}
+		<title>{$a_data->title}</title>
 		<link>{plink //News:show, $a->link}</link>
-		<guid>{= md5($a->title . $a->date)}</guid>
-		<description>{if $a->description}{$a->description|texy|striptags}{else}{$a->content|texy|striptags|truncate, 200}{/if}</description>
+		<guid>{= md5($a_data->title . $a->date)}</guid>
+		<description>{if $a_data->description}{$a_data->description|texy|striptags}{else}{$a_data->content|texy|striptags|truncate, 200}{/if}</description>
 		<pubdate>{$a->date|date,"r"}</pubdate>
 	</item>
 </channel>

@@ -13,8 +13,9 @@
 	<h2>{_"Latest news"}</h2>
 
 	<dl n:inner-foreach="$news_panel as $item">
+		{var $news_data = $presenter->getNewsData($item)}
 		<dt><span class="date">{$item->date|date,'j.n.Y'}</span></dt>
-		<dd><a n:href="News:show, $item->link">{$item->title}</a></dd>
+		<dd><a n:href="News:show, $item->link">{$news_data->title}</a></dd>
 	</dl>
 </div>
 

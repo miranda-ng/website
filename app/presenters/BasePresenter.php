@@ -8,10 +8,46 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     /** @var GettextTranslator\Gettext @inject */
     public $translator;
 
+	const LANG_DEFAULT = "en";
+
     public function  startup() {
         parent::startup();
 
     }
+
+	public function getTransData($item, $table) {
+		$data = null;
+		$data_default = null;
+
+		$res = $this->context->database->table("{$table}_content")->where("{$table}_id", $item->id)->where("lang", array($this->lang, self::LANG_DEFAULT))->order("lang = ?", $this->lang)->limit(1)->fetch();
+		return $res;
+
+
+		$item2 = clone $item;
+		$res = $item->related("{$table}_content")->where("lang", $this->lang)->limit(1)->fetch();
+		if (!$res) {
+			$res = $item2->related("{$table}_content")->where("lang", self::LANG_DEFAULT)->limit(1)->fetch();
+		}
+		return $res;
+
+		if ($data) {
+			return $data;
+		} elseif ($data_default) {
+			return $data_default;
+		}
+
+		return NULL;
+	}
+
+	public function getNewsData($item)
+	{
+		return $this->getTransData($item, "news");
+	}
+
+	public function getPagesData($item)
+	{
+		return $this->getTransData($item, "pages");
+	}
 
     public function beforeRender()
     {

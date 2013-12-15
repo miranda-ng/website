@@ -1,12 +1,14 @@
-{block content}
-<h1 n:block="title">{$item->title}</h1>
-<p class="date">{$item->date|date,'j.n.Y'} | {$item->author}</p>
+{var $item_data = $presenter->getNewsData($item)}
 
-{if $item->description}
-	<div class="italic">{!$item->description|texy}</div>
+{block content}
+<h1 n:block="title">{$item_data->title}</h1>
+<p class="date">{$item->date|date,'j.n.Y'} | {$item_data->author}</p>
+
+{if $item_data->description}
+	<div class="italic">{!$item_data->description|texy}</div>
 {/if}
 
-{!$item->content|texy}
+{!$item_data->content|texy}
 
 {*if $item->content}
 	{!$item->content|texy}
