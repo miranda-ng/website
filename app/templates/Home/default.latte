@@ -1,0 +1,116 @@
+{block top}
+<h1 class="erase">About Miranda NG</h1>
+<p>Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast.</p>
+
+<a class="download" n:href="Downloads:">
+
+<img src="{$basePath}/images/arrow_down_64.png" alt="">
+Download
+	<span>latest version</span>
+</a>
+
+<div class="screenshots">
+	<a href="{$basePath}/images/miranda_ng.png"><img src="{$basePath}/images/miranda_ng_small.png" alt="Miranda NG"></a>
+</div>			
+
+{/block}
+
+{block content}
+{!$page->content|texy}
+
+{*
+<p>Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast.</p>
+
+<hr/>
+<h3>Protocol Support{* ({= count($protocols)})* }</h3>
+<ul n:inner-foreach="$protocols as $protocol" class="threecols">
+<li>{$protocol}</li>
+</ul>
+
+<h3>Supported Operating Systems</h3>
+<ul>
+<li>Windows 2003 / XP / Vista / 7 / 8</li>
+</ul>
+
+<h3>Miranda NG is designed, written & supported by:</h3>
+
+<ul n:inner-foreach="$team as $user => $role" class="twocols">
+	<li>{$user} <span class="aka">aka</span> {$role[0]}</li>
+</ul>
+*}
+{*<table>
+<thead>
+	<tr><th>Name</th><th>Role/focus</th></tr>
+</thead>
+<tbody n:inner-foreach="$team as $user => $role">
+	<tr><td>{$user}</td><td>{$role}</td></tr>
+</tbody>
+</table>*}
+{*
+<h3>License</h3>
+<p>Miranda NG is published under the GNU GPL license.</p>
+
+<h3>Thanks To</h3>
+<p>We would like to thank the following for making Miranda NG and the website possible:</p>
+
+<ul>
+<li>Miranda IM team - for their good work in the past</li>
+<li>Michal Tomášek <span class="aka">aka</span> Cree - for the initial graphics design of this website</li>
+<li>All testers, translators and users for their support</li>
+</ul>
+
+
+*}
+{*{block panel}
+<h2 class="twitter">Latest tweets</h2>
+
+<div class="tweet">
+	<h3>#twitterMiranda</h3>
+	<p>Lorem ipsum dolor sit amet, care die! Lorem civibus laude ipsum dolor sit amet, mauricii.</p>
+</div>
+
+<div class="tweet">
+	<h3>#twitterMiranda</h3>
+	<p>Lorem ipsum dolor sit amet, care die! Lorem civibus laudeipsum dolor sit amet, mauricii.</p>
+</div>
+
+<div class="tweet">
+	<h3>#twitterMiranda</h3>
+	<p>Lorem ipsum dolor sit amet, care die! Lorem civibus laudeipsum dolor sit amet, mauricii.</p>
+</div>
+
+<div class="tweet">
+	<h3>#twitterMiranda</h3>
+	<p>Lorem ipsum dolor sit amet, care die! Lorem civibus laudeipsum dolor sit amet, mauricii.</p>
+</div>			
+{/block}
+
+{block content}
+<h1>Miranda NG rulz!</h1>
+
+<div class="news">
+	<h2>Dolor sit</h2>
+	<p class="date">July 26, 2012</p>
+
+	<p>Lorem ipsum dolor sit amet, mirantur deo agili est amet amet Cur meae. Audito dolet sit Mariae maximas hanc legibus Antiochiam innocentem vis. Disce Apollonius ut casus inferioribus civitatis in lucem in modo. Vituperia ad suis Tyrium coniugem Jesu Dionysiadem in rei civibus laude clamaverunt donavit in modo ad quia.</p>
+
+	<a href="#" class="more">Continue reading &raquo;</a>
+</div>
+
+<div class="news">
+	<h2>Dolor sit</h2>
+	<p class="date">July 26, 2012</p>
+
+	<p>Lorem ipsum dolor sit amet, mirantur deo agili est amet amet Cur meae. Audito dolet sit Mariae maximas hanc legibus Antiochiam innocentem vis. Disce Apollonius ut casus inferioribus civitatis in lucem in modo. Vituperia ad suis Tyrium coniugem Jesu Dionysiadem in rei civibus laude clamaverunt donavit in modo ad quia.</p>
+
+	<a href="#" class="more">Continue reading &raquo;</a>
+</div>
+
+<div class="news">
+	<h2>Dolor sit</h2>
+	<p class="date">July 26, 2012</p>
+
+	<p>Lorem ipsum dolor sit amet, mirantur deo agili est amet amet Cur meae. Audito dolet sit Mariae maximas hanc legibus Antiochiam innocentem vis. Disce Apollonius ut casus inferioribus civitatis in lucem in modo. Vituperia ad suis Tyrium coniugem Jesu Dionysiadem in rei civibus laude clamaverunt donavit in modo ad quia.</p>
+
+	<a href="#" class="more">Continue reading &raquo;</a>
+</div>*}

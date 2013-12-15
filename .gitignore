@@ -1,0 +1,14 @@
+/log/*
+/temp/*
+/cache/*
+/vendor/*
+/nbproject/*
+
+.DS_Store
+!.gitignore
+!.htaccess
+!web.config
+/app/config/local.neon
+/app/config/server.neon
+/deployment.ini
+/deployment.log

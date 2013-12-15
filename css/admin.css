@@ -1,0 +1,445 @@
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+html {
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* This helps to make newer HTML5 elements behave like DIVs in older browers */
+article, aside, details, figcaption, figure, dialog,
+footer, header, hgroup, menu, nav, section {
+    display:block;
+}
+
+/* Line-height should always be unitless! */
+body {
+  line-height: 1.5;
+  background: white;
+}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+/* float:none prevents the span-x classes from breaking table-cell display */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  float:none !important;
+}
+table, th, td {
+  vertical-align: top;
+}
+
+/* Remove possible quote marks (") from <q>, <blockquote>. */
+blockquote:before, blockquote:after, q:before, q:after { content: ''; }
+blockquote, q { quotes: "" ""; }
+
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
+/* Remember to define your own focus styles! */
+:focus { outline: 0; }
+
+
+/***********************************************************/
+
+
+textarea {
+	resize: vertical;
+}
+
+
+.table th,
+.table td {
+  padding: 5px 8px;
+  line-height: 18px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+}
+.table th {
+  font-weight: bold;
+}
+.table thead th {
+  vertical-align: bottom;
+}
+.table colgroup + thead tr:first-child th,
+.table colgroup + thead tr:first-child td,
+.table thead:first-child tr:first-child th,
+.table thead:first-child tr:first-child td {
+  border-top: 0;
+}
+.table tbody + tbody {
+  border-top: 2px solid #dddddd;
+}
+.table-bordered {
+  border: 1px solid #dddddd;
+  border-left: 0;
+  border-collapse: separate;
+  *border-collapse: collapsed;
+}
+.table-bordered th,
+.table-bordered td {
+  border-left: 1px solid #dddddd;
+}
+.table-bordered thead:first-child tr:first-child th,
+.table-bordered tbody:first-child tr:first-child th,
+.table-bordered tbody:first-child tr:first-child td {
+  border-top: 0;
+}
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+.table tbody tr:hover td,
+.table tbody tr:hover th {
+  /*background-color: #f5f5f5;*/
+}
+
+
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.pagination {
+  height: 36px;
+  margin: 18px 0;
+}
+.pagination ul {
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+
+  *zoom: 1;
+  margin-left: 0;
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.pagination li {
+  display: inline;
+}
+.pagination a {
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+}
+.pagination a:hover,
+.pagination .active a {
+  background-color: #f5f5f5;
+}
+.pagination .active a {
+  color: #999999;
+  cursor: default;
+}
+.pagination .disabled span,
+.pagination .disabled a,
+.pagination .disabled a:hover {
+  color: #999999;
+  background-color: transparent;
+  cursor: default;
+}
+.pagination li:first-child a {
+  border-left-width: 1px;
+  -webkit-border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
+}
+.pagination li:last-child a {
+  -webkit-border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+}
+.pagination-centered {
+  text-align: center;
+}
+.pagination-right {
+  text-align: right;
+}
+
+.thumbnails {
+  margin-left: -20px;
+  list-style: none;
+  *zoom: 1;
+}
+.thumbnails:before,
+.thumbnails:after {
+  display: table;
+  content: "";
+}
+.thumbnails:after {
+  clear: both;
+}
+.thumbnails > li {
+  float: left;
+  margin: 0 0 18px 20px;
+}
+.thumbnail {
+  display: block;
+  padding: 4px;
+  line-height: 1;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+a.thumbnail:hover {
+  border-color: #0088cc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+.thumbnail > img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.thumbnail .caption {
+  padding: 9px;
+}
+
+
+
+
+
+
+
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+:focus { outline: 0; }
+body { line-height: 1; }
+ol, ul {
+  list-style: none;
+  list-style-position: outside;
+}
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+}
+caption, td, th {
+  text-align: left;
+  vertical-align: middle;
+  font-weight: normal;
+}
+th { font-weight: bolder; }
+p { text-indent: 0px; }
+strong { font-weight: bold; }
+em { font-style: italic; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+.error { background-color: #ff0000; color: white;}
+.warning { background-color: #cc6600; color: white; }
+.success { background-color: #008000; color: white; }
+.info { background-color: #000080; color: white; }
+.icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+.erase { display: none; }
+.hide { visibility: hidden; }
+.mask {
+  text-indent: -9999em;
+  display: block;
+}
+.lfloat { float: left !important; }
+.rfloat { float: right !important; }
+.lclear { clear: left; }
+.rclear { clear: right; }
+.clear { clear: both; }
+.strike { text-decoration: line-through; }
+.center { text-align: center; }
+.left { text-align: left; }
+.right { text-align: right; }
+.sub {
+  vertical-align: sub;
+  font-size: 0.83em;
+  line-height: 0.83em;
+}
+.sup {
+  vertical-align: super;
+  font-size: 0.83em;
+  line-height: 0.83em;
+}
+.italic { font-style: italic; }
+.cleaner {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0px;
+}
+/*body {
+  font-family: "Arial", "Arial CE", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}*/
+/*html, body, header, footer { background-color: whitesmoke; }*/
+#login p {
+  text-align: center;
+  margin: 10px 0 15px;
+}
+#login {
+  background: white;
+  width: 350px;
+  margin: 10% auto 0;
+  padding: 10px;
+  border: solid 1px #bbbbbb;
+}
+table td, table th { padding: 2px 10px; }
+/*#all {
+  width: 900px;
+  margin: 0 auto;
+  background: white;
+}
+/*#all, #all > * {
+  padding: 10px;
+  border: solid 1px #bbbbbb;
+}*/
+/*header {
+	height: 20px;
+}
+menu {
+	margin: -10px -10px -10px 0;
+	padding: 0;
+	height: 40px;
+	float: left;	
+}
+menu li {
+	float: left;
+	list-style: none;
+	border-right: solid 1px #bbb;
+}
+menu li a {
+	display: block;
+	padding: 10px 20px;
+}
+menu li.active {
+	padding: 10px 20px;
+}*/
+
+/*#all section {
+  border-bottom: none;
+  border-top: none;
+/*  width: 659px;*/
+/*  min-height: 170px;
+  padding: 20px;
+}*/
+section textarea, section input[type="text"] {
+	width: 740px;
+}
+.flash { text-align: center; font-size: 14px; padding: 5px; margin-bottom: 10px; color: white !important; font-weight: bold; border-radius: 10px; }
+h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+ol { list-style: decimal; }
+ul { list-style: disc; }
+section > ul li p, section > ol li p { float: right; }
+
+section > ul li p.description, section > ol li p.description {
+	clear: both;
+	text-align: left;
+	float: left;
+}
+
+section > ul li p > a, section > ol li p > a { float: none; }
+section > ul li, section > ol li {
+  width: 100%;
+  border-bottom: dotted 1px black;
+  padding-top: 5px;
+  clear: both;
+}
+section > ul, section > ol { margin-left: 40px; }
+ul.error {
+  margin-left: 30px;
+  margin-bottom: 8px;
+}
+input, textarea {
+  font-family: "Arial", "Arial CE", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+
+
+
+
+
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.texyla {
+	border: 1px solid #bbb;
+}
+
+.ui-dialog-titlebar-close .ui-button-text { 
+	display: none !important;
+}
+.ui-dialog-titlebar-close {
+	cursor: pointer !important;
+}
+
+.ui-dialog {
+	z-index: 10;
+}
+
+section.admin {
+	padding: 20px 25px;
+}

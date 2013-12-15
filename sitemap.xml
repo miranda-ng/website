@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://miranda-ng.org/</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/downloads/</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/development/</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/webpage-improvements</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/0-94-4</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/0-94-3</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/rss/news/</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/0-94-2</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/plugin-updater-for-miranda-im</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/0-94-1</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/page/2</loc>
+</url>
+<url>
+  <loc>http://miranda-ng.org/news/0-93-5</loc>
+</url>
+</urlset>

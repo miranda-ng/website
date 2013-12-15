@@ -1,0 +1,30 @@
+{layout none}
+<!DOCTYPE html>
+<!--[if lte IE 7 ]><html lang="en" class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="en" class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE) ]><!--><html lang="en" class="no-js"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="{$author}" n:ifset="$author">
+	<meta name="robots" content="{$robots}" n:ifset="$robots">
+	<meta name="googlebot" content="snippet,archive">
+	<meta name="description" content="{$description}" n:ifset="$description">
+	<meta name="keywords" content="{$keywords}" n:ifset="$keywords">
+	<title>{ifset $title}{$title} - {/ifset}{$sufix}</title>
+	<link rel="stylesheet" href="{$basePath}/css/admin.css">
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script src="{$basePath}/js/script.js"></script>
+</head>
+<body>
+	<div id="login">
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
+		<p>For enter administration you must login.</p>
+		{control signInForm}
+		
+		<a n:href=":Home:" style="padding-left: 10px;">Home page</a>
+	</div>
+</body>
+</html>

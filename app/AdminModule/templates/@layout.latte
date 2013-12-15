@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<meta name="author" content="{$author}" n:ifset="$author">
+	<meta name="robots" content="{$robots}" n:ifset="$robots">
+	<meta name="description" content="{$description}" n:ifset="$description">
+	<title>{ifset $title}{$title} - {/ifset}{$sufix}</title>
+	<link rel="stylesheet" href="{$basePath}/css/admin.css">
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="stylesheet" href="{$basePath}/js/texyla/css/style.css">
+	<link rel="stylesheet" href="{$basePath}/js/texyla/themes/default/theme.css">
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css" type="text/css" />
+	<script src="{$basePath}/js/netteForms.js"></script>
+	{control texyla}	
+	<script>
+		$(function(){
+			$(".delete-dialog").click(function(){
+				return confirm("Are you sure you want to delete this item?");
+			});
+		});
+	</script>	
+</head>
+
+<body>
+<div id="all">	
+	<header>
+		<a n:href="Home:" id="logo">
+			Miranda NG
+			<br><span class="subtitle">Administration of website</a>
+		
+		<menu class="main" n:inner-foreach="$menu as $id => $item">
+			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" {if $id[0] == "/"}href="{$id}"{else}n:href="$id"{/if}>{$item}</a></li>
+		</menu>
+
+		<p class="rfloat loginbox">Logged in as <strong>{$user->id}</strong> | <a n:href="Sign:out">Logout</a></p>
+	</header>
+
+	<section class="admin">
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+	
+		<h1 n:ifset="$title" n:if="!isset($noTitle)">{$title}</h1>
+		{include #content}
+	</section>
+
+	<footer>
+		<p class="copyright">
+			Copyright &copy; {$copy} Miranda NG. Website by <a href="http://www.robyer.cz" target="_blank">Robert Pösel</a>.
+		</p>
+	</footer>
+</div>
+</body>
+</html>

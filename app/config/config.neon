@@ -1,0 +1,94 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+common:
+	parameters:
+		year: 2012
+		title: Miranda NG
+
+	php:
+		date.timezone: Europe/Prague
+		# zlib.output_compression: yes
+
+	nette:
+		session:
+			autoStart: smart
+			expiration: +31 days
+			#savePath: "%tempDir%/sessions"
+			#cookieDomain: ".%domain%"
+
+		application:
+			debugger: true
+			# catchExceptions: %productionMode%
+			#catchExceptions: true
+			#errorPresenter: Error
+
+		routing:
+			debugger: true
+			# routes:
+
+		security:
+			debugger: true
+			users:
+				ghazan: T4bhiDSu
+				Robyer: ZoX2zQBg
+				watcher: NyXI0V5P
+				kxepal: UZEofdqr
+				wishmaster: HHtaWN0P
+
+		#mailer:
+			#smtp:
+			# dále lze uvést host, port, username, password, secure, timeout
+			# Pro vytvoření emailové zprávy můžeme použít $container->nette->createMail().
+
+		database:
+			default:
+				dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
+				user: %database.user%
+				password: %database.password%
+				debugger: true
+				explain: true
+				# autowired:
+				#reflection:
+
+		xhtml: false
+
+		container:
+			debugger: true
+
+		debugger:
+			# email: robyer@seznam.cz
+			strictMode: true
+			# editor:
+			# browser:
+			# bar: [IncludePanel, XDebugHelper('myIdeKey')]
+			# blueScreen: []
+      
+	services:
+		database: @nette.database.default
+		
+		Texy:
+			class: MyTexy($baseUri)
+
+	factories:
+
+production < common:
+	parameters:
+		database:
+			driver: mysql
+			dbname: miranda_web
+			host: localhost
+			user: mirweb
+			password: yV6RtCsvUizB
+
+development < common:
+	parameters:
+		database:
+			driver: mysql
+			dbname: miranda
+			host: localhost
+			user: root
+			password:

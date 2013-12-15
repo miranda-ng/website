@@ -1,0 +1,17 @@
+{block content}
+<h1 n:block="title">News{if $page} ({$page}/{$pageCount}){/if}</h1>
+
+<div class="news" n:foreach="$news as $item">
+	<h2><a n:tag-if="$item->content" n:href="show, $item->link">{$item->title}</a></h2>
+	<p class="date">{$item->date|date,'j.n.Y'} | {$item->author}</p>
+	
+	{if $item->description}
+		{!$item->description|texy}
+	{else}
+		<p>{!$item->content|texy|striptags|truncate, 200}</p>
+	{/if}
+
+	<a n:if="$item->content" n:href="show, $item->link" class="more">Continue reading &raquo;</a>
+</div>
+
+{control vp}

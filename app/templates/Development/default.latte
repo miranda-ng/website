@@ -1,0 +1,48 @@
+{block head}
+	<link rel="alternate" href="http://trac.miranda-ng.org/log/?format=rss&amp;limit=30&amp;mode=stop_on_copy&verbose=on" type="application/rss+xml" class="rss" title="RSS channel for commits">
+{/block}
+{block content}
+<h1 n:block="title">{$page->title}</h1>
+
+{!$page->content|texy}
+
+<h2>Latest changes</h2>
+
+<table>
+<tr><th>Date</th>
+<th>Author</th>
+<th>Change</th>
+</tr>
+<?php
+	
+	error_reporting(E_ALL && ~E_NOTICE);
+	include "libs/lastRSS.php";
+	$rss = new \lastRSS;
+	$rss->cp = 'UTF-8';
+	$rss->date_format = 'Y-m-d H:i:s';
+	$rss->date_format = 'j.n.Y, H:i';
+	$rss->stripHTML = TRUE;
+	$rss->cache_dir = TEMP_DIR;
+	$rss->CDATA = 'content';
+	
+	$value = "http://trac.miranda-ng.org/log/?format=rss&limit=30&mode=stop_on_copy&verbose=on";
+	$data = array();
+	if ($rs = $rss->get($value)) {
+		foreach ($rs['items'] as $item) {
+			?>
+				<tr>
+				<td><?php echo $item["pubDate"]; ?></td>
+				<td><?php echo $item["dc:creator"]; ?></td>
+				<td><a href="<?php echo $item["link"];?>"><?php echo nl2br(trim($item["description"]));?></a></td>
+				</tr>						
+			<?php
+		}
+
+	} else {
+		echo "Error when downloading<br>";
+	}
+	
+?>
+</table>
+
+<a href="http://trac.miranda-ng.org/log/" title="Revision log" class="rfloat">&raquo; Show complete log</a>

@@ -1,0 +1,7 @@
+{block content}
+
+<ol n:inner-foreach="$pages as $page">
+	<li>{$page->title}
+		<p><a n:href="edit, $page->id">Edit</a></p>
+	</li>
+</ol>

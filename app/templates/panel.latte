@@ -1,0 +1,70 @@
+<div class="download">
+	<h2>Quick links</h2>
+	
+	<ul>
+		<li><a href="http://wiki.miranda-ng.org/index.php?title=Download">Downloads list</a></li>
+		<li><a href="http://trac.miranda-ng.org/report/1">Report bug</a></li>
+		<li><a href="http://trac.miranda-ng.org/">Get source code</a></li>
+	</ul>
+</div>
+
+<div class="lastnews" n:if="!$presenter->isLinkCurrent('News:*')">
+	<a class="more" n:href="News:">&raquo; Show all</a>
+	<h2>Latest news</h2>	
+	
+	<dl n:inner-foreach="$news_panel as $item">	
+		<dt><span class="date">{$item->date|date,'j.n.Y'}</span></dt>
+		<dd><a n:href="News:show, $item->link">{$item->title}</a></dd>
+	</dl>	
+</div>
+
+
+<div>
+	<h2>Stay in touch</h2>
+
+	<ul class="icons">
+		<li><a n:href="Rss:news">
+			<img src="{$basePath}/images/icon_rss.png" alt="RSS">
+			RSS
+		</a></li>
+		<li><a href="http://www.facebook.com/miranda.newgen" title="Miranda NG on Facebook">
+			<img src="{$basePath}/images/icon_facebook.png" alt="Facebook">
+			Facebook
+		</a></li>
+		<li><a href="https://plus.google.com/u/0/112395897441053008352/" title="Miranda NG on Google+">
+			<img src="{$basePath}/images/icon_google.png" alt="Google+">
+			Google+
+		</a></li>
+		<li><a href="https://twitter.com/MirandaNewgen" title="Miranda NG on Twitter">
+			<img src="{$basePath}/images/icon_twitter.png" alt="Twitter">
+			Twitter
+		</a></li>
+		<li><a href="xmpp:miranda-ng-int@conference.jabber.ru?join" title="Miranda NG conference on Jabber (english)">
+			<img src="{$basePath}/images/icon_jabber.png" alt="Jabber">
+			Jabber conference (english)
+		</a></li>
+		<li><a href="xmpp:miranda-ng@conference.jabber.ru?join" title="Miranda NG conference on Jabber (russian)">
+			<img src="{$basePath}/images/icon_jabber.png" alt="Jabber">
+			Jabber conference (russian)
+		</a></li>
+	</ul>
+</div>
+
+<div>
+	<h2>Facebook Page</h2>
+
+	<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FMiranda.newgen&amp;width=247&amp;height=258&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;show_border=false&amp;header=false&amp;" class="facebook"></iframe>
+</div>
+
+<div class="facts" n:if="false">
+	<h2>What people say</h2>
+	<hr style="margin: -10px 0 15px 0">
+
+	<p style="font-style: italic">{!$quote}</p>
+	{*<a href="#" class="more rfloat" style="margin-top: -10px;margin-bottom: 20px">Read all opinions &raquo;</a>*}
+</div>
+
+{*<div class="clear">
+	<h2>Get help</h2>
+	<p>If you would </p>
+</div>*}

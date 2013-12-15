@@ -1,0 +1,9 @@
+{block content}
+
+<a class="" n:href="add">Add news</a>
+
+<ol n:inner-foreach="$news as $new">
+	<li>{$new->title}, {$new->date|date,'j.n.Y'}
+		<p><a n:href="edit, $new->id">Edit</a> | <a class="delete-dialog" n:href="delete, $new->id">Delete</a></p>
+	</li>
+</ol>

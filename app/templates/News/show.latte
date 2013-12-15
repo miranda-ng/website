@@ -1,0 +1,15 @@
+{block content}
+<h1 n:block="title">{$item->title}</h1>
+<p class="date">{$item->date|date,'j.n.Y'} | {$item->author}</p>
+
+{if $item->description}
+	<div class="italic">{!$item->description|texy}</div>
+{/if}
+
+{!$item->content|texy}
+
+{*if $item->content}
+	{!$item->content|texy}
+{else}
+	{!$item->description|texy}
+{/if*}
