@@ -13,6 +13,8 @@ nette:
 	session:
 		expiration: 31 days
 		autoStart: smart
+		savePath: "%tempDir%/sessions"
+		#cookieDomain: ".%domain%"
 
 	application:
 		#errorPresenter: Error

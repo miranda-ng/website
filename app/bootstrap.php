@@ -8,6 +8,7 @@ $configurator = new Nette\Configurator;
 // Enable Nette Debugger for error visualisation & logging
 //$configurator->setDebugMode(TRUE);
 //$configurator->setDebugMode(array("90.180.45.360", "90.180.45.361"));
+//$configurator->setDebugMode(array("95.82.187.242"));
 $configurator->enableDebugger(__DIR__ . '/../log', 'robyer@seznam.cz');
 
 // Specify folder for cache

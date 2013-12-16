@@ -12,7 +12,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     public function  startup() {
         parent::startup();
-
     }
 
 	public function getTransData($item, $table) {
@@ -52,6 +51,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     public function beforeRender()
     {
         parent::beforeRender();
+
+		if ($this->user->isLoggedIn())
+			\Nette\Diagnostics\Debugger::enable(\Nette\Diagnostics\Debugger::DEVELOPMENT);
 
 		$year = $this->context->parameters["year"];
 		$this->template->copy = $year . (date("Y") > $year ? " - " . date("Y") : "");

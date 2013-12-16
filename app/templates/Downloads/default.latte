@@ -1,4 +1,5 @@
+{var $page_content = $presenter->getPagesData($page)}
 {block content}
-<h1 n:block="title">{$page->title}</h1>
+<h1 n:block="title">{$page_content->title}</h1>
 
-{!$page->content|texy}
+{!$page_content->content|texy}
