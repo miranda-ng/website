@@ -63,10 +63,16 @@ class NewsForm extends Form
 			} else {
 				$res = $this->presenter->context->database->table('news')->wherePrimary($id)->update($values->basic);
 
-				$values->details->author = $this->presenter->user->id;
-				$values->details->news_id = $id;
-				$values->details->lang = $this->presenter->lang;
-				$res = $this->presenter->context->database->table('news_content')->insert($values->details);
+				$res = $this->presenter->context->database->table('news_content')->where("news_id", $id)->where("lang", $this->presenter->lang)->fetch();
+				if ($res) {
+					$res->update($values->details);
+				} else {
+					$values->details->author = $this->presenter->user->id;
+					$values->details->news_id = $id;
+					$values->details->lang = $this->presenter->lang;
+					$this->presenter->context->database->table('news_content')->insert($values->details);
+				}
+
 			}
 
 		} else {
