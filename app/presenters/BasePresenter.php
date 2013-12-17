@@ -5,14 +5,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	/** @persistent */
 	public $lang;
 
-    /** @var GettextTranslator\Gettext @inject */
-    public $translator;
+	/** @var GettextTranslator\Gettext @inject */
+	public $translator;
 
 	const LANG_DEFAULT = "en";
 
     public function  startup() {
-        parent::startup();
-    }
+		parent::startup();
+
+		if (!$this->lang) {
+			$langs = $this->context->database->table("languages")->order("code = ? DESC, code", self::LANG_DEFAULT)->fetchPairs("code", "code");
+			$lang = $this->context->httpRequest->detectLanguage(array_values($langs)) ?: self::LANG_DEFAULT;
+			return $this->redirect("this", array("lang" => $lang));
+		}
+	}
 
 	public function getTransData($item, $table) {
 		$data = null;

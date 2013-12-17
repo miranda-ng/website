@@ -13,24 +13,24 @@ class RouterFactory
 	{
 		$router = new RouteList();
 
+		$lang = "[<lang [a-z]{2}>/]";
+
 		// Admin routers
 		$adminRouter = new RouteList('Admin');
 		$adminRouter[] = new Route('admin', array(
 				'presenter' => "Home",
 				'action' => "default",
 			), Route::ONE_WAY);
-		$adminRouter[] = new Route('/admin/<lang>/<presenter>/<action>[/<id>]', 'Home:default');
+		$adminRouter[] = new Route($lang . 'admin/<presenter>/<action>[/<id>]', 'Home:default');
 		$router[] = $adminRouter;
 
 		// Front routers
 		$router[] = new Route('index.php', 'Home:default', Route::ONE_WAY);
 
-		$lang = "[<lang [a-z]{2}>/]";
-
 		$router[] = new Route($lang . 'news/<link>', array(
 			'presenter' => 'News',
 			'action' => 'show',
-			'lang' => "en"
+			//'lang' => "en"
 		));
 
 		$router[] = new Route('p/<id>', array(
@@ -42,14 +42,14 @@ class RouterFactory
 				'presenter' => 'Home',
 				'action' => 'default',
 				'id' => NULL,
-				'lang' => "en"
+				//'lang' => "en"
 		));
 
 		$router[] = new Route($lang . '<presenter>/<action>/<id>', array(
 				'presenter' => 'Home',
 				'action' => 'default',
 				'id' => NULL,
-				'lang' => "en"
+				//'lang' => "en"
 		));
 
 		return $router;
