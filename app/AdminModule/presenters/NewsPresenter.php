@@ -41,7 +41,7 @@ class NewsPresenter extends SecuredPresenter
 		}
 
 		try {
-			if (!$this->context->database->table('news')->find($id)->delete())
+			if (!$this->context->database->table('news')->wherePrimary($id)->delete())
 				$this->flashMessage($this->translator->translate('Error when deleting news'), 'error');
 			else
 				$this->flashMessage($this->translator->translate('Succesfully deleted'), 'success');

@@ -61,7 +61,7 @@ class NewsForm extends Form
 				$values->details->lang = $this->presenter->lang;
 				$res = $this->presenter->context->database->table('news_content')->insert($values->details);
 			} else {
-				$res = $this->presenter->context->database->table('news')->find($id)->update($values->basic);
+				$res = $this->presenter->context->database->table('news')->wherePrimary($id)->update($values->basic);
 
 				$values->details->author = $this->presenter->user->id;
 				$values->details->news_id = $id;
