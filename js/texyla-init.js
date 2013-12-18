@@ -5,13 +5,14 @@ $.texyla.setDefaults({
 	filesUploadPath: '{{$filesUploadPath}}',
 	filesMkDirPath: '{{$filesMkDirPath}}',
 	filesRenamePath: '{{$filesRenamePath}}',
-	filesDeletePath: '{{$filesDeletePath}}'
+	filesDeletePath: '{{$filesDeletePath}}',
+	language: 'en'
 });
 
 $(function () {
 	$(".texyla").texyla({
 		toolbar: [
-//			'h1', 'h2', 'h3', 'h4',
+			'h2', 'h3', 'h4',
 //			null,
 			'bold', 'italic',
 			null,
