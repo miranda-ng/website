@@ -1,15 +1,24 @@
 <?php
 
 class RssPresenter extends \BasePresenter
-{	
+{
+
+	public function beforeRender() {
+		parent::beforeRender();
+		$this->session->start();
+
+		if ($this->action == "default") {
+			$this->redirect("news");
+		}
+	}
 
 	public function renderNews()
-	{		
+	{
 		$limit = 15;
-		
+
 		$data = $this->context->database->table('news')->order("date DESC")->limit($limit);
 		$this->template->data = $data;
 		$this->setView("default");
 	}
-	
+
 }
