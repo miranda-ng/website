@@ -1,17 +1,39 @@
 {block content}
 
-<h1 n:inner-block="title">{_"News"}</h1>
-
 <a n:if="$original" class="rfloat" n:href="add">{_"Add news"}</a>
 
-{if !$original}<b>(!!!)</b> = {_"missing translation"}{/if}
-<hr>
+<h1 n:inner-block="title">{_"News and announcements"}</h1>
 
-<ol n:inner-foreach="$news as $new">
+<p n:if="!$original"><b>(!!!)</b> = {_"missing translation"}</p>
+
+{define item}
 	{var $new_content = $presenter->getNewsData($new)}
 	<li><b n:if="!$original && $new_content->lang == en">(!!!) </b>
 		{$new_content->title}, {$new->date|date,'j.n.Y'}
 		<p><a n:href="edit, $new->id">{_"Edit"}</a>
 			{if $original}| <a class="delete-dialog" n:href="delete, $new->id">{_"Delete"}</a>{/if}</p>
 	</li>
+{/define}
+
+{var $found}
+
+<h2>{_"Important announcements"}</h2>
+{? $found = false}
+<ol n:inner-foreach="$news as $new">
+	{if $new->important}
+		{include #item, "new" => $new}
+		{?$found = true}
+	{/if}
 </ol>
+<p n:if="!$found" class="italic">{_"There are no important announcements."}</p>
+
+<h2>{_"News"}</h2>
+{? $found = false}
+<ol n:inner-foreach="$news as $new">
+	{if !$new->important}
+		{include #item, "new" => $new}
+		{?$found = true}
+	{/if}
+</ol>
+
+<p n:if="!$found" class="italic">{_"There are no news."}</p>

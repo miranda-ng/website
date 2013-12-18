@@ -577,13 +577,13 @@ table tr td:first-child { white-space: nowrap; }
 		line-height: 17px;
 	}
 	dd {
-		margin-left: 65px;
-		padding-bottom: 10px;		
+		margin-left: 78px;
+		padding-bottom: 10px;
 	}	
 	dt {
 		float: left;
-		width: 55px;
-		color: #666;		
+		width: 70px;
+		color: #666;
 		text-align: right;
 	}
 	.more {

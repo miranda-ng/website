@@ -66,7 +66,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
 		$this->template->sufix = $this->context->parameters["title"];
 
-		$this->template->news_panel = $this->context->database->table("news")->order("date DESC")->limit(3);
+		$this->template->news_panel = $this->context->database->table("news")->where("important", 0)->order("date DESC")->limit(3);
+		$this->template->important_news_panel = $this->context->database->table("news")->where("important", 1)->order("date DESC")->limit(3);
 		$this->template->langs = $this->context->database->table("languages")->order("code = ? DESC, code", self::LANG_DEFAULT);
 
 		$this->template->menu = array(

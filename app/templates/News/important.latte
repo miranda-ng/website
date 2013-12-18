@@ -1,0 +1,20 @@
+{block content}
+<a n:href="this, important => NULL" class="more rfloat">{_"News"} &raquo;</a>
+<h1 n:block="title">{_"Important announcements"}{if $page && $pageCount > 1} ({$page}/{$pageCount}){/if}</h1>
+
+<div class="news" n:foreach="$news as $item">
+	{var $item_data = $presenter->getNewsData($item)}
+
+	<h2>{$item_data->title}</h2>
+	<p class="date">{$item->date|date,'j.n.Y'} | {$item_data->author}</p>
+
+	{if $item_data->description}
+		<div class="bold">{!$item_data->description|texy}</div>
+	{/if}
+
+	<p>{!$item_data->content|texy}</p>
+</div>
+
+<p n:if="!$news->count()" class="italic">{_"There are no important announcements."}</p>
+
+{control vp}

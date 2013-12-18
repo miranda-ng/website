@@ -1,11 +1,14 @@
 {var $item_data = $presenter->getNewsData($item)}
 
 {block content}
+<a n:if="$item->important" n:href="default, important => 1" class="more rfloat">&laquo; {_"Show all announcements"}</a>
+<a n:if="!$item->important" n:href="default, important => NULL" class="more rfloat">&laquo; {_"Show all news"}</a>
+
 <h1 n:block="title">{$item_data->title}</h1>
 <p class="date">{$item->date|date,'j.n.Y'} | {$item_data->author}</p>
 
 {if $item_data->description}
-	<div class="italic">{!$item_data->description|texy}</div>
+	<div class="bold">{!$item_data->description|texy}</div>
 {/if}
 
 {!$item_data->content|texy}

@@ -8,8 +8,18 @@
 	</ul>
 </div>
 
-<div class="lastnews" n:if="!$presenter->isLinkCurrent('News:*')">
-	<a class="more" n:href="News:">&raquo; {_"Show all"}</a>
+<div class="lastnews" n:if="$important_news_panel->count() > 0">
+	<h2>{_"Important announcements"}</h2>
+
+	<ul n:inner-foreach="$important_news_panel as $item">
+		{var $news_data = $presenter->getNewsData($item)}
+		<li><a n:href="News:show, $item->link">{$news_data->title}</a></li>
+	</ul>
+
+	<a class="more" n:href="News:, important => 1">&raquo; {_"Show all"}</a>
+</div>
+
+<div class="lastnews" n:if="true || !$presenter->isLinkCurrent('News:*') || $presenter->getParameter('important')">
 	<h2>{_"Latest news"}</h2>
 
 	<dl n:inner-foreach="$news_panel as $item">
@@ -17,6 +27,8 @@
 		<dt><span class="date">{$item->date|date,'j.n.Y'}</span></dt>
 		<dd><a n:href="News:show, $item->link">{$news_data->title}</a></dd>
 	</dl>
+
+	<a class="more" n:href="News:">&raquo; {_"Show all"}</a>
 </div>
 
 

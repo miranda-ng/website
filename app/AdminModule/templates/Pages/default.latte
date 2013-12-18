@@ -2,8 +2,7 @@
 
 <h1 n:inner-block="title">{_"Pages"}</h1>
 
-{if !$original}<b>(!!!)</b> = {_"missing translation"}{/if}
-<hr>
+<p n:if="!$original"><b>(!!!)</b> = {_"missing translation"}</p>
 
 <ol n:inner-foreach="$pages as $page">
 	{var $page_content = $presenter->getPagesData($page)}

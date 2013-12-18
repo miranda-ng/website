@@ -5,7 +5,7 @@ namespace AdminModule;
 class NewsPresenter extends SecuredPresenter
 {
 	public function renderDefault() {
-		$this->template->news = $this->context->database->table('news')->order('date DESC');
+		$this->template->news = $this->context->database->table('news')->order('important DESC, date DESC');
 	}
 
 	public function renderEdit($id) {

@@ -2,9 +2,9 @@
 
 final class NewsPresenter extends BasePresenter
 {
-	public function renderDefault()
+	public function renderDefault($important = 0)
 	{
-		$news = $this->template->news = $this->context->database->table("news")->order("date DESC");
+		$news = $this->template->news = $this->context->database->table("news")->where("important", $important)->order("date DESC");
 
 		$vp = $this["vp"];
 		$paginator = $vp->getPaginator();
@@ -13,6 +13,10 @@ final class NewsPresenter extends BasePresenter
 
 		$this->template->page = $paginator->page;
 		$this->template->pageCount = $paginator->pageCount;
+
+		if ($important) {
+			$this->setView("important");
+		}
 	}
 
 	public function renderShow($link)

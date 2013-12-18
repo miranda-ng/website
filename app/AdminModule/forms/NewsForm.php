@@ -27,6 +27,8 @@ class NewsForm extends Form
 				->setRequired('Enter date')
 				->setAttribute('class','date')
 				->setDefaultValue(date('Y-m-d H:i:s'));
+
+			$basic->addCheckbox('important', 'This is important announcement', 20, 20);
 		}
 
 		$details = $this->addContainer("details");
