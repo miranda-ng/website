@@ -8,11 +8,9 @@
 	<h2>{$item_data->title}</h2>
 	<p class="date">{$item->date|date,'j.n.Y'} | {$item_data->author}</p>
 
-	{if $item_data->description}
-		<div class="bold">{!$item_data->description|texy}</div>
-	{/if}
+	<div n:if="$item_data->description" class="bold">{!$item_data->description|texy}</div>
 
-	<p>{!$item_data->content|texy}</p>
+	{!$item_data->content|texy}
 </div>
 
 <p n:if="!$news->count()" class="italic">{_"There are no important announcements."}</p>
