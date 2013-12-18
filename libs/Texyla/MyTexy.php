@@ -48,8 +48,8 @@ class MyTexy extends Texy
 		$this->imageModule->root = $baseUrl . "/files/";
 
 		// security
-		$this->urlSchemeFilters[Texy::FILTER_ANCHOR] = '#https?:|ftp:|mailto:|xmpp:#A';
-		$this->urlSchemeFilters[Texy::FILTER_IMAGE] = '#https?:#A';
+		//$this->urlSchemeFilters[Texy::FILTER_ANCHOR] = '#https?:|ftp:|mailto:|xmpp:#A';
+		//$this->urlSchemeFilters[Texy::FILTER_IMAGE] = '#https?:#A';
 
 		// smileys
 		$this->allowed['emoticon'] = true;
@@ -60,7 +60,8 @@ class MyTexy extends Texy
 		$this->addHandler('image', array($this, 'streamHandler'));
 		$this->addHandler('image', array($this, 'flashHandler'));
 		$this->addHandler("phrase", array($this, "netteLink"));
-		$this->addHandler("phrase", array($this, "targetLink"));
+		//$this->addHandler("phrase", array($this, "targetLink"));
+		$this->addHandler("phrase", array($this, "wikiLink"));
 		$this->addHandler('image', array($this, 'gravatarHandler'));
 		$this->addHandler("image", array($this, "facebookHandler"));
 	}
@@ -78,6 +79,34 @@ class MyTexy extends Texy
 		return $template;
 	}
 
+
+	/**
+	 * @param TexyHandlerInvocation  handler invocation
+	 * @param string
+	 * @param string
+	 * @param TexyModifier
+	 * @param TexyLink
+	 * @return TexyHtml|string|FALSE
+	 */
+	public function wikiLink($invocation, $phrase, $content, $modifier, $link)
+	{
+	   // is there link?
+	   if (!$link)
+		   return $invocation->proceed();
+
+		$parts = explode(':', $link->URL, 2);
+
+		if (count($parts) === 2 && $parts[0] === "wiki") {
+			$page = $parts[1];
+			if (Strings::startsWith($page, "p:")) { // plugin shortcut
+				$page = "Plugin:" . substr($page, 2);
+			}
+
+			$link->URL = "http://wiki.miranda-ng.org/index.php?title=" . $page;
+		}
+
+		return $invocation->proceed();
+	}
 
 
 	/**
