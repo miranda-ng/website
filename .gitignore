@@ -3,6 +3,7 @@
 /cache/*
 /vendor/*
 /nbproject/*
+/webtemp/*
 
 .DS_Store
 !.gitignore

@@ -58,7 +58,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         parent::beforeRender();
 
-		if ($this->user->isLoggedIn())
+		if ($this->user->isLoggedIn() && !$this->isAjax())
 			\Nette\Diagnostics\Debugger::enable(\Nette\Diagnostics\Debugger::DEVELOPMENT);
 
 		$year = $this->context->parameters["year"];
