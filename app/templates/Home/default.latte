@@ -17,7 +17,60 @@
 
 {block content}
 {var $page_content = $presenter->getPagesData($page)}
-{!$page_content->content|texy}
+
+{capture $protos}
+{block |texy}
+.[threecols]
++ AIM:[wiki:p:AIM] "(AOL Instant Messenger) .[aka]"
++ Em-LAN:[wiki:p:EmLanProto]
++ Facebook:[wiki:p:Facebook]
++ Gadu-Gadu:[wiki:p:GG]
++ ICQ:[wiki:p:ICQ]
++ IRC:[wiki:p:IRC] "(Internet Relay Chat) .[aka]"
++ Jabber:[wiki:p:Jabber] "(XMPP) .[aka]"
++ MRA:[wiki:p:MRA]
++ MSN:[wiki:p:MSN]
++ Omegle:[wiki:p:Omegle]
++ Skype:[wiki:p:Skype]
++ "Skype Classic":[wiki:p:SkypeClassic]
++ Tlen:[wiki:p:Tlen]
++ Twitter:[wiki:p:Twitter]
++ VKontakte:[wiki:p:VKontakte]
++ WhatsApp:[wiki:p:WhatsApp]
++ Xfire:[wiki:p:XFire]
++ Yahoo:[wiki:p:Yahoo]
+{/block}
+{/capture}
+
+{capture $authors}
+{block |texy}
+.[twocols]
++ Bartosz Białek "aka .[aka]" Dezeath
++ Vadim Dashevsky "aka .[aka]" watcher
++ Alexander Gluzsky "aka .[aka]" sss
++ Vladislav Grishenko "aka .[aka]" theMIROn
++ Ekaterina Gritsenko "aka .[aka]" Tuarisa
++ George Hazan "aka .[aka]" ghazan
++ Ulrich Hecht "aka .[aka]" fishbone
++ Vitaly Igonin "aka .[aka]" persei
++ Alexey Koulakov "aka .[aka]" Awkward
++ Michael Kunz "aka .[aka]" Protogenes
++ Dmitry Kuzkin "aka .[aka]" Bio
++ Alexander Lantsev "aka .[aka]" Unsane
++ Eugene Lishnevsky "aka .[aka]" elishnevsky
++ Vlad Mironov "aka .[aka]" mironych
++ Victor Pavlychko "aka .[aka]" nullbie
++ Robert Pösel "aka .[aka]" Robyer
++ Konstantin Romanov "aka .[aka]" Kildor
++ Ivan Rozhuk "aka .[aka]" rozhuk
++ Alexander Shorin "aka .[aka]" Kxepal
++ Artem Shpynov "aka .[aka]" FYR
++ Kirill Volinsky "aka .[aka]" Mataes
++ Tobias Weimer "aka .[aka]" Wishmaster / Freak_TheMighty
+{/block}
+{/capture}
+
+{$page_content->content|noescape|replace,'$protocols',$protos|replace,'$authors',$authors|texy}
 
 {*
 <p>Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast.</p>
