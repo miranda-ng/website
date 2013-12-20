@@ -12,7 +12,7 @@ abstract class SecuredPresenter extends BasePresenter
 		$user = $this->user;
 		if (!$user->isLoggedIn()) {
 			if ($user->getLogoutReason() === User::INACTIVITY) {
-				$this->flashMessage($this->translator->translate('You was logged out due to inactivity.'), 'warning');
+				$this->flashMessage($this->translator->translate('You were logged out due to inactivity.'), 'warning');
 			}
 			$backlink = $this->storeRequest();
 			$this->redirect(':Admin:Sign:', array('backlink' => $backlink));
