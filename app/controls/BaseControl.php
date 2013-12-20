@@ -6,6 +6,14 @@ use Nette\Application\UI\Control;
 abstract class BaseControl extends Control
 {
 
+	/** @var GettextTranslator\Gettext */
+	public $translator;
+
+	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, \GettextTranslator\Gettext $translator) {
+		$this->translator = $translator;
+		parent::__construct($parent, $name);
+	}
+
 	public function templatePrepareFilters($template) {
 		$template->registerFilter($latte = new \Nette\Latte\Engine);
 		\Macros::setupMacros($latte->compiler);
@@ -13,6 +21,7 @@ abstract class BaseControl extends Control
 
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
+		$template->setTranslator($this->translator);
 		return \Macros::setupTemplate($template, $this->presenter->context->parameters["wwwDir"]);
 	}
 
