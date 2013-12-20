@@ -12,7 +12,7 @@ php:
 nette:
 	session:
 		expiration: 31 days
-		autoStart: smart
+		autoStart: yes
 		savePath: "%tempDir%/sessions"
 		#cookieDomain: ".%domain%"
 
