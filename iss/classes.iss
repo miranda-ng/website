@@ -68,3 +68,15 @@
 .italic {
 	font-style: italic;
 }
+
+code {
+	font-family: monospace;
+}
+
+pre {
+	code {
+		margin-bottom: 22px;
+		font-size: 14px;
+		line-height: 24px;
+	}
+}

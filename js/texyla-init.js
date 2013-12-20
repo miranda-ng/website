@@ -13,8 +13,10 @@ $(function () {
 	$(".texyla").texyla({
 		toolbar: [
 			'h2', 'h3', 'h4',
-//			null,
-			'bold', 'italic',
+			null,
+			'bold', 'italic', 'del',
+			null,
+			'codeInline',
 			null,
 			'center', ['left', 'right', 'justify'],
 			null,
@@ -26,11 +28,11 @@ $(function () {
 //			null,
 //			'files', 'youtube', 'gravatar',
 			null,
-			'div', ['html', 'blockquote', 'text', 'comment'],
+			'div', ['html', 'blockquote', 'text', 'comment', 'code'],
 //			null,
 //			'code',	['codeHtml', 'codeCss', 'codeJs', 'codePhp', 'codeSql'], 'codeInline',
 			null,
-			{ type: "label", text: "Other"}, ['sup', 'sub', 'del', 'acronym', 'hr', 'notexy', 'web']
+			{ type: "label", text: "Other"}, ['sup', 'sub', 'acronym', 'hr', 'notexy', 'web']
 
 		],
 		texyCfg: "admin",

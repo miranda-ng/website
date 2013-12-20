@@ -194,6 +194,14 @@ line-height: .83em;
 font-style: italic;
 font-style: italic;
 }
+code {
+font-family: monospace;
+}
+pre code {
+margin-bottom: 22px;
+font-size: 14px;
+line-height: 24px;
+}
 @font-face {
 font-family: 'CaviarDreamsRegular';
 src: url('fonts/caviardreams-webfont.eot');
