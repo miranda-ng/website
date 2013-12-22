@@ -26,16 +26,19 @@ html, body {
 
 body {
 	background-color: #f3f0e7;
+	&.rtl {
+		direction: rtl;
+	}
 }
 
 #all {
 	width: $width;
-	
+
 /*	max-width: 1500px;
 	min-width: 800px;
 	width: 80%;	*/
-	
-	
+
+
 	padding: 0;
 	margin: 0 auto;
 	position: relative;
@@ -50,17 +53,18 @@ header {
 	height: 480px;
 	height: 90px;
 	position: relative;
-	
+
 	#logo {
 		display: block;
 		background: img("logo_smaller.png") no-repeat left top;
 		width: 270px;
 		height: 75px;
 		float: left;
+		left: 0px;
 		margin: 8px 0px 0 15px;
 		position: absolute;
 		z-index: 10;
-		
+
 		text-align: left;
 		text-decoration: none;
 		color: black;
@@ -71,15 +75,15 @@ header {
 		letter-spacing: 1px;
 		line-height: 20px;
 		//text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
-		
+
 		padding: 5px 0 0 160px;
-		
+
 		.subtitle {
 			font-size: 13px;
 			color: #666;
 		}
 	}
-	
+
 	menu {
 		list-style: none;
 		margin: 0;
@@ -89,29 +93,29 @@ header {
 		top: 58px;
 		right: 15px;
 		margin-right: -2px;
-		
+
 		li {
 			float: left;
 			margin-left: 0px;
 			height: 32px;
 			overflow: hidden;
 			padding: 2px 2px 0 2px;
-			
+
 			a {
 				color: black;
 				font-size: 16px;
 				font-family: $font;
 				padding: 0 10px;
-				display: block;		
+				display: block;
 				text-align: center;
 				line-height: 30px;
 				text-decoration: none;
 			}
-			
+
 			a.active {
 				color: white;
 			}
-			
+
 			a.active, a:hover {
 				background: #89d5f5;
 				//font-weight:bold;
@@ -125,34 +129,34 @@ header {
 section {
 	position: relative;
 	@self-clear;
-	
+
 	@border-radius-simple: 15px;
-	
+
 		display: block;
-		
+
 		position: relative;
 		//top: 90px;
 		//padding: 55px 0px 15px;
 		//margin-bottom: 100px;
-		
+
 		background: white;
 		border-top: solid 3px #89d5f5;
-		
-		box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);				
-		
-		
+
+		box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+
+
 	#top {
 		width: 100%;
 		height: 180px;
-				
+
 		padding: 20px 0px 15px;
-		
+
 		background: #F7FCFF;
-		
+
 		border-bottom: solid 1px #d6d6d6;
-		
+
 		@border-radius: 15px 15px 0 0;
-		
+
 		> p {
 			clear: left;
 			float: left;
@@ -161,7 +165,7 @@ section {
 			text-align: left;
 			width: 340px;
 		}
-		
+
 		.download {
 			color: black;
 			display: block;
@@ -174,21 +178,21 @@ section {
 			position: absolute;
 			text-decoration: none;
 			width: auto;
-			
+
 			img {
 				float: left;
 				margin-bottom: -29px;
 				margin-right: 10px;
 				vertical-align: baseline;
 			}
-			
+
 			&:hover {
 				text-decoration: underline;
 				span {
 					!text-decoration: none;
 				}
 			}
-			
+
 			span {
 				display: block;
 				clear: both;
@@ -197,14 +201,14 @@ section {
 				color: #868686;
 				font-size: 22px;
 				text-decoration: none;
-			}			
+			}
 		}
-		
+
 		&.file_of_week {
 			padding-top: 30px;
 			height: 280px;
 			padding-right: 8px;
-		
+
 			.screenshot {
 				float: right;
 				margin-top: -10px;
@@ -214,11 +218,11 @@ section {
 					max-height: 240px;
 				}
 			}
-			
+
 			.download {
 				margin-left: 50px;
 			}
-			
+
 			p {
 				clear: left;
 				float: left;
@@ -230,12 +234,12 @@ section {
 				text-indent: 0px;
 				width: 450px;
 				height: 72px;
-				
+
 				overflow: hidden;
 				text-indent: 0px;
 				text-overflow: ellipsis;
 			}
-			
+
 			p + .more {
 				float: left;
 				margin-left: 430px;
@@ -245,7 +249,7 @@ section {
 				font-weight: bold;
 			}
 		}
-		
+
 		.screenshots {
 			height: 170px;
 			left: 130px;
@@ -256,7 +260,7 @@ section {
 			}
 		}
 	}
-	
+
 	#guy_quote {
 		display: block;
 		position: absolute;
@@ -265,7 +269,7 @@ section {
 		height: 169px;
 		//bottom: 30px;
 		top: 180px;
-		
+
 		p {
 			//width: 280px;
 			//height: 48px;
@@ -283,7 +287,7 @@ section {
 			@border-radius-simple: 15px;
 			@box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 			position: relative;
-			
+
 			b {
 				font-size: 13px;
 				//color: #555;
@@ -293,7 +297,7 @@ section {
 				display: block;
 				padding-top: 3px;
 			}
-			
+
 			&:after {
 				content: "";
 				display: block;
@@ -311,27 +315,27 @@ section {
 	#top + article, #guy_quote + article {
 		padding-top: 20px;
 	}
-	
-	article {		
+
+	article {
 		//float: left;
 		width: 560px;
 		width: 68%;
 		width: 610px;
 		clear: both;
-		
+
 		display: table-cell;
 
 		padding: 20px 25px 10px;
-		
+
 		.news {
 			clear: both;
 			@self-clear;
 			margin-bottom: 20px;
 			border-bottom: solid 1px #d6d6d6;
-			
+
 			&:last-child {
 				border-bottom: none;
-			}			
+			}
 			.more {
 				float: right;
 				font-family: $fontBold;
@@ -339,7 +343,7 @@ section {
 			p + .more {
 				margin-top: -12px;
 				margin-bottom: 18px;
-			}			
+			}
 		}
 	}
 
@@ -352,13 +356,13 @@ section {
 		padding: 0 20px;
 		background: #FAF2DC;
 		background: #FFFCF2;
-		
+
 		@border-radius: 0px 15px 15px 0;
-		
+
 		border-left: solid 1px #d6d6d6;
-		
+
 		display: table-cell;
-		
+
 		.tweet {
 			p {
 				font-size: 12px;
@@ -367,16 +371,16 @@ section {
 				color: #444;
 			}
 		}
-		
+
 		&.addons {
 			padding-top: 0px;
-			
+
 			menu {
 				list-style: none;
 				line-height: 22px;
 				margin-left: 0px;
 				padding-left: 0;
-				
+
 				menu {
 					list-style: circle;
 					margin-left: 20px;
@@ -386,7 +390,7 @@ section {
 			}
 		}
 	}
-	
+
 }
 
 footer {
@@ -397,7 +401,7 @@ footer {
 		//font-style: italic;
 		text-align: right;
 	}
-	
+
 }
 
 &.italic {
@@ -438,7 +442,7 @@ a {
 h1, h2, h3, h4, h5 {
 	font-family: $fontBold;
 	font-weight: bold;
-	
+
 	a {
 		color: inherit;
 		text-decoration: none;
@@ -517,7 +521,7 @@ table {
 	td, th {
 		padding: 5px 5px;
 		vertical-align: top;
-	}	
+	}
 }
 
 
@@ -528,16 +532,16 @@ table {
 ul.icons {
 	list-style: none;
 	margin-left: 0px;
-	
+
 	li {
 		padding: 0 0 8px 10px;
-		
+
 		img {
 			vertical-align: middle;
 			margin-right: 6px;
 			opacity:0.9;
 		}
-		
+
 		a {
 			display: block;
 			text-decoration: none;
@@ -550,10 +554,10 @@ ul.icons {
 }
 
 aside {
-	h2 {	
+	h2 {
 		//font-variant: small-caps;
 		margin-top: 20px;
-		
+
 		border-bottom: solid 1px #d6d6d6;
 		padding-bottom: 10px;
 	}
@@ -579,7 +583,7 @@ table tr td:first-child { white-space: nowrap; }
 	dd {
 		margin-left: 78px;
 		padding-bottom: 10px;
-	}	
+	}
 	dt {
 		float: left;
 		width: 70px;
@@ -655,7 +659,8 @@ table tr td:first-child { white-space: nowrap; }
 .languages {
 	margin: -2px 20px 0 0;
 	float: right;
-	
+	direction: ltr;
+
 	a {
 		display: inline-block;
 		vertical-align: middle;
@@ -664,7 +669,7 @@ table tr td:first-child { white-space: nowrap; }
 		border: solid 1px transparent;
 		@border-radius-simple: 2px;
 		text-decoration: none;
-		
+
 		&.active {
 			background: white;
 			border-color: #aaa;
@@ -676,7 +681,7 @@ table tr td:first-child { white-space: nowrap; }
 		}
 
 		img {
-		
+
 		}
 	}
 }

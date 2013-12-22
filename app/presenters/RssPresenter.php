@@ -1,6 +1,6 @@
 <?php
 
-class RssPresenter extends \BasePresenter
+final class RssPresenter extends BasePresenter
 {
 
 	public function beforeRender() {
@@ -15,6 +15,8 @@ class RssPresenter extends \BasePresenter
 	public function renderNews()
 	{
 		$limit = 15;
+
+		$this->template->translatedOnly = $this->getParameter("translated") == "force";
 
 		$data = $this->context->database->table('news')->order("date DESC")->limit($limit);
 		$this->template->data = $data;

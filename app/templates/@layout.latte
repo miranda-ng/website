@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lte IE 7 ]><html lang="en" class="no-js ie7"><![endif]-->
-<!--[if IE 8 ]><html lang="en" class="no-js ie8"><![endif]-->
-<!--[if IE 9 ]><html lang="en" class="no-js ie9"><![endif]-->
-<!--[if (gt IE 9)|!(IE) ]><!--><html lang="en" class="no-js"><!--<![endif]-->
+<!--[if lte IE 7 ]><html lang="{$presenter->lang}" class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="{$presenter->lang}" class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="{$presenter->lang}" class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE) ]><!--><html lang="{$presenter->lang}" class="no-js"><!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
@@ -13,13 +13,18 @@
 	<meta name="keywords" content="miranda, messenger, chat, windows, facebook, skype, twitter, jabber, icq, irc, chat">
 	<title>{ifset #title}{include #title|striptags|trim} - {/ifset}{$sufix}</title>
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
-	<link rel="alternate" n:href="Rss:news" type="application/rss+xml" class="rss" title="RSS channel for news">
+	<link rel="alternate" n:href="Rss:news" type="application/rss+xml" class="rss" title="{_"RSS channel for news"}">
+	<link n:if="$presenter->lang != \BasePresenter::LANG_DEFAULT" rel="alternate" n:href="Rss:news, translated => force" type="application/rss+xml" class="rss" title="{_"RSS channel for news (translated only)"}">
 {*	<link rel="image_src" type="image/jpeg" href="images/logo.png"> *}
 	{iss "style", "screen,projection,tv"}
 	{block head}{/block}
 </head>
 
-<body>
+{var $rtl = false}
+{foreach $langs as $lang}
+	{if $presenter->lang == $lang->code}{? $rtl = $lang->rtl}{/if}
+{/foreach}
+<body{if $rtl} style="direction: rtl"{/if}>
 
 <div id="all">
 
@@ -36,7 +41,7 @@
 		<div class="languages">
 			<a n:foreach="$langs as $lang" n:class="$presenter->lang == $lang->code ? active" n:href="this, lang => $lang->code" title="{$lang->name}">
 				<img src="{$basePath}/images/flags/{$lang->icon}.png" alt="{$lang->name}">
-				{$lang->name}
+				{*$lang->name*}
 			</a>
 		</div>
 

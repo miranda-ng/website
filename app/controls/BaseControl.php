@@ -5,12 +5,15 @@ use Nette\Application\UI\Control;
 
 abstract class BaseControl extends Control
 {
+	/** @var MyTexy */
+	public $texy;
 
 	/** @var GettextTranslator\Gettext */
 	public $translator;
 
-	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, \GettextTranslator\Gettext $translator) {
+	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, \GettextTranslator\Gettext $translator, \MyTexy $texy) {
 		$this->translator = $translator;
+		$this->texy = $texy;
 		parent::__construct($parent, $name);
 	}
 
@@ -22,13 +25,13 @@ abstract class BaseControl extends Control
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
 		$template->setTranslator($this->translator);
-		return \Macros::setupTemplate($template, $this->presenter->context->parameters["wwwDir"]);
+		return \Macros::setupTemplate($template, $this->texy);
 	}
 
 	public function render() {
 		$template = $this->template;
 
-		$view = "default"; // TODO: upravit pro různé renderNeco metody?
+		$view = "default"; // TODO: edit for different renderXy methods?
 
 		$name = $this->getReflection()->shortName;
 

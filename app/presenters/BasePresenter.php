@@ -8,6 +8,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	/** @var GettextTranslator\Gettext @inject */
 	public $translator;
 
+	/** @var MyTexy @inject */
+	public $texy;
+
 	const LANG_DEFAULT = "en";
 
     public function  startup() {
@@ -18,6 +21,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			$lang = $this->context->httpRequest->detectLanguage(array_values($langs)) ?: self::LANG_DEFAULT;
 			return $this->redirect("this", array("lang" => $lang));
 		}
+
+		$this->texy->setLang($this->lang);
 	}
 
 	public function getTransData($item, $table) {
@@ -70,15 +75,44 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->template->important_news_panel = $this->context->database->table("news")->where("important", 1)->order("date DESC")->limit(3);
 		$this->template->langs = $this->context->database->table("languages")->order("code = ? DESC, code", self::LANG_DEFAULT);
 
+		$wikiLink = "//wiki.miranda-ng.org";
+		switch ($this->lang) {
+			case "by":
+				$wikiLink = MAcros::GetWikiLink("%D0%93%D0%B0%D0%BB%D0%BE%D1%9E%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%BE%D0%BD%D0%BA%D0%B0");
+				break;
+			case "cs":
+				$wikiLink = MAcros::GetWikiLink("Hlavn%C3%AD_strana");
+				break;
+			case "de":
+				$wikiLink = MAcros::GetWikiLink("Hauptseite");
+				break;
+			case "en":
+				$wikiLink = MAcros::GetWikiLink("Main_Page");
+				break;
+			case "fr":
+				$wikiLink = MAcros::GetWikiLink("Page_principale");
+				break;
+			case "pl":
+				$wikiLink = MAcros::GetWikiLink("Strona_g%C5%82%C3%B3wna");
+				break;
+			case "ru":
+				$wikiLink = MAcros::GetWikiLink("%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0");
+				break;
+			case "sk":
+				$wikiLink = MAcros::GetWikiLink("Hlavn%C3%A1_str%C3%A1nka");
+				break;
+		}
+		if (\Nette\Utils\Strings::startsWith($wikiLink, "http://"))
+			$wikiLink = substr($wikiLink, 5);
+
+		$this->template->lang = $this->lang;
+
 		$this->template->menu = array(
 			"Home:" => $this->translator->translate("Home"),
 			"News:" => $this->translator->translate("News"),
-			//"About:" => $this->translator->translate("About"),
 			"Downloads:" => $this->translator->translate("Downloads"),
 			"Development:" => $this->translator->translate("Development"),
-			//"//wiki.miranda-ng.org/index.php?title=Download" => "Downloads",
-			"//wiki.miranda-ng.org" => $this->translator->translate("Wiki"),
-			//"Forums:" => "Forums",
+			$wikiLink => $this->translator->translate("Wiki"),
 			"//forum.miranda-ng.org/" => $this->translator->translate("Forum"),
 		);
 
@@ -111,8 +145,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         }
 
         $template->setTranslator($this->translator);
-
-		return \Macros::setupTemplate($template, $this->context->parameters["wwwDir"]);
+		return \Macros::setupTemplate($template, $this->texy);
 	}
 
 	/**

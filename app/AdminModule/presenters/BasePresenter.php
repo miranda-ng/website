@@ -4,9 +4,6 @@ namespace AdminModule;
 
 abstract class BasePresenter extends \BasePresenter
 {
-	/** @var GettextTranslator\Gettext @inject */
-    public $translator;
-
 	public function startup() {
 		parent::startup();
 		$this->session->start();

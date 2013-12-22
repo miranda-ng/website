@@ -29,7 +29,7 @@ final class NewsPresenter extends BasePresenter
 	}
 
 	public function createComponentVp($name) {
-		$vp = new Components\VisualPaginator($this, $name, $this->translator);
+		$vp = new Components\VisualPaginator($this, $name, $this->translator, $this->texy);
 		$vp->getPaginator()->itemsPerPage = 6;
 		return $vp;
 	}

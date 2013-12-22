@@ -14,6 +14,7 @@ use Nette\Templating\FileTemplate, Nette\Latte\Engine;
 class MyTexy extends Texy
 {
 	private $templatesDir;
+	private $lang = BasePresenter::LANG_DEFAULT;
 
 	/**
 	 * Construct
@@ -66,6 +67,10 @@ class MyTexy extends Texy
 		$this->addHandler("image", array($this, "facebookHandler"));
 	}
 
+	public function setLang($lang) {
+		$this->lang = $lang;
+	}
+
 
 
 	/**
@@ -99,10 +104,10 @@ class MyTexy extends Texy
 		if (count($parts) === 2 && $parts[0] === "wiki") {
 			$page = $parts[1];
 			if (Strings::startsWith($page, "p:")) { // plugin shortcut
-				$page = "Plugin:" . substr($page, 2);
+				$link->URL = MAcros::getWikiLink("Plugin:" . substr($page, 2), $this->lang);
+			} else {
+				$link->URL = MAcros::getWikiLink($page);
 			}
-
-			$link->URL = "http://wiki.miranda-ng.org/index.php?title=" . $page;
 		}
 
 		return $invocation->proceed();
