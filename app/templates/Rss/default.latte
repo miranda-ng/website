@@ -14,7 +14,7 @@
 			<link>{plink //News:show, $a->link}</link>
 			<guid>{= md5($a_data->title . $a->date)}</guid>
 			<description>{if $a_data->description}{$a_data->description|texy|striptags}{else}{$a_data->content|texy|striptags|truncate, 200}{/if}</description>
-			<pubdate>{$a->date|date,"r"}</pubdate>
+			<pubDate>{$a->date|date,"r"}</pubDate>
 		</item>
 	{/foreach}
 </channel>
