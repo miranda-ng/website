@@ -172,12 +172,12 @@ section {
 			font-family: "Arial", "Helvetica", sans-serif;
 			font-size: 42px;
 			font-weight: 700;
-			margin-left: 460px;
-			margin-top: 100px;
 			padding-right: 55px;
-			position: absolute;
 			text-decoration: none;
 			width: auto;
+			float: left;
+			margin-left: 460px;
+			margin-top: 0px;
 
 			img {
 				float: left;
@@ -632,7 +632,6 @@ table tr td:first-child { white-space: nowrap; }
 .aka {
 	font-size: 11px;
 }
-
 
 .twocols {
 	@columns: 2;
