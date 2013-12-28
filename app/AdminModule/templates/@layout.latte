@@ -39,7 +39,6 @@
 		<div class="languages">
 			<a n:foreach="$langs as $lang" n:class="$presenter->lang == $lang->code ? active" n:href="this, lang => $lang->code" title="{$lang->name}">
 				<img src="{$basePath}/images/flags/{$lang->icon}.png" alt="{$lang->name}">
-				{$lang->name}
 			</a>
 		</div>
 
