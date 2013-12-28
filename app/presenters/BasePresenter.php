@@ -63,6 +63,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         parent::beforeRender();
 
+		$this->session->start();
+		
 		if ($this->user->isLoggedIn() && !$this->isAjax())
 			\Nette\Diagnostics\Debugger::enable(\Nette\Diagnostics\Debugger::DEVELOPMENT);
 
