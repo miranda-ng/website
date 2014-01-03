@@ -25,7 +25,7 @@ class PagesForm extends Form
 
 		$this->addSubmit('submit', 'Save');
 
-		$this->onSuccess[] = callback($this, 'formSubmitted');
+		$this->onSuccess[] = $this->formSubmitted;
 	}
 
 	public function formSubmitted($form) {
