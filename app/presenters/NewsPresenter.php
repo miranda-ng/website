@@ -23,7 +23,7 @@ final class NewsPresenter extends BasePresenter
 	{
 		$item = $this->context->database->table("news")/*->where("id", $id)*/->where("link", $link)->fetch();
 		if (!$item) {
-			throw new \Nette\Application\BadRequestException($this->translator->translate("Item was not found."));
+			$this->error($this->translator->translate("Item was not found."));
 		}
 		$this->template->item = $item;
 	}
