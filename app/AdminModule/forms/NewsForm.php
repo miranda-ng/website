@@ -59,7 +59,7 @@ class NewsForm extends Form
 				$res = $this->presenter->context->database->table('news')->insert($values->basic);
 
 				$values->details->author = $this->presenter->user->id;
-				$values->details->news_id = $this->presenter->context->database->connection->lastInsertId();
+				$values->details->news_id = $this->presenter->context->database->connection->getInsertId();
 				$values->details->lang = $this->presenter->lang;
 				$res = $this->presenter->context->database->table('news_content')->insert($values->details);
 			} else {
