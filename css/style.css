@@ -237,6 +237,9 @@ padding: 0;
 font-family: 'Arial', 'Helvetica', sans-serif;
 font-size: 14px;
 }
+body.rtl {
+direction: rtl;
+}
 #all {
 width: 950px;
 padding: 0;
@@ -262,6 +265,7 @@ background: url('../images/logo_smaller.png') no-repeat left top;
 width: 270px;
 height: 75px;
 float: left;
+left: 0;
 margin: 8px 0 0 15px;
 position: absolute;
 z-index: 10;
@@ -383,12 +387,12 @@ display: block;
 font-family: 'Arial', 'Helvetica', sans-serif;
 font-size: 42px;
 font-weight: 700;
-margin-left: 460px;
-margin-top: 100px;
 padding-right: 55px;
-position: absolute;
 text-decoration: none;
 width: auto;
+float: left;
+margin-left: 460px;
+margin-top: 0;
 }
 section #top .download img {
 float: left;
@@ -807,6 +811,7 @@ clear: right;
 .languages {
 margin: -2px 20px 0 0;
 float: right;
+direction: ltr;
 }
 .languages a {
 display: inline-block;

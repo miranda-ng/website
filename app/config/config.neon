@@ -1,9 +1,6 @@
 parameters:
-	year: 2012
+	year: 2014
 	title: Miranda NG
-	Texy:
-		headingModule:
-			top: 2
 
 php:
 	date.timezone: Europe/Prague
