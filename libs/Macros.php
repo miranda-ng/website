@@ -27,11 +27,11 @@ class Macros
 
 		if ($lang != NULL) {
 			// fix languages with different code on wiki
-			switch ($lang) {
+			/*switch ($lang) {
 				case 'cs':
 					$lang = 'cz';
 					break;
-			}
+			}*/
 			$page .= '/' . $lang;
 		}
 

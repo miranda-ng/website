@@ -78,6 +78,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->template->langs = $this->context->database->table("languages")->order("code = ? DESC, code", self::LANG_DEFAULT);
 
 		$wikiLink = "//wiki.miranda-ng.org";
+		// TODO: load this wiki link from database
 		switch ($this->lang) {
 			case "by":
 				$wikiLink = MAcros::GetWikiLink("%D0%93%D0%B0%D0%BB%D0%BE%D1%9E%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%BE%D0%BD%D0%BA%D0%B0");
