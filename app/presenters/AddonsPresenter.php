@@ -3,6 +3,9 @@
 final class AddonsPresenter extends BasePresenter
 {
 
+	/** @var \Rawbyer\Search @inject */
+	public $search;
+
 	/**
 	 * Make array structurized by exploding keys and create new subarrays when needed.
 	 *
@@ -82,20 +85,28 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderSearch($id)
 	{
-		$addons = $this->context->database->table("addons")->select("*, COALESCE(updated, added) AS sortdate")
-				->where("name LIKE ? OR description LIKE ?", "%$id%", "%$id%")->order("sortdate DESC");
-
-		$vp = $this["vp"];
-		$paginator = $vp->getPaginator();
-		$paginator->itemCount = $addons->count('id');
-		$addons->limit($paginator->itemsPerPage, $paginator->offset);
-
+		$params = $this->search->parseSearch($id);
 		$this->template->search = $id;
-		$this->template->page = $paginator->page;
-		$this->template->pageCount = $paginator->pageCount;
-		$this->template->itemCount = $paginator->itemCount;
 
-		$this->template->addons = $addons;
+		if (empty($params)) {
+			$this->template->invalid = true;
+		} else {
+			$regexp = $this->search->prepareSearch($params, "/");
+			$addons = $this->context->database->table("addons")->select("*, COALESCE(updated, added) AS sortdate")
+					->where("name REGEXP ? OR description REGEXP ?", $regexp, $regexp)->order("sortdate DESC");
+
+			$vp = $this["vp"];
+			$paginator = $vp->getPaginator();
+			$paginator->itemCount = $addons->count('id');
+			$addons->limit($paginator->itemsPerPage, $paginator->offset);
+
+			$this->template->highlight = $id;
+			$this->template->page = $paginator->page;
+			$this->template->pageCount = $paginator->pageCount;
+			$this->template->itemCount = $paginator->itemCount;
+
+			$this->template->addons = $addons;
+		}
 	}
 
 	public function renderDetail($id)
@@ -121,6 +132,7 @@ final class AddonsPresenter extends BasePresenter
 		$form->addText("s", "Search query")
 				->setAttribute("placeholder", "Search...")
 				->setRequired()
+				->setDefaultValue($this->action == "search" ? $this->getParameter("id") : "")
 				->addRule($form::MIN_LENGTH, NULL, 2);
 
 		$form->addSubmit("submit", "Search");
@@ -132,6 +144,10 @@ final class AddonsPresenter extends BasePresenter
 
 			$this->redirect('search', array("id" => ($values["s"])));
 		};
+	}
+
+	public function highlight($text, $word, $truncate = NULL) {
+		return $this->search->highlight($text, $word, $truncate);
 	}
 
 }

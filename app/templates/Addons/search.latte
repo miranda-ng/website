@@ -1,11 +1,13 @@
 {block content}
-<h1 n:block="title">{_"Search results for %s", $search}{if $page && $pageCount > 1} ({_"page"} {$page}/{$pageCount}){/if}</h1>
 
-<p class="italic" style="margin: -10px 0 15px 0">{_"We found %d addons.", $itemCount}</p>
+<h1 n:block="title">{_"Search results for „%s“", $search}{if !isset($invalid) && $page && $pageCount > 1} ({_"page"} {$page}/{$pageCount}){/if}</h1>
+
+<p class="italic" style="margin: -10px 0 15px 0">{ifset $invalid}{_"Invalid search query. Write at least one word with 2 or more characters."}{else}{_"We found %d addons.", $itemCount}{/ifset}</p>
 <hr>
 
+{if !isset($invalid)}
 <div class="news" n:foreach="$addons as $item">
-	<h2><a n:href="detail, $item->id">{$item->name} {$item->version}</a></h2>
+	<h2><a n:href="detail, $item->id">{!$presenter->highlight($item->name, $highlight)} {$item->version}</a></h2>
 	<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong> | {$item->downloads}&times;</p>
 
 	<a n:tag-if="$item->screenshot" href="{$item->screenshot}" rel="addon" class="colorbox" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
@@ -14,7 +16,7 @@
 	</a>
 
 	{var $text = htmlspecialchars_decode($item->description)}
-	<p style="padding-left: 200px;">{!$text|striptags|truncate, 300}</p>
+	<p style="padding-left: 200px;">{!$presenter->highlight($text, $highlight, 300)}</p>
 
 	<p style="text-align: right; clear: both;">
 		<a href="http://addons.miranda-im.org/download.php?dlfile={$item->id}" style="font-weight: bold; font-size: 15px">{_"Download"}</a>
@@ -22,5 +24,6 @@
 		<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>
 	</p>
 </div>
+{/if}
 
 {control vp}

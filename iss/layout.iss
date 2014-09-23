@@ -206,7 +206,7 @@ section {
 
 		&.warning {
 			height: auto;
-			
+
 			p {
 				width: auto;
 				padding: 0px 20px;
@@ -218,7 +218,7 @@ section {
 				text-align: center;
 			}
 		}
-		
+
 		&.file_of_week {
 			padding-top: 30px;
 			height: 280px;
@@ -707,4 +707,11 @@ iframe.facebook {
 	width: 247px;
 	height: 258px;
 	margin-top: -10px;
+}
+
+.highlight {
+	//display: inline-block;
+	@border-radius-simple: 2px;
+	background: yellow;
+	padding: 2px 0;
 }

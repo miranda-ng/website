@@ -29,7 +29,7 @@
 {block panel}
 <div class="search">
 	{form searchForm}
-		{input s} {input submit}
+		{input s, style => "width: 150px"} {input submit}
 
 		<ul class="errors" n:if="$form->hasErrors()" style="color: #cc0000; margin-top: 10px;">
 			<li n:foreach="$form->errors as $error">{$error}</li>
