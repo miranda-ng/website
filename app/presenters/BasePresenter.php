@@ -14,7 +14,7 @@ abstract class BasePresenter extends Presenter
 	/** @persistent */
 	public $lang;
 
-	/** @var \GettextTranslator\Gettext @inject */
+	/** @var \LiveTranslator\Translator @inject */
 	public $translator;
 
 	/** @var MyTexy @inject */
@@ -34,7 +34,17 @@ abstract class BasePresenter extends Presenter
 			return $this->redirect("this", array("lang" => $lang));
 		}
 
-		$this->translator->setLang($this->lang);
+		$langs = $this->languagesModel->getLanguages()->fetchPairs(NULL, "code");
+		
+		//$this->translator->setCurrentLang($this->lang);
+        //$this->template->setTranslator($this->translator);
+		
+		$this->translator->setAvailableLanguages($langs);
+		// TODO: plurals
+			//en: "nplurals=2; plural=(n==1) ? 0 : 1;",
+            //cz: "nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));",
+		$this->translator->setPresenterLanguageParam("lang");
+
 		$this->texy->setLang($this->lang);
 
 		// Translate form's default error messages
