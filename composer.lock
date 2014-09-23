@@ -1,44 +1,51 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "2363563ac67ec1391a732aa9b8b0e4d9",
+    "hash": "94df1912c078b55eff72da927e9dd30b",
     "packages": [
         {
             "name": "dg/adminer-custom",
-            "version": "v1.0.1",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/adminer-custom.git",
-                "reference": "7047037f3dbd16032c3cfa4a7091ce11fa83590a"
+                "reference": "9365952e11b2b706be94c5000bf032027557a45b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/adminer-custom/zipball/7047037f3dbd16032c3cfa4a7091ce11fa83590a",
-                "reference": "7047037f3dbd16032c3cfa4a7091ce11fa83590a",
+                "url": "https://api.github.com/repos/dg/adminer-custom/zipball/9365952e11b2b706be94c5000bf032027557a45b",
+                "reference": "9365952e11b2b706be94c5000bf032027557a45b",
                 "shasum": ""
             },
             "type": "project",
             "notification-url": "https://packagist.org/downloads/",
             "description": "Customization for the best database management tool written in PHP, Adminer",
-            "time": "2013-10-16 10:46:14"
+            "time": "2014-08-05 16:59:07"
         },
         {
             "name": "dg/ftp-deployment",
-            "version": "v1.2",
+            "version": "v2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/ftp-deployment.git",
-                "reference": "e057007e916af125ed6af3de943d2c186ad89865"
+                "reference": "9bbfd6368b32639c2255b89a8f5e0c4f46f74081"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/ftp-deployment/zipball/e057007e916af125ed6af3de943d2c186ad89865",
-                "reference": "e057007e916af125ed6af3de943d2c186ad89865",
+                "url": "https://api.github.com/repos/dg/ftp-deployment/zipball/9bbfd6368b32639c2255b89a8f5e0c4f46f74081",
+                "reference": "9bbfd6368b32639c2255b89a8f5e0c4f46f74081",
                 "shasum": ""
             },
-            "type": "tool",
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "bin": [
+                "Deployment/deployment"
+            ],
+            "type": "project",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause",
@@ -55,29 +62,33 @@
             "homepage": "https://github.com/dg/ftp-deployment",
             "keywords": [
                 "deployment",
-                "ftp"
+                "ftp",
+                "ssh"
             ],
-            "time": "2013-12-12 23:22:00"
+            "time": "2014-09-02 09:26:36"
         },
         {
             "name": "dg/texy",
-            "version": "v2.3",
+            "version": "v2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/texy.git",
-                "reference": "11c34e6df7846ff1e02e6ef7c0ef4a1e3af40847"
+                "reference": "8213d3646c3ab1a3eca52413a5be26acb29826fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/texy/zipball/11c34e6df7846ff1e02e6ef7c0ef4a1e3af40847",
-                "reference": "11c34e6df7846ff1e02e6ef7c0ef4a1e3af40847",
+                "url": "https://api.github.com/repos/dg/texy/zipball/8213d3646c3ab1a3eca52413a5be26acb29826fc",
+                "reference": "8213d3646c3ab1a3eca52413a5be26acb29826fc",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.0.0"
+                "php": ">=5.2.0"
+            },
+            "replace": {
+                "dg/texy": "self.version"
             },
             "require-dev": {
-                "nette/tester": "0.9.*"
+                "nette/tester": "~1.2"
             },
             "type": "library",
             "autoload": {
@@ -110,7 +121,7 @@
                 "wiki",
                 "xhtml"
             ],
-            "time": "2013-07-19 22:05:37"
+            "time": "2014-06-20 18:38:38"
         },
         {
             "name": "enumag/ivory",
@@ -160,16 +171,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/janmarek/WebLoader.git",
-                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9"
+                "reference": "0b30a7b42f7e4290fcafd98dfb3e478fda1ad38a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/b51478e2d302aa98cc9c64a9f55779071621f2c9",
-                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9",
+                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/0b30a7b42f7e4290fcafd98dfb3e478fda1ad38a",
+                "reference": "0b30a7b42f7e4290fcafd98dfb3e478fda1ad38a",
                 "shasum": ""
             },
             "require": {
-                "nette/nette": "~2.0"
+                "nette/nette": "~2.0@rc"
             },
             "require-dev": {
                 "mockery/mockery": "0.7.*",
@@ -191,9 +202,7 @@
             "authors": [
                 {
                     "name": "Jan Marek",
-                    "email": "mail@janmarek.net",
-                    "homepage": "http://www.janmarek.net/",
-                    "role": "Author"
+                    "email": "mail@janmarek.net"
                 }
             ],
             "description": "Tool for loading or deploying CSS and JS files into web pages",
@@ -205,20 +214,20 @@
                 "nette",
                 "webloader"
             ],
-            "time": "2013-11-24 01:08:23"
+            "time": "2014-09-10 18:15:02"
         },
         {
             "name": "nette/nette",
-            "version": "v2.1.0-RC3",
+            "version": "v2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "081d7dcf02c872611c567be660110b5ef7214ae2"
+                "reference": "ba6ce49492700fb36ea97e4c3ad9a6dcef068362"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/081d7dcf02c872611c567be660110b5ef7214ae2",
-                "reference": "081d7dcf02c872611c567be660110b5ef7214ae2",
+                "url": "https://api.github.com/repos/nette/nette/zipball/ba6ce49492700fb36ea97e4c3ad9a6dcef068362",
+                "reference": "ba6ce49492700fb36ea97e4c3ad9a6dcef068362",
                 "shasum": ""
             },
             "require": {
@@ -227,21 +236,15 @@
                 "php": ">=5.3.1"
             },
             "require-dev": {
-                "nette/tester": "@dev"
+                "nette/tester": "~1.1"
             },
             "suggest": {
-                "ext-fileinfo": "*",
-                "ext-gd": "*",
-                "ext-mbstring": "*",
-                "ext-memcache": "*",
-                "ext-pdo": "*"
+                "ext-fileinfo": "",
+                "ext-gd": "",
+                "ext-mbstring": "",
+                "ext-pdo": ""
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
             "autoload": {
                 "classmap": [
                     "Nette/"
@@ -271,18 +274,13 @@
             "keywords": [
                 "Forms",
                 "database",
-                "dbal",
                 "debugging",
                 "framework",
-                "images",
-                "latte",
                 "mailing",
-                "micro",
                 "mvc",
-                "neon",
                 "templating"
             ],
-            "time": "2013-12-13 06:13:12"
+            "time": "2014-08-28 11:11:29"
         }
     ],
     "packages-dev": [
@@ -293,10 +291,10 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "nette/nette": 5,
         "enumag/ivory": 20,
         "janmarek/webloader": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.4.0"
     },
