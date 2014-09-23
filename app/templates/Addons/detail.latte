@@ -1,0 +1,26 @@
+{block content}
+<h1 n:block="title">{$item->name} {$item->version}</h1>
+
+<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong> | {$item->downloads}&times;</p>
+
+{var $imageUrl = $item->screenshot ? $item->screenshot : "/images/placeholder.png"}
+<a href="{$imageUrl}" class="colorbox">
+	<img src="{$imageUrl}" style="float: left; width: 180px; margin: 0 10px 15px 0">
+</a>
+
+<p style="padding-left: 200px;">
+	<strong>{_"License:"}</strong> {$item->license->name}
+	<br><strong>{_"Requirements:"}</strong> {$item->requirements}
+
+	<br><br><strong>{_"Description:"}</strong>
+	{!$item->description}
+</p>
+
+<p style="float: right; clear: both;">
+<a href="http://addons.miranda-im.org/download.php?dlfile={$item->id}" style="font-weight: bold; font-size: 18px">{_"Download"}</a>
+{if $item->source}
+| <a href="http://addons.miranda-im.org/download.php?dlsource={$item->id}">{_"Download source"}</a>
+{/if}
+| <a href="http://addons.miranda-im.org/details.php?action=viewlog&id={$item->id}">{_"Show changelog"}</a>
+</p>
+

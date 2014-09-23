@@ -64,7 +64,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         parent::beforeRender();
 
 		$this->session->start();
-		
+
 		if ($this->user->isLoggedIn() && !$this->isAjax())
 			\Nette\Diagnostics\Debugger::enable(\Nette\Diagnostics\Debugger::DEVELOPMENT);
 
@@ -114,6 +114,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			"Home:" => $this->translator->translate("Home"),
 			"News:" => $this->translator->translate("News"),
 			"Downloads:" => $this->translator->translate("Downloads"),
+			"Addons:" => $this->translator->translate("Addons"),
 			"Development:" => $this->translator->translate("Development"),
 			$wikiLink => $this->translator->translate("Wiki"),
 			"//forum.miranda-ng.org/" => $this->translator->translate("Forum"),

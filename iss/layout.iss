@@ -204,6 +204,21 @@ section {
 			}
 		}
 
+		&.warning {
+			height: auto;
+			
+			p {
+				width: auto;
+				padding: 0px 20px;
+				margin: 0;
+				float: none;
+				font-weight: bold;
+				font-size: 14px;
+				color: #cc0000;
+				text-align: center;
+			}
+		}
+		
 		&.file_of_week {
 			padding-top: 30px;
 			height: 280px;

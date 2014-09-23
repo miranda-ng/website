@@ -1,0 +1,36 @@
+{layout ../@layout.latte}
+
+{var $aside_class = "addons"}
+{var $top_class = "warning"}
+
+{block top}
+<p>{_"WARNING! This is temporary listing of addons from Miranda IM."}<br>{_"These addons might be incompatible with recent version of Miranda NG so use them with caution."}</p>
+{/block}
+
+{define menu}
+	{foreach $cats as $category => $id}
+		{continueIf in_array($category, array("Plugins", "Localisation", "nConvers++", "Battleship", "nConvers"))}
+
+		{if is_array($id)}
+			<li style="list-style: none">
+				<h3 style="margin: 10px 0 5px">{$category}</h3>
+				<menu>
+				{include this, cats => $id}
+				</menu>
+			</li>
+		{else}
+			<li>
+				<a n:href="category, $id">{$category}</a>
+			</li>
+		{/if}
+	{/foreach}
+{/define}
+
+{block panel}
+<h2>Categories</h2>
+
+<menu>
+	{include menu, cats => $categories}
+</menu>
+{/block}
+

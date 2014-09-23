@@ -415,6 +415,19 @@ color: #868686;
 font-size: 22px;
 text-decoration: none;
 }
+section #top.warning {
+height: auto;
+}
+section #top.warning p {
+width: auto;
+padding: 0 20px;
+margin: 0;
+float: none;
+font-weight: bold;
+font-size: 14px;
+color: #cc0000;
+text-align: center;
+}
 section #top.file_of_week {
 padding-top: 30px;
 height: 280px;
