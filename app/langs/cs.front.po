@@ -1,18 +1,13 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-12-15 19:26:13
+# Created: 2014-08-06 14:24:23
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-12-15 21:55+0100\n"
+"PO-Revision-Date: 2014-08-06 14:24+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
-"Project-Id-Version: Miranda NG website\n"
-"POT-Creation-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: cs_CZ\n"
-"X-Generator: Poedit 1.6.2\n"
+
 
 msgid "About Miranda NG"
 msgstr "O Mirandě NG"
@@ -38,8 +33,17 @@ msgstr "Opravdu chcete smazat tuto položku?"
 msgid "Author"
 msgstr "Autor"
 
+msgid "Back to important announcements"
+msgstr "Zpět na důležitá oznámení"
+
+msgid "Back to news"
+msgstr "Zpět na novinky"
+
 msgid "Change"
 msgstr "Popis"
+
+msgid "Contact support"
+msgstr "Kontaktovat podporu"
 
 msgid "Content:"
 msgstr "Obsah:"
@@ -89,6 +93,12 @@ msgstr "Zadejte nadpis"
 msgid "Enter url link"
 msgstr "Zadejte odkaz pro url"
 
+msgid "Enter your login."
+msgstr "Zadejte váš login."
+
+msgid "Enter your password."
+msgstr "Zadejte vaše heslo."
+
 msgid "Facebook Page"
 msgstr "Facebook stránka"
 
@@ -98,11 +108,23 @@ msgstr "Fórum"
 msgid "Get source code"
 msgstr "Získat zdrojový kód"
 
+msgid "Give feedback"
+msgstr "Zpětná vazba"
+
 msgid "Home"
+msgstr "Domů "
+
+msgid "Home page"
 msgstr "Domů"
 
 msgid "I hope you have a nice day."
 msgstr "Doufám, že máte hezký den."
+
+msgid "Important announcements"
+msgstr "Důležitá oznámení"
+
+msgid "Important info"
+msgstr "Důležitá oznámení"
 
 msgid "Jabber conference (english)"
 msgstr "Jabber konference (angličtina)"
@@ -117,7 +139,13 @@ msgid "Latest news"
 msgstr "Aktuální novinky"
 
 msgid "Logged in as"
-msgstr "Přihlášen"
+msgstr "Přihlášen "
+
+msgid "Login"
+msgstr "Přihlásit"
+
+msgid "Login:"
+msgstr "Login:"
 
 msgid "Logout"
 msgstr "Odhlásit"
@@ -128,13 +156,8 @@ msgstr "Miranda NG konference na Jabbberu (angličtina)"
 msgid "Miranda NG conference on Jabber (russian)"
 msgstr "Miranda NG konference na Jabberu (ruština)"
 
-msgid ""
-"Miranda NG is a successor of a popular multi-protocol instant messaging "
-"client for Windows - Miranda IM. Very light on system resources and "
-"extremely fast."
-msgstr ""
-"Miranda NG je následovník populárního multiprotokolového klienta pro Windows "
-"- Mirandy IM. Je velmi rychlý a nenáročný na systémové prostředky."
+msgid "Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast."
+msgstr "Miranda NG je nástupcem populárního multiprotokolového klienta pro Windows - Mirandy IM. Je velmi rychlý a nenáročný na systémové prostředky."
 
 msgid "Miranda NG on Facebook"
 msgstr "Miranda NG na Facebooku"
@@ -148,17 +171,41 @@ msgstr "Miranda NG na Twitteru"
 msgid "News"
 msgstr "Novinky"
 
+msgid "News and announcements"
+msgstr "Novinky a oznámení"
+
+msgid "News on Miranda NG website"
+msgstr "Novinky na stránkách Mirandy NG"
+
 msgid "Next Generation of Miranda IM"
 msgstr "Nová generace Mirandy IM"
+
+msgid "No important announcements yet."
+msgstr "Žádná důležitá oznámení."
 
 msgid "Pages"
 msgstr "Stránky"
 
+msgid "Password:"
+msgstr "Heslo:"
+
 msgid "Quick links"
 msgstr "Rychlé odkazy"
 
+msgid "RSS channel for news"
+msgstr "RSS kanál novinek"
+
+msgid "RSS channel for news (translated only)"
+msgstr "RSS kanál novinek (pouze českých)"
+
+msgid "Remember login"
+msgstr "Zapamatovat přihlášení"
+
 msgid "Report bug"
 msgstr "Nahlásit chybu"
+
+msgid "Request new feature"
+msgstr "Požádat o novou funkci"
 
 msgid "Save"
 msgstr "Uložit"
@@ -166,14 +213,32 @@ msgstr "Uložit"
 msgid "Show all"
 msgstr "Zobrazit vše"
 
+msgid "Show all announcements"
+msgstr "Zobrazit všechna oznámení"
+
+msgid "Show all news"
+msgstr "Zobrazit všechny novinky"
+
 msgid "Show complete log"
 msgstr "Kompletní seznam změn"
 
 msgid "Stay in touch"
 msgstr "Zůstaňte v kontaktu"
 
+msgid "There are no important announcements"
+msgstr "Nejsou zde žádná důležitá oznámení"
+
+msgid "There are no important announcements yet."
+msgstr "Nejsou zde žádná důležitá oznámení."
+
+msgid "There are no important announcements."
+msgstr "Nejsou zde žádná důležitá oznámení."
+
 msgid "Title:"
 msgstr "Nadpis:"
+
+msgid "To enter administration you must login."
+msgstr "Pro přístup do administrace se nejprve přihlaste."
 
 msgid "URL link:"
 msgstr "URL odkaz:"
@@ -193,8 +258,9 @@ msgstr "nejnovější verzi"
 msgid "missing translation"
 msgstr "chybí překlad"
 
+msgid "page"
+msgstr "strana"
+
 msgid "untranslated"
 msgstr "nepřeloženo"
 
-msgid "News on Miranda NG website"
-msgstr "Novinky na stránkách Mirandy NG"

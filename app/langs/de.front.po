@@ -1,17 +1,13 @@
-# Created: 2013-12-15 19:26:13
+# Gettext keys exported by GettextTranslator and Translation Panel
+# Created: 2014-08-06 14:36:00
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-12-15 22:28+0100\n"
+"PO-Revision-Date: 2014-08-06 14:36+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Project-Id-Version: Miranda NG website\n"
-"POT-Creation-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"X-Generator: Poedit 1.6.2\n"
-"Language: de\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
+
 
 msgid "About Miranda NG"
 msgstr "Über Miranda NG"
@@ -38,7 +34,10 @@ msgid "Author"
 msgstr "Autor"
 
 msgid "Change"
-msgstr "Ändern"
+msgstr "Änderung"
+
+msgid "Contact support"
+msgstr "Support kontaktieren"
 
 msgid "Content:"
 msgstr "Inhalt:"
@@ -65,31 +64,37 @@ msgid "Download"
 msgstr "Herunterladen"
 
 msgid "Downloads"
-msgstr "Downloads"
+msgstr "Herunterladen"
 
 msgid "Downloads list"
 msgstr "Downloadliste"
 
 msgid "Edit"
-msgstr "Upravit"
+msgstr "Bearbeiten"
 
 msgid "Edit news"
-msgstr "Upravit novinku"
+msgstr "Neuigkeit bearbeiten"
 
 msgid "Edit page"
-msgstr "Upravit stránku"
+msgstr "Seite bearbeiten"
 
 msgid "Enter date"
-msgstr "Zadejte datum"
+msgstr "Datum eingeben"
 
 msgid "Enter title"
-msgstr "Zadejte nadpis"
+msgstr "Titel eingeben"
 
 msgid "Enter url link"
-msgstr "Zadejte odkaz pro url"
+msgstr "URL-Link eingeben"
+
+msgid "Enter your login."
+msgstr "Geben Sie Ihre Anmeldedaten an."
+
+msgid "Enter your password."
+msgstr "Geben Sie Ihr Passwort ein."
 
 msgid "Facebook Page"
-msgstr "Facebook Seite"
+msgstr "Facebook-Seite"
 
 msgid "Forum"
 msgstr "Forum"
@@ -97,11 +102,20 @@ msgstr "Forum"
 msgid "Get source code"
 msgstr "Quellcode beziehen"
 
+msgid "Give feedback"
+msgstr "Anregungen machen"
+
 msgid "Home"
 msgstr "Home"
 
+msgid "Home page"
+msgstr "Homepage"
+
 msgid "I hope you have a nice day."
 msgstr "Ich hoffe Sie haben einen schönen Tag."
+
+msgid "Important announcements"
+msgstr "Wichtige Ankündigungen"
 
 msgid "Jabber conference (english)"
 msgstr "Jabber-Konferenz (englisch)"
@@ -118,23 +132,23 @@ msgstr "Letzte Neuigkeiten"
 msgid "Logged in as"
 msgstr "Angemeldet als"
 
+msgid "Login"
+msgstr "Anmelden"
+
+msgid "Login:"
+msgstr "Anmelden:"
+
 msgid "Logout"
 msgstr "Abmelden"
 
 msgid "Miranda NG conference on Jabber (english)"
-msgstr "Miranda NG Konferenz auf Jabber (englisch)"
+msgstr "Miranda-NG-Konferenz auf Jabber (englisch)"
 
 msgid "Miranda NG conference on Jabber (russian)"
-msgstr "Miranda NG Konferenz auf Jabber (russisch)"
+msgstr "Miranda-NG-Konferenz auf Jabber (russisch)"
 
-msgid ""
-"Miranda NG is a successor of a popular multi-protocol instant messaging "
-"client for Windows - Miranda IM. Very light on system resources and "
-"extremely fast."
-msgstr ""
-"Miranda NG ist der Nachfolger des bekannten Multi-Protokoll-Messengers "
-"Miranda NG für Windows. Benötigt sehr wenig Systemresourcen und ist sehr "
-"schnell."
+msgid "Miranda NG is a successor of a popular multi-protocol instant messaging client for Windows - Miranda IM. Very light on system resources and extremely fast."
+msgstr "Miranda NG ist eine Abspaltung des bekannten Multi-Protokoll-Messengers Miranda IM für Windows. Benötigt sehr wenig Systemressourcen und ist sehr schnell."
 
 msgid "Miranda NG on Facebook"
 msgstr "Miranda NG auf Facebook"
@@ -148,17 +162,41 @@ msgstr "Miranda NG auf Twitter"
 msgid "News"
 msgstr "Neuigkeiten"
 
+msgid "News and announcements"
+msgstr "Neuigkeiten und Ankündigungen"
+
+msgid "News on Miranda NG website"
+msgstr "Neuigkeiten auf der Miranda-NG-Webseite"
+
 msgid "Next Generation of Miranda IM"
-msgstr "Next Generation of Miranda IM"
+msgstr "Nächste Generation von Miranda IM"
 
 msgid "Pages"
 msgstr "Seiten"
 
+msgid "Password:"
+msgstr "Passwort:"
+
 msgid "Quick links"
 msgstr "Wichtige Links"
 
+msgid "RSS channel for news"
+msgstr "RSS-Channel für Neuigkeiten"
+
+msgid "RSS channel for news (translated only)"
+msgstr "RSS-Channel für Neuigkeiten (nur übersetzt)"
+
+msgid "Remember login"
+msgstr "Anmeldung merken"
+
 msgid "Report bug"
 msgstr "Fehler melden"
+
+msgid "Request new feature"
+msgstr "Neue Funktion anfragen"
+
+msgid "Rev."
+msgstr "Rev."
 
 msgid "Save"
 msgstr "Speichern"
@@ -166,14 +204,26 @@ msgstr "Speichern"
 msgid "Show all"
 msgstr "Alle anzeigen"
 
+msgid "Show all announcements"
+msgstr "Alle Ankündigungen anzeigen"
+
+msgid "Show all news"
+msgstr "Alle Neuigkeiten anzeigen"
+
 msgid "Show complete log"
 msgstr "Kompletten Log anzeigen"
 
 msgid "Stay in touch"
 msgstr "In Verbindung bleiben"
 
+msgid "There are no important announcements."
+msgstr "Es gibt keine wichtigen Ankündigungen."
+
 msgid "Title:"
 msgstr "Titel:"
+
+msgid "To enter administration you must login."
+msgstr "Für die Administration müssen Sie sich anmelden"
 
 msgid "URL link:"
 msgstr "URL Link:"
@@ -193,8 +243,9 @@ msgstr "Neuste Version"
 msgid "missing translation"
 msgstr "Fehlende Übersetzungen"
 
+msgid "page"
+msgstr "Seite"
+
 msgid "untranslated"
 msgstr "unübersetzt"
 
-msgid "News on Miranda NG website"
-msgstr "Neuigkeiten auf der Miranda NG Webseite"

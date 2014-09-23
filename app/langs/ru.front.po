@@ -1,12 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-12-15 17:48:07
+# Created: 2014-08-21 14:38:04
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-12-15 17:48+0100\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2014-08-21 14:38+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +13,16 @@ msgid "About Miranda NG"
 msgstr "О программе"
 
 msgid "Admin"
-msgstr "Админ"
+msgstr "Администрирование"
+
+msgid "Administration"
+msgstr "Администрация"
+
+msgid "Administration of website"
+msgstr "Администрирование сайта"
+
+msgid "Are you sure you want to delete this item?"
+msgstr "Вы уверены, что хотите удалить этот элемент?"
 
 msgid "Author"
 msgstr "Автор"
@@ -25,11 +30,20 @@ msgstr "Автор"
 msgid "Change"
 msgstr "Комментарий"
 
+msgid "Contact support"
+msgstr "Поддержка"
+
+msgid "Content:"
+msgstr "Содержание"
+
 msgid "Continue reading"
 msgstr "Читать дальше"
 
 msgid "Date"
 msgstr "Дата"
+
+msgid "Description:"
+msgstr "Описание:"
 
 msgid "Development"
 msgstr "Разработка"
@@ -43,6 +57,24 @@ msgstr "Скачать"
 msgid "Downloads list"
 msgstr "Скачать"
 
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Edit news"
+msgstr "Редактировать новости"
+
+msgid "Edit page"
+msgstr "Редактировать страницу"
+
+msgid "Enter title"
+msgstr "Ввести заголовок"
+
+msgid "Enter your login."
+msgstr "Введите имя пользователя."
+
+msgid "Enter your password."
+msgstr "Введите пароль:"
+
 msgid "Facebook Page"
 msgstr "Страница Facebook"
 
@@ -52,8 +84,20 @@ msgstr "Форум"
 msgid "Get source code"
 msgstr "Исходный код"
 
+msgid "Give feedback"
+msgstr "Обратная связь"
+
 msgid "Home"
 msgstr "Главная "
+
+msgid "Home page"
+msgstr "Главная страница"
+
+msgid "I hope you have a nice day."
+msgstr "Желаем вам хорошего дня."
+
+msgid "Important announcements"
+msgstr "Важное"
 
 msgid "Jabber conference (english)"
 msgstr "Конференция Jabber (англ.)"
@@ -69,6 +113,12 @@ msgstr "Новости"
 
 msgid "Logged in as"
 msgstr "Вы вошли как"
+
+msgid "Login"
+msgstr "Вход"
+
+msgid "Login:"
+msgstr "Имя пользователя:"
 
 msgid "Logout"
 msgstr "Выход"
@@ -94,17 +144,47 @@ msgstr "Miranda NG в Twitter"
 msgid "News"
 msgstr "Новости"
 
+msgid "News and announcements"
+msgstr "Важное"
+
+msgid "News on Miranda NG website"
+msgstr "Новости на сайте Miranda NG"
+
 msgid "Next Generation of Miranda IM"
-msgstr "Next Generation of Miranda IM"
+msgstr "Реинкарнация Miranda IM"
+
+msgid "Pages"
+msgstr "Страницы"
+
+msgid "Password:"
+msgstr "Пароль:"
 
 msgid "Quick links"
 msgstr "Ссылки"
 
+msgid "RSS channel for news"
+msgstr "RSS-канал новостей"
+
+msgid "RSS channel for news (translated only)"
+msgstr "RSS-канал новостей (только переведенные новости)"
+
+msgid "Remember login"
+msgstr "Запомнить пароль"
+
 msgid "Report bug"
 msgstr "Сообщить об ошибке"
 
+msgid "Save"
+msgstr "Сохранить"
+
 msgid "Show all"
 msgstr "Показать все"
+
+msgid "Show all announcements"
+msgstr "Показать все объявления"
+
+msgid "Show all news"
+msgstr "Показать все новости"
 
 msgid "Show complete log"
 msgstr "Полный список изменений"
@@ -112,30 +192,33 @@ msgstr "Полный список изменений"
 msgid "Stay in touch"
 msgstr "Контакты"
 
+msgid "Title:"
+msgstr "Заголовок"
+
+msgid "To enter administration you must login."
+msgstr "Для входа в администрационный центр вам нужно ввести имя пользователя и пароль."
+
 msgid "Website by"
 msgstr "Дизайн"
+
+msgid "Welcome"
+msgstr "Добро пожаловать"
 
 msgid "Wiki"
 msgstr "Wiki"
 
+msgid "You are already logged in."
+msgstr "Вы уже вошли"
+
 msgid "latest version"
 msgstr "последнюю версию"
 
-msgid "Administration"
-msgstr ""
+msgid "missing translation"
+msgstr "непереведенное"
 
-msgid "Pages"
-msgstr ""
+msgid "page"
+msgstr "страница"
 
-msgid "Are you sure you want to delete this item?"
-msgstr ""
-
-msgid "Administration of website"
-msgstr ""
-
-msgid "untranslated"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
+msgid "Request new feature"
+msgstr "Запрос нового функционала"
 
