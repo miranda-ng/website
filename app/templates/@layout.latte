@@ -17,6 +17,7 @@
 	<link n:if="$presenter->lang != \BasePresenter::LANG_DEFAULT" rel="alternate" n:href="Rss:news, translated => force" type="application/rss+xml" class="rss" title="{_"RSS channel for news (translated only)"}">
 {*	<link rel="image_src" type="image/jpeg" href="images/logo.png"> *}
 	{iss "style", "screen,projection,tv"}
+	<link rel="stylesheet" href="/js/colorbox/colorbox.css">
 	{block head}{/block}
 
 	<script>
@@ -102,6 +103,26 @@ UserVoice.push(['showTab', 'classic_widget', {
   tab_position: 'middle-left',
   tab_inverted: false
 }]);
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/colorbox/jquery.colorbox-min.js"></script>
+
+<script>
+$(function(){
+	if ($().colorbox) {
+		$(".colorbox").colorbox({
+			maxWidth: "90%",
+			maxHeight: "90%",
+			minWidth: "15%",
+			minHeight: "25%",
+			initialWidth: 400,
+			initialHeight: 300,
+			opacity: 0.7
+		});
+	}
+});
 </script>
 
 </body>

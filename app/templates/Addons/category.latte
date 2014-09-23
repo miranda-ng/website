@@ -1,14 +1,14 @@
 {block content}
 <h1 n:block="title">{$categoryName}{*_"Addons from %s", $categoryName*}{if $page && $pageCount > 1} ({_"page"} {$page}/{$pageCount}){/if}</h1>
 
-<p class="info" style="margin: -10px 0 15px 0">{_"There is %d addons in this category.", $itemCount}</p>
+<p class="info" style="margin: -10px 0 15px 0">{_"There are %d addons in this category.", $itemCount}</p>
 <hr>
 
 <div class="news" n:foreach="$addons as $item">
 	<h2><a n:href="detail, $item->id">{$item->name} {$item->version}</a></h2>
 	<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong> | {$item->downloads}&times;</p>
 
-	<a n:href="detail, $item->id" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
+	<a n:tag-if="$item->screenshot" href="{$item->screenshot}" rel="addon" class="colorbox" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
 		{var $imageUrl = $item->screenshot ? $item->screenshot : "/images/placeholder.png"}
 		<img src="{$imageUrl}" style="width: 180px" alt="">
 	</a>
