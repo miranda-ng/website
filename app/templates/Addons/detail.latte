@@ -10,13 +10,13 @@
 
 <p style="padding-left: 200px;">
 	<strong>{_"License:"}</strong> {$item->license->name}
-	<br><strong>{_"Requirements:"}</strong> {$item->requirements}
+	{if $item->requirements}<br><strong>{_"Requirements:"}</strong> {$item->requirements}{/if}
 
 	<br><br><strong>{_"Description:"}</strong>
 	{!$item->description}
 </p>
 
-<p style="float: right; clear: both;">
+<p style="text-align: right; clear: both;">
 <a href="http://addons.miranda-im.org/download.php?dlfile={$item->id}" style="font-weight: bold; font-size: 18px">{_"Download"}</a>
 {if $item->source}
 | <a href="http://addons.miranda-im.org/download.php?dlsource={$item->id}">{_"Download source"}</a>

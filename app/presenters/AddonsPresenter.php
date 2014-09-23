@@ -80,6 +80,24 @@ final class AddonsPresenter extends BasePresenter
 		$this->template->categoryName = array_pop($names);
 	}
 
+	public function renderSearch($id)
+	{
+		$addons = $this->context->database->table("addons")->select("*, COALESCE(updated, added) AS sortdate")
+				->where("name LIKE ? OR description LIKE ?", "%$id%", "%$id%")->order("sortdate DESC");
+
+		$vp = $this["vp"];
+		$paginator = $vp->getPaginator();
+		$paginator->itemCount = $addons->count('id');
+		$addons->limit($paginator->itemsPerPage, $paginator->offset);
+
+		$this->template->search = $id;
+		$this->template->page = $paginator->page;
+		$this->template->pageCount = $paginator->pageCount;
+		$this->template->itemCount = $paginator->itemCount;
+
+		$this->template->addons = $addons;
+	}
+
 	public function renderDetail($id)
 	{
 		$item = $this->context->database->table("addons")->where("id", $id)->fetch();
@@ -93,6 +111,27 @@ final class AddonsPresenter extends BasePresenter
 		$vp = new Components\VisualPaginator($this, $name, $this->translator, $this->texy);
 		$vp->getPaginator()->itemsPerPage = 20;
 		return $vp;
+	}
+
+	public function createComponentSearchForm($name) {
+		$form = new \Nette\Application\UI\Form($this, $name);
+
+		$form->getElementPrototype()->class = "search";
+
+		$form->addText("s", "Search query")
+				->setAttribute("placeholder", "Search...")
+				->setRequired()
+				->addRule($form::MIN_LENGTH, NULL, 2);
+
+		$form->addSubmit("submit", "Search");
+
+		$form->onSuccess[] = function($form) {
+			$values = $form->getValues();
+			$values["s"] = str_replace('\\', '', $values["s"]);
+			$values["s"] = str_replace('/', '', $values["s"]);
+
+			$this->redirect('search', array("id" => ($values["s"])));
+		};
 	}
 
 }
