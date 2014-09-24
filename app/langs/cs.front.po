@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2014-08-06 14:24:23
+# Created: 2014-09-24 13:36:34
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2014-08-06 14:24+0200\n"
+"PO-Revision-Date: 2014-09-24 13:36+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,6 +17,12 @@ msgstr "Přidat"
 
 msgid "Add news"
 msgstr "Přidat novinku"
+
+msgid "Added"
+msgstr "Přidáno"
+
+msgid "Addons"
+msgstr "Doplňky"
 
 msgid "Admin"
 msgstr "Administrace"
@@ -68,6 +74,12 @@ msgstr "Vývoj"
 
 msgid "Download"
 msgstr "Stáhnout"
+
+msgid "Download source"
+msgstr "Stáhnout zdrojový kód"
+
+msgid "Downloaded"
+msgstr "Staženo"
 
 msgid "Downloads"
 msgstr "Ke stažení"
@@ -126,6 +138,9 @@ msgstr "Důležitá oznámení"
 msgid "Important info"
 msgstr "Důležitá oznámení"
 
+msgid "Item was not found."
+msgstr "Položka nebyla nalezena."
+
 msgid "Jabber conference (english)"
 msgstr "Jabber konference (angličtina)"
 
@@ -137,6 +152,9 @@ msgstr "Poslední změny"
 
 msgid "Latest news"
 msgstr "Aktuální novinky"
+
+msgid "License:"
+msgstr "Licence:"
 
 msgid "Logged in as"
 msgstr "Přihlášen "
@@ -207,8 +225,17 @@ msgstr "Nahlásit chybu"
 msgid "Request new feature"
 msgstr "Požádat o novou funkci"
 
+msgid "Requirements:"
+msgstr "Požadavky:"
+
 msgid "Save"
 msgstr "Uložit"
+
+msgid "Search results for „%s“"
+msgstr "Výsledky vyhledávání pro „%s“"
+
+msgid "Select category from right menu..."
+msgstr "Zvolte kategorii z pravého menu..."
 
 msgid "Show all"
 msgstr "Zobrazit vše"
@@ -218,6 +245,9 @@ msgstr "Zobrazit všechna oznámení"
 
 msgid "Show all news"
 msgstr "Zobrazit všechny novinky"
+
+msgid "Show changelog"
+msgstr "Zobrazit seznam změn"
 
 msgid "Show complete log"
 msgstr "Kompletní seznam změn"
@@ -234,6 +264,9 @@ msgstr "Nejsou zde žádná důležitá oznámení."
 msgid "There are no important announcements."
 msgstr "Nejsou zde žádná důležitá oznámení."
 
+msgid "These addons might be incompatible with recent version of Miranda NG so use them with caution."
+msgstr "Tyto doplňky nemusí být kompatibilní s nejnovějšími verzemi Mirandy NG, proto je používejte opatrně."
+
 msgid "Title:"
 msgstr "Nadpis:"
 
@@ -242,6 +275,18 @@ msgstr "Pro přístup do administrace se nejprve přihlaste."
 
 msgid "URL link:"
 msgstr "URL odkaz:"
+
+msgid "Updated"
+msgstr "Aktualizováno"
+
+msgid "Version"
+msgstr "Verze"
+
+msgid "WARNING! This is temporary listing of addons from Miranda IM."
+msgstr "VAROVÁNÍ! Toto je dočasný výpis doplňků Mirandy IM."
+
+msgid "We found %d addons."
+msgstr "Nalezli jsme %d doplňků."
 
 msgid "Website by"
 msgstr "Stránky vytvořil"
@@ -263,4 +308,25 @@ msgstr "strana"
 
 msgid "untranslated"
 msgstr "nepřeloženo"
+
+msgid "updated"
+msgstr "aktualizováno"
+
+msgid "There are %d addons in this category."
+msgstr "V této kategorii je %d doplňků."
+
+msgid "Categories"
+msgstr "Kategorie"
+
+msgid "This field is required."
+msgstr "Toto pole je nutné vyplnit."
+
+msgid "Please enter at least %d characters."
+msgstr "Zadejte prosím alespoň %d znaků."
+
+msgid "Search..."
+msgstr "Hledaný výraz..."
+
+msgid "Search"
+msgstr "Hledat"
 

@@ -159,6 +159,7 @@ final class AddonsPresenter extends BasePresenter
 
 	public function createComponentSearchForm($name) {
 		$form = new \Nette\Application\UI\Form($this, $name);
+		$form->setTranslator($this->translator);
 
 		$form->getElementPrototype()->class = "search";
 
