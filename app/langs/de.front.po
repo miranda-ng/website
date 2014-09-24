@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2014-08-06 14:36:00
+# Created: 2014-09-24 10:19:54
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2014-08-06 14:36+0200\n"
+"PO-Revision-Date: 2014-09-24 10:19+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,6 +17,12 @@ msgstr "Hinzufügen"
 
 msgid "Add news"
 msgstr "Neuigkeiten hinzufügen"
+
+msgid "Added"
+msgstr "Hinzugefügt"
+
+msgid "Addons"
+msgstr "Addons"
 
 msgid "Admin"
 msgstr "Admin"
@@ -62,6 +68,12 @@ msgstr "Entwicklung"
 
 msgid "Download"
 msgstr "Herunterladen"
+
+msgid "Download source"
+msgstr "Quellcode herunterladen"
+
+msgid "Downloaded"
+msgstr "Heruntergeladen"
 
 msgid "Downloads"
 msgstr "Herunterladen"
@@ -129,6 +141,9 @@ msgstr "Letzte Änderungen"
 msgid "Latest news"
 msgstr "Letzte Neuigkeiten"
 
+msgid "License:"
+msgstr "Lizenz:"
+
 msgid "Logged in as"
 msgstr "Angemeldet als"
 
@@ -195,11 +210,17 @@ msgstr "Fehler melden"
 msgid "Request new feature"
 msgstr "Neue Funktion anfragen"
 
+msgid "Requirements:"
+msgstr "Voraussetzungen:"
+
 msgid "Rev."
 msgstr "Rev."
 
 msgid "Save"
 msgstr "Speichern"
+
+msgid "Select category from right menu..."
+msgstr "Wählen Sie eine Kategorie aus dem rechten Menü aus..."
 
 msgid "Show all"
 msgstr "Alle anzeigen"
@@ -210,23 +231,41 @@ msgstr "Alle Ankündigungen anzeigen"
 msgid "Show all news"
 msgstr "Alle Neuigkeiten anzeigen"
 
+msgid "Show changelog"
+msgstr "Änderungsprotokoll anzeigen"
+
 msgid "Show complete log"
 msgstr "Kompletten Log anzeigen"
 
 msgid "Stay in touch"
 msgstr "In Verbindung bleiben"
 
+msgid "There are %d addons in this category."
+msgstr "Es sind %d Addons in dieser Kategorie."
+
 msgid "There are no important announcements."
 msgstr "Es gibt keine wichtigen Ankündigungen."
+
+msgid "There is %d addons in this category."
+msgstr "Es sind %d Addons in dieser Kategorie."
+
+msgid "These addons might be incompatible with recent version of Miranda NG so use them with caution."
+msgstr "Diese Addons sind möglicherweise inkompatibel mit neusten Versionen von Miranda NG, also verwenden Sie diese mit Vorsicht!"
 
 msgid "Title:"
 msgstr "Titel:"
 
 msgid "To enter administration you must login."
-msgstr "Für die Administration müssen Sie sich anmelden"
+msgstr "Für die Administration müssen Sie sich anmelden."
 
 msgid "URL link:"
-msgstr "URL Link:"
+msgstr "URL-Link:"
+
+msgid "Updated"
+msgstr "Aktualisiert"
+
+msgid "WARNING! This is temporary listing of addons from Miranda IM."
+msgstr "WARNUNG! Dies ist eine vorrübergehende Auflistung der Addons für Miranda IM."
 
 msgid "Website by"
 msgstr "Webseite von"
@@ -248,4 +287,7 @@ msgstr "Seite"
 
 msgid "untranslated"
 msgstr "unübersetzt"
+
+msgid "updated"
+msgstr "aktualisiert"
 

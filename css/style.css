@@ -415,6 +415,19 @@ color: #868686;
 font-size: 22px;
 text-decoration: none;
 }
+section #top.warning {
+height: auto;
+}
+section #top.warning p {
+width: auto;
+padding: 0 20px;
+margin: 0;
+float: none;
+font-weight: bold;
+font-size: 14px;
+color: #cc0000;
+text-align: center;
+}
 section #top.file_of_week {
 padding-top: 30px;
 height: 280px;
@@ -530,6 +543,8 @@ clear: both;
 zoom: 1;
 margin-bottom: 20px;
 border-bottom: solid 1px #d6d6d6;
+width: 610px;
+overflow: hidden;
 }
 section article .news:after {
 content: '';
@@ -845,4 +860,16 @@ overflow: hidden;
 width: 247px;
 height: 258px;
 margin-top: -10px;
+}
+.highlight {
+-webkit-border-radius: 2px 2px;
+-khtml-border-radius: 2px/2px;
+-moz-border-radius: 2px/2px;
+border-radius: 2px/2px;
+behavior: url('/PIE.htc');
+background: yellow;
+padding: 2px 0;
+}
+a.active {
+font-weight: bold;
 }

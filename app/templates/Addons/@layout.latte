@@ -1,0 +1,45 @@
+{layout ../@layout.latte}
+
+{var $aside_class = "addons"}
+{var $top_class = "warning"}
+
+{block top}
+<p>{_"WARNING! This is temporary listing of addons from Miranda IM."}<br>{_"These addons might be incompatible with recent version of Miranda NG so use them with caution."}</p>
+{/block}
+
+{define menu}
+	{foreach $cats as $category => $id}
+		{if is_array($id)}
+			<li style="list-style: none">
+				<h3 style="margin: 10px 0 5px">{$category}</h3>
+				<menu>
+				{include this, cats => $id}
+				</menu>
+			</li>
+		{else}
+			<li>
+				{default $activeCategoryId = ""}
+				<a n:href="category, $id" n:class="$activeCategoryId == $id ? active">{$category}</a> ({ifset $categoriesCounts[$id]}{$categoriesCounts[$id]}{else}0{/ifset})
+			</li>
+		{/if}
+	{/foreach}
+{/define}
+
+{block panel}
+<div class="search">
+	{form searchForm}
+		{input s, style => "width: 150px"} {input submit}
+
+		<ul class="errors" n:if="$form->hasErrors()" style="color: #cc0000; margin-top: 10px;">
+			<li n:foreach="$form->errors as $error">{$error}</li>
+		</ul>
+	{/form}
+</div>
+
+<h2>{_"Categories"}</h2>
+
+<menu>
+	{include menu, cats => $categories}
+</menu>
+{/block}
+

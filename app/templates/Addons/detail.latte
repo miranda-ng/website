@@ -1,0 +1,34 @@
+{block content}
+<h1 n:block="title">{$item->name} {$item->version}</h1>
+
+{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->screenshot : "/images/placeholder.png"}
+<a href="{$imageUrl}" class="colorbox" style="display: inline-block; max-height: 200px; overflow: hidden; float: left; margin: 0 10px 15px 0">
+	<img src="{$imageUrl}" style="float: left; width: 250px; margin: 0 10px 15px 0">
+</a>
+
+<p style="padding-left: 270px;">
+	<strong>{_"Author"}:</strong> {$item->ref("old_authors", "author_id")->name}
+	<br><strong>{_"License:"}</strong> {$item->license->name}
+	{if $item->requirements}
+		<br><strong>{_"Requirements:"}</strong> {!$item->requirements}
+	{/if}
+
+	<br>
+	<br><strong>{_"Added"}:</strong> {$item->added|date,'j.n.Y'}
+	{if $item->updated}
+		<br><strong>{_"Updated"}:</strong> {$item->updated|date,'j.n.Y'}
+	{/if}
+	<br><strong>{_"Downloaded"}:</strong> {$item->downloads}&times;
+
+	<br><br><a href="/upload/files/{$item->filename}" style="font-weight: bold; font-size: 18px" title="{_'Version'}: {$item->version}">{_"Download"}</a>
+{if $item->source_filename}
+| <a href="/upload/sources/{$item->source_filename}" title="{_'Version'}: {$item->source_version}">{_"Download source"}</a>
+{/if}
+| <a href="http://addons.miranda-im.org/details.php?action=viewlog&id={$item->id}">{_"Show changelog"}</a>
+
+</p>
+
+<hr>
+
+<h2>{_"Description:"}</h2>
+<p>{!$item->description}</p>

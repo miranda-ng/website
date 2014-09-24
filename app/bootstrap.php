@@ -1,5 +1,14 @@
 <?php
 
+// Normalized internal encoding
+iconv_set_encoding('internal_encoding', 'UTF-8');
+mb_internal_encoding('UTF-8');
+
+// Normalized locale settings
+$locale = 'en_US.UTF-8';
+setlocale(LC_ALL, $locale);
+putenv('LC_ALL=' . $locale);
+
 // Create cache with 0777
 umask(0);
 

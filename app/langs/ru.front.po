@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2014-08-21 14:38:04
+# Created: 2014-09-24 12:46:09
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2014-08-21 14:38+0200\n"
+"PO-Revision-Date: 2014-09-24 12:46+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,6 +11,12 @@ msgstr ""
 
 msgid "About Miranda NG"
 msgstr "О программе"
+
+msgid "Added"
+msgstr "Добавлено"
+
+msgid "Addons"
+msgstr "Дополнения"
 
 msgid "Admin"
 msgstr "Администрирование"
@@ -50,6 +56,12 @@ msgstr "Разработка"
 
 msgid "Download"
 msgstr "Скачать"
+
+msgid "Download source"
+msgstr "Скачать исходный код"
+
+msgid "Downloaded"
+msgstr "Скачано"
 
 msgid "Downloads"
 msgstr "Скачать"
@@ -110,6 +122,9 @@ msgstr "Свежие правки"
 
 msgid "Latest news"
 msgstr "Новости"
+
+msgid "License:"
+msgstr "Лицензия:"
 
 msgid "Logged in as"
 msgstr "Вы вошли как"
@@ -174,8 +189,20 @@ msgstr "Запомнить пароль"
 msgid "Report bug"
 msgstr "Сообщить об ошибке"
 
+msgid "Request new feature"
+msgstr "Запрос нового функционала"
+
+msgid "Requirements:"
+msgstr "Зависимости:"
+
 msgid "Save"
 msgstr "Сохранить"
+
+msgid "Search results for „%s“"
+msgstr "Результаты поиска для %s"
+
+msgid "Select category from right menu..."
+msgstr "Выберите категорию из меню справа..."
 
 msgid "Show all"
 msgstr "Показать все"
@@ -186,17 +213,35 @@ msgstr "Показать все объявления"
 msgid "Show all news"
 msgstr "Показать все новости"
 
+msgid "Show changelog"
+msgstr "Показать журнал изменений"
+
 msgid "Show complete log"
 msgstr "Полный список изменений"
 
 msgid "Stay in touch"
 msgstr "Контакты"
 
+msgid "There are %d addons in this category."
+msgstr "%d дополнений в этой категории."
+
+msgid "There is %d addons in this category."
+msgstr "%d дополнений в этой категории."
+
+msgid "These addons might be incompatible with recent version of Miranda NG so use them with caution."
+msgstr "Не все дополнения могут быть совместимы с последней версией Miranda NG, так что используйте их с осторожностью."
+
 msgid "Title:"
 msgstr "Заголовок"
 
 msgid "To enter administration you must login."
 msgstr "Для входа в администрационный центр вам нужно ввести имя пользователя и пароль."
+
+msgid "Updated"
+msgstr "Обновлено"
+
+msgid "WARNING! This is temporary listing of addons from Miranda IM."
+msgstr "ПРЕДУПРЕЖДЕНИЕ!!! Это временная копия сайта дополнений Miranda IM."
 
 msgid "Website by"
 msgstr "Дизайн"
@@ -219,6 +264,9 @@ msgstr "непереведенное"
 msgid "page"
 msgstr "страница"
 
-msgid "Request new feature"
-msgstr "Запрос нового функционала"
+msgid "updated"
+msgstr "обновлено"
+
+msgid "We found %d addons."
+msgstr "Найдено %d дополнений."
 

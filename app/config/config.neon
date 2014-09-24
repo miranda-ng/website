@@ -22,6 +22,9 @@ services:
 	database: @nette.database.default.context
 	urlScript: @httpRequest::getUrl()
 	texy: MyTexy(%wwwDir%, @urlScript::getBaseUrl())
+	- Rawbyer\Search
+	- Models\AddonsModel
+	- Models\CategoriesModel
 
 extensions:
 	gettextTranslator: GettextTranslator\DI\Extension
