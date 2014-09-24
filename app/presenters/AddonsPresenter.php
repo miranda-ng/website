@@ -6,55 +6,18 @@ final class AddonsPresenter extends BasePresenter
 	/** @var \Rawbyer\Search @inject */
 	public $search;
 
-	/**
-	 * Make array structurized by exploding keys and create new subarrays when needed.
-	 *
-	 * @param array $data
-	 * @return array
-	 */
-	private function reshapeArray($data) {
-		$arr = array();
+	/** @var \Models\CategoriesModel @inject */
+	public $categoriesModel;
 
-		foreach ($data as $setting => $value) {
-			$name_parts = explode("/", $setting);
-
-			$place = &$arr;
-			for ($i = 0; $i < count($name_parts); $i++) {
-				$name_part = $name_parts[$i];
-
-				if ($i !== count($name_parts) - 1) {
-					// This is not last item, se must go deeper
-					if (!isset($place[$name_part])) {
-						$place[$name_part] = array();
-					}
-
-					$place = &$place[$name_part];
-					continue;
-				}
-
-				// Last item, here we finally put the value
-				$place[$name_part] = $value;
-			}
-		}
-
-		return $arr;
-	}
+	/** @var \Models\AddonsModel @inject */
+	public $addonsModel;
 
 	public function beforeRender()
 	{
 		parent::beforeRender();
 
-		$categories = $this->context->database->table("categories")->where("hidden", 0)->order("name");
-
-		$cats = array();
-		foreach ($categories as $cat) {
-			$cats[$cat->name] = $cat->id;
-		}
-
-		$counts = $this->context->database->table("addons")->select("categories_id, count(*) AS cnt")->group("categories_id")->fetchPairs("categories_id", "cnt");
-
-		$this->template->categories = $this->reshapeArray($cats);
-		$this->template->categoriesCounts = $counts;
+		$this->template->categories = $this->categoriesModel->getCategoriesArray();
+		$this->template->categoriesCounts = $this->categoriesModel->getCategoriesCountsArray();
 	}
 
 	public function renderDefault()
@@ -64,12 +27,12 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderCategory($id)
 	{
-		$category = $this->context->database->table("categories")->where("hidden", 0)->where("id", $id)->fetch();
+		$category = $this->categoriesModel->findCategories($published)->where("id", $id)->fetch();
 		if (!$category) {
 			$this->error($this->translator->translate("Item was not found."));
 		}
 
-		$addons = $this->context->database->table("addons")->select("*, COALESCE(updated, added) AS sortdate")->where("categories_id", $id)->order("sortdate DESC");
+		$addons = $this->addonsModel->findAddonsByCategory($id)->select("*, COALESCE(updated, added) AS sortdate")->order("sortdate DESC");
 
 		$vp = $this["vp"];
 		$paginator = $vp->getPaginator();
@@ -95,8 +58,10 @@ final class AddonsPresenter extends BasePresenter
 			$this->template->invalid = true;
 		} else {
 			$regexp = $this->search->prepareSearch($params, "/");
-			$addons = $this->context->database->table("addons")->select("*, COALESCE(updated, added) AS sortdate")
-					->where("name REGEXP ? OR description REGEXP ?", $regexp, $regexp)->order("sortdate DESC");
+			$addons = $this->addonsModel->findAddons()
+						->select("*, COALESCE(updated, added) AS sortdate")
+						->where("name REGEXP ? OR description REGEXP ?", $regexp, $regexp)
+						->order("sortdate DESC");
 
 			$vp = $this["vp"];
 			$paginator = $vp->getPaginator();
@@ -114,11 +79,74 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderDetail($id)
 	{
-		$item = $this->context->database->table("addons")->where("id", $id)->fetch();
+		$item = $this->addonsModel->findAddons()->where("id", $id)->fetch();
 		if (!$item) {
 			$this->error($this->translator->translate("Item was not found."));
 		}
 		$this->template->item = $item;
+	}
+
+	public function get_real_filename($headers,$url)
+	{
+		foreach($headers as $header)
+		{
+			if (strpos(strtolower($header),'content-disposition') !== false)
+			{
+				$tmp_name = explode('=', $header);
+				if ($tmp_name[1]) return trim($tmp_name[1],'";\'');
+			}
+		}
+
+		$stripped_url = preg_replace('|\\?.*|', '', $url);
+		return basename($stripped_url);
+	}
+
+	public function actionDownloadFiles()
+	{
+		ob_end_flush();
+
+		$i = 0;
+
+		//$items = $this->context->database->table("addons")->where("filename IS NULL");
+		//$items = $this->context->database->table("addons")->where("source", 1)->where("source_filename IS NULL");
+		$items = $this->context->database->table("addons")->where("source_filename IS NOT NULL")->where("source_version = ''");
+		foreach ($items as $item) {
+
+			set_time_limit(30);
+
+			$url = 'http://addons.miranda-im.org/details.php?action=viewfile&id=' . $item->id;
+			//$url = 'http://addons.miranda-im.org/download.php?dlfile=' . $item->id;
+			//$url = 'http://addons.miranda-im.org/download.php?dlsource=' . $item->id;
+			echo "Downloading: $item->name - $url\n<br>";
+
+			if (($i = ($i + 1) % 5) == 0)
+				flush();
+
+			$content = file_get_contents($url);
+
+			preg_match('|<h3 class="border2" width=100%>Source Code</h3>.*?"indentText">(.*?)\s*-.*?</div>|is', $content, $matches);
+			$item->update(array("source_version" => $matches[1]));
+
+
+			//$filename = $this->get_real_filename($http_response_header, $url); // http_response_header is filled automatically
+
+			/*$params = $this->context->getParameters();
+			$wwwDir = $params["wwwDir"];
+
+			$f = fopen(implode(DIRECTORY_SEPARATOR, array($wwwDir, "upload", "files", $filename)), "w");
+			//$f = fopen(implode(DIRECTORY_SEPARATOR, array($wwwDir, "upload", "sources", $filename)), "w");
+
+			if ($f) {
+				fwrite($f, $content);
+				fclose($f);
+			}*/
+
+			//$item->update(array("filename" => $filename));
+			//$item->update(array("source_filename" => $filename));
+
+		}
+
+		$this->terminate();
 	}
 
 	public function createComponentVp($name) {
