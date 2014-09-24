@@ -7,22 +7,7 @@
 
 {if !isset($invalid)}
 <div class="news" n:foreach="$addons as $item">
-	<h2><a n:href="detail, $item->id">{!$presenter->highlight($item->name, $highlight)} {$item->version}</a></h2>
-	<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong> | {$item->downloads}&times;</p>
-
-	<a n:tag-if="$item->screenshot" href="/upload/images/{$item->screenshot}" rel="addon" class="colorbox" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
-		{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->screenshot : "/images/placeholder.png"}
-		<img src="{$imageUrl}" style="width: 180px; float: left" alt="">
-	</a>
-
-	{var $text = htmlspecialchars_decode($item->description)}
-	<p style="padding-left: 200px;">{!$presenter->highlight($text, $highlight, 300)}</p>
-
-	<p style="text-align: right; clear: both;">
-		<a href="http://addons.miranda-im.org/download.php?dlfile={$item->id}" style="font-weight: bold; font-size: 15px">{_"Download"}</a>
-		|
-		<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>
-	</p>
+	{include "@item.latte", "item" => $item, "highlight" => $highlight}
 </div>
 {/if}
 

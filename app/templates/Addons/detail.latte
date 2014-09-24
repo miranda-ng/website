@@ -17,9 +17,9 @@
 </p>
 
 <p style="text-align: right; clear: both;">
-<a href="http://addons.miranda-im.org/download.php?dlfile={$item->id}" style="font-weight: bold; font-size: 18px">{_"Download"}</a>
-{if $item->source}
-| <a href="http://addons.miranda-im.org/download.php?dlsource={$item->id}">{_"Download source"}</a>
+<a href="/upload/files/{$item->filename}" style="font-weight: bold; font-size: 18px">{_"Download"}</a>
+{if $item->sourcename}
+| <a href="/upload/sources/{$item->sourcename}">{_"Download source"}</a>
 {/if}
 | <a href="http://addons.miranda-im.org/details.php?action=viewlog&id={$item->id}">{_"Show changelog"}</a>
 </p>
