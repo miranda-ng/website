@@ -27,7 +27,7 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderCategory($id)
 	{
-		$category = $this->categoriesModel->findCategories($published)->where("id", $id)->fetch();
+		$category = $this->categoriesModel->findCategories()->where("id", $id)->fetch();
 		if (!$category) {
 			$this->error($this->translator->translate("Item was not found."));
 		}
