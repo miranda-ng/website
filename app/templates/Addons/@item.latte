@@ -13,8 +13,8 @@
 
 <p style="text-align: right; clear: both;">
 	<a href="/upload/files/{$item->filename}" style="font-weight: bold; font-size: 15px">{_"Download"}</a>
-	{if $item->sourcename}
-	| <a href="/upload/sources/{$item->sourcename}">{_"Download source"}</a>
+	{if $item->source_filename}
+	| <a href="/upload/sources/{$item->source_filename}">{_"Download source"}</a>
 	{/if}
 	|
 	<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>

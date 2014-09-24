@@ -9,8 +9,6 @@
 
 {define menu}
 	{foreach $cats as $category => $id}
-		{continueIf in_array($category, array("Plugins", "Localisation", "nConvers++", "Battleship", "nConvers"))}
-
 		{if is_array($id)}
 			<li style="list-style: none">
 				<h3 style="margin: 10px 0 5px">{$category}</h3>
@@ -20,7 +18,7 @@
 			</li>
 		{else}
 			<li>
-				<a n:href="category, $id">{$category}</a>
+				<a n:href="category, $id" n:class="$presenter->getParameter('id') == $id ? active">{$category} ({ifset $categoriesCounts[$id]}{$categoriesCounts[$id]}{else}0{/ifset})</a>
 			</li>
 		{/if}
 	{/foreach}

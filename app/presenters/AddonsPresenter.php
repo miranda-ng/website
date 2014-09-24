@@ -44,14 +44,17 @@ final class AddonsPresenter extends BasePresenter
 	{
 		parent::beforeRender();
 
-		$categories = $this->context->database->table("categories");
+		$categories = $this->context->database->table("categories")->where("hidden", 0)->order("name");
 
 		$cats = array();
 		foreach ($categories as $cat) {
 			$cats[$cat->name] = $cat->id;
 		}
 
+		$counts = $this->context->database->table("addons")->select("categories_id, count(*) AS cnt")->group("categories_id")->fetchPairs("categories_id", "cnt");
+
 		$this->template->categories = $this->reshapeArray($cats);
+		$this->template->categoriesCounts = $counts;
 	}
 
 	public function renderDefault()
@@ -61,7 +64,7 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderCategory($id)
 	{
-		$category = $this->context->database->table("categories")->where("id", $id)->fetch();
+		$category = $this->context->database->table("categories")->where("hidden", 0)->where("id", $id)->fetch();
 		if (!$category) {
 			$this->error($this->translator->translate("Item was not found."));
 		}

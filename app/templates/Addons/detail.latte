@@ -10,7 +10,7 @@
 	<strong>{_"Author"}:</strong> {$item->ref("old_authors", "author_id")->name}
 	<br><strong>{_"License:"}</strong> {$item->license->name}
 	{if $item->requirements}
-		<br><strong>{_"Requirements:"}</strong> {$item->requirements}
+		<br><strong>{_"Requirements:"}</strong> {!$item->requirements}
 	{/if}
 
 	<br>
@@ -20,9 +20,9 @@
 	{/if}
 	<br><strong>{_"Downloaded"}:</strong> {$item->downloads}&times;
 
-	<br><br><a href="/upload/files/{$item->filename}" style="font-weight: bold; font-size: 18px">{_"Download"}</a>
-{if $item->sourcename}
-| <a href="/upload/sources/{$item->sourcename}">{_"Download source"}</a>
+	<br><br><a href="/upload/files/{$item->filename}" style="font-weight: bold; font-size: 18px" title="{_'Version'}: {$item->version}">{_"Download"}</a>
+{if $item->source_filename}
+| <a href="/upload/sources/{$item->source_filename}" title="{_'Version'}: {$item->source_version}">{_"Download source"}</a>
 {/if}
 | <a href="http://addons.miranda-im.org/details.php?action=viewlog&id={$item->id}">{_"Show changelog"}</a>
 
