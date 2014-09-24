@@ -4,6 +4,7 @@
 /vendor/*
 /nbproject/*
 /webtemp/*
+/upload/*
 
 .DS_Store
 !.gitignore
