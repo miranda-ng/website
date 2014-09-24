@@ -3,7 +3,7 @@
 
 <p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong> | {$item->downloads}&times;</p>
 
-{var $imageUrl = $item->screenshot ? $item->screenshot : "/images/placeholder.png"}
+{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->screenshot : "/images/placeholder.png"}
 <a href="{$imageUrl}" class="colorbox">
 	<img src="{$imageUrl}" style="float: left; width: 180px; margin: 0 10px 15px 0">
 </a>

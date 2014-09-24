@@ -8,8 +8,8 @@
 	<h2><a n:href="detail, $item->id">{$item->name} {$item->version}</a></h2>
 	<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong> | {$item->downloads}&times;</p>
 
-	<a n:tag-if="$item->screenshot" href="{$item->screenshot}" rel="addon" class="colorbox" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
-		{var $imageUrl = $item->screenshot ? $item->screenshot : "/images/placeholder.png"}
+	<a n:tag-if="$item->screenshot" href="/upload/images/{$item->screenshot}" rel="addon" class="colorbox" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
+		{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->screenshot : "/images/placeholder.png"}
 		<img src="{$imageUrl}" style="width: 180px; float: left" alt="">
 	</a>
 
