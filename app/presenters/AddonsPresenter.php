@@ -47,6 +47,7 @@ final class AddonsPresenter extends BasePresenter
 
 		$names = explode("/", $category->name);
 		$this->template->categoryName = array_pop($names);
+		$this->template->activeCategoryId = $id;
 	}
 
 	public function renderSearch($id)
@@ -84,6 +85,7 @@ final class AddonsPresenter extends BasePresenter
 			$this->error($this->translator->translate("Item was not found."));
 		}
 		$this->template->item = $item;
+		$this->template->activeCategoryId = $item->categories_id;
 	}
 
 	public function get_real_filename($headers,$url)

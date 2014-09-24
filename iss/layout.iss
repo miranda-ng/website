@@ -717,3 +717,7 @@ iframe.facebook {
 	background: yellow;
 	padding: 2px 0;
 }
+
+a.active {
+	font-weight: bold;
+}
