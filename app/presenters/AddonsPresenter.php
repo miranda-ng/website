@@ -178,11 +178,13 @@ final class AddonsPresenter extends BasePresenter
 	}
 
 	public function highlight($text, $word, $truncate = NULL) {
+		$text = strip_tags($text);
+
 		if (!$word) {
 			if ($truncate !== NULL)
-				return \Nette\Utils\Strings::truncate(strip_tags($text), $truncate);
+				return \Nette\Utils\Strings::truncate($text, $truncate);
 			else
-				return strip_tags($text);
+				return $text;
 		}
 
 		return $this->search->highlight($text, $word, $truncate);
