@@ -347,6 +347,8 @@ section {
 			@self-clear;
 			margin-bottom: 20px;
 			border-bottom: solid 1px #d6d6d6;
+			width: 610px;
+			overflow: hidden;
 
 			&:last-child {
 				border-bottom: none;
