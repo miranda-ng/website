@@ -25,6 +25,7 @@ services:
 	- Rawbyer\Search
 	- Models\AddonsModel
 	- Models\CategoriesModel
+	- Models\LanguagesModel
 
 extensions:
 	gettextTranslator: GettextTranslator\DI\Extension

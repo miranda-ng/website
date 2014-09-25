@@ -20,14 +20,14 @@ abstract class BasePresenter extends Presenter
 	/** @var MyTexy @inject */
 	public $texy;
 
-	const LANG_DEFAULT = "en";
+	/** @var \Models\LanguagesModel @inject */
+	public $languagesModel;
 
     public function  startup() {
 		parent::startup();
 
 		if (!$this->lang) {
-			$langs = $this->context->database->table("languages")->order("code = ? DESC, code", self::LANG_DEFAULT)->fetchPairs("code", "code");
-			$lang = $this->context->httpRequest->detectLanguage(array_values($langs)) ?: self::LANG_DEFAULT;
+			$lang = $this->languagesModel->getDefaultLanguage();
 			return $this->redirect("this", array("lang" => $lang));
 		}
 
@@ -44,14 +44,14 @@ abstract class BasePresenter extends Presenter
 		$data = null;
 		$data_default = null;
 
-		$res = $this->context->database->table("{$table}_content")->where("{$table}_id", $item->id)->where("lang", array($this->lang, self::LANG_DEFAULT))->order("lang = ? DESC", $this->lang)->limit(1)->fetch();
+		$res = $this->context->database->table("{$table}_content")->where("{$table}_id", $item->id)->where("lang", array($this->lang, \Models\LanguagesModel::LANG_DEFAULT))->order("lang = ? DESC", $this->lang)->limit(1)->fetch();
 		return $res;
 
 /*
 		$item2 = clone $item;
 		$res = $item->related("{$table}_content")->where("lang", $this->lang)->limit(1)->fetch();
 		if (!$res) {
-			$res = $item2->related("{$table}_content")->where("lang", self::LANG_DEFAULT)->limit(1)->fetch();
+			$res = $item2->related("{$table}_content")->where("lang", \Models\LanguagesModel::LANG_DEFAULT)->limit(1)->fetch();
 		}
 		return $res;
 
@@ -90,7 +90,7 @@ abstract class BasePresenter extends Presenter
 
 		$this->template->news_panel = $this->context->database->table("news")->where("important", 0)->order("date DESC")->limit(3);
 		$this->template->important_news_panel = $this->context->database->table("news")->where("important", 1)->order("date DESC")->limit(3);
-		$this->template->langs = $this->context->database->table("languages")->order("code = ? DESC, code", self::LANG_DEFAULT);
+		$this->template->langs = $this->languagesModel->getLanguages();
 
 		$wikiLink = "//wiki.miranda-ng.org";
 		// TODO: load this wiki link from database

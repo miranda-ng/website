@@ -14,7 +14,7 @@ class NewsPresenter extends SecuredPresenter
 			$this->flashMessage($this->translator->translate("News with this id doesn't exists."), "error");
 			$this->redirect("default");
 		}
-		if ($this->lang == self::LANG_DEFAULT) {
+		if ($this->lang == \Models\LanguagesModel::LANG_DEFAULT) {
 			$this['newsForm']['basic']->setValues($news);
 			$this['newsForm']['basic']['date']->value = $news["date"]->format("Y-m-d H:i:s");
 		}
@@ -24,7 +24,7 @@ class NewsPresenter extends SecuredPresenter
 	}
 
 	public function actionAdd() {
-		if ($this->lang != self::LANG_DEFAULT) {
+		if ($this->lang != \Models\LanguagesModel::LANG_DEFAULT) {
 			$this->flashMessage($this->translator->translate("News could be added only when using main language"), "error");
 			$this->redirect("default");
 		}
@@ -35,7 +35,7 @@ class NewsPresenter extends SecuredPresenter
 	}
 
 	public function actionDelete($id) {
-		if ($this->lang != self::LANG_DEFAULT) {
+		if ($this->lang != \Models\LanguagesModel::LANG_DEFAULT) {
 			$this->flashMessage($this->translator->translate("News could be deleted only when using main language"), "error");
 			$this->redirect("default");
 		}

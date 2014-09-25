@@ -20,7 +20,7 @@ abstract class BasePresenter extends \BasePresenter
 			":Home:" => $this->translator->translate("Home"),
 		);
 
-		$this->template->original = $this->lang == self::LANG_DEFAULT;
+		$this->template->original = $this->lang == \Models\LanguagesModel::LANG_DEFAULT;
 	}
 
 	/**
@@ -30,7 +30,7 @@ abstract class BasePresenter extends \BasePresenter
 	protected function createComponentTexyla()
 	{
 		$baseUri = $this->context->httpRequest->url->baseUrl;
-		$params = array("lang" => self::LANG_DEFAULT);
+		$params = array("lang" => \Models\LanguagesModel::LANG_DEFAULT);
 		$filter = new \WebLoader\Filter\VariablesFilter(array(
 			"baseUri" => $baseUri,
 			"previewPath" => $this->link("Texyla:preview", $params),

@@ -14,7 +14,7 @@
 	<title>{ifset #title}{include #title|striptags|trim} - {/ifset}{$sufix}</title>
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
 	<link rel="alternate" n:href="Rss:news" type="application/rss+xml" class="rss" title="{_"RSS channel for news"}">
-	<link n:if="$presenter->lang != \BasePresenter::LANG_DEFAULT" rel="alternate" n:href="Rss:news, translated => force" type="application/rss+xml" class="rss" title="{_"RSS channel for news (translated only)"}">
+	<link n:if="$presenter->lang != \Models\LanguagesModel::LANG_DEFAULT" rel="alternate" n:href="Rss:news, translated => force" type="application/rss+xml" class="rss" title="{_"RSS channel for news (translated only)"}">
 {*	<link rel="image_src" type="image/jpeg" href="images/logo.png"> *}
 	{iss "style", "screen,projection,tv"}
 	<link rel="stylesheet" href="/js/colorbox/colorbox.css">
