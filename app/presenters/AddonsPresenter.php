@@ -159,7 +159,7 @@ final class AddonsPresenter extends BasePresenter
 
 		// Just to be sure we're pointing to safe file
 		$name = preg_replace("#\\.\\.(\\\\|\\/)#", "", $name);
-		$path = implode(DIRECTORY_SEPARATOR, [ $wwwDir, "upload", $folder, $name ]);
+		$path = implode(DIRECTORY_SEPARATOR, [ $wwwDir, "upload", $folder, $item->id . "_" . $name ]);
 
 		if (!$name || !is_file($path)) {
 			$this->error($this->translator->translate("File doesn't exists."));

@@ -1,7 +1,7 @@
 {block content}
 <h1 n:block="title">{$item->name} {$item->version}</h1>
 
-{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->screenshot : "/images/placeholder.png"}
+{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
 <a href="{$imageUrl}" class="colorbox" style="display: inline-block; max-height: 200px; overflow: hidden; float: left; margin: 0 10px 15px 0">
 	<img src="{$imageUrl}" style="float: left; width: 250px; margin: 0 10px 15px 0">
 </a>
