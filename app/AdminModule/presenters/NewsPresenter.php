@@ -4,12 +4,15 @@ namespace AdminModule;
 
 class NewsPresenter extends SecuredPresenter
 {
+	/** @var \Models\NewsModel @inject */
+	public $newsModel;
+
 	public function renderDefault() {
-		$this->template->news = $this->context->database->table('news')->order('important DESC, date DESC');
+		$this->template->news = $this->newsModel->findNews(FALSE)->order('important DESC, date DESC');
 	}
 
 	public function renderEdit($id) {
-		$news = $this->context->database->table('news')->get($id);
+		$news = $this->newsModel->get($id);
 		if (!$news) {
 			$this->flashMessage($this->translator->translate("News with this id doesn't exists."), "error");
 			$this->redirect("default");
@@ -41,7 +44,7 @@ class NewsPresenter extends SecuredPresenter
 		}
 
 		try {
-			if (!$this->context->database->table('news')->wherePrimary($id)->delete())
+			if (!$this->newsModel->wherePrimary($id)->delete())
 				$this->flashMessage($this->translator->translate('Error when deleting news'), 'error');
 			else
 				$this->flashMessage($this->translator->translate('Succesfully deleted'), 'success');

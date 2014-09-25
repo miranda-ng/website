@@ -27,6 +27,7 @@ services:
 	- Models\CategoriesModel
 	- Models\LanguagesModel
 	- Models\PagesModel
+	- Models\NewsModel
 
 extensions:
 	gettextTranslator: GettextTranslator\DI\Extension

@@ -22,6 +22,9 @@ abstract class BasePresenter extends Presenter
 
 	/** @var \Models\LanguagesModel @inject */
 	public $languagesModel;
+	
+	/** @var \Models\NewsModel @inject */
+	public $newsModel;
 
     public function  startup() {
 		parent::startup();
@@ -88,8 +91,8 @@ abstract class BasePresenter extends Presenter
 
 		$this->template->sufix = $this->context->parameters["title"];
 
-		$this->template->news_panel = $this->context->database->table("news")->where("important", 0)->order("date DESC")->limit(3);
-		$this->template->important_news_panel = $this->context->database->table("news")->where("important", 1)->order("date DESC")->limit(3);
+		$this->template->news_panel = $this->newsModel->findNews()->where("important", 0)->order("date DESC")->limit(3);
+		$this->template->important_news_panel = $this->newsModel->findNews()->where("important", 1)->order("date DESC")->limit(3);
 		$this->template->langs = $this->languagesModel->getLanguages();
 
 		$wikiLink = "//wiki.miranda-ng.org";

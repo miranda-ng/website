@@ -2,6 +2,8 @@
 
 final class RssPresenter extends BasePresenter
 {
+	/** @var \Models\NewsModel @inject */
+	public $newsModel;
 
 	public function beforeRender() {
 		parent::beforeRender();
@@ -18,7 +20,7 @@ final class RssPresenter extends BasePresenter
 
 		$this->template->translatedOnly = $this->getParameter("translated") == "force";
 
-		$data = $this->context->database->table('news')->order("date DESC")->limit($limit);
+		$data = $this->newsModel->findNews()->order("date DESC")->limit($limit);
 		$this->template->data = $data;
 		$this->setView("default");
 	}
