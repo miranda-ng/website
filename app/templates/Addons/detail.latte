@@ -20,11 +20,11 @@
 	{/if}
 	<br><strong>{_"Downloaded"}:</strong> {$item->downloads}&times;
 
-	<br><br><a href="/upload/files/{$item->filename}" style="font-weight: bold; font-size: 18px" title="{_'Version'}: {$item->version}">{_"Download"}</a>
+	<br><br><a n:href="download, $item->id, 'file'" style="font-weight: bold; font-size: 18px" title="{_'Version'}: {$item->version}">{_"Download"}</a>
 {if $item->source_filename}
-| <a href="/upload/sources/{$item->source_filename}" title="{_'Version'}: {$item->source_version}">{_"Download source"}</a>
+| <a n:href="download, $item->id, 'source'" title="{_'Version'}: {$item->source_version}">{_"Download source"}</a>
 {/if}
-| <a href="http://addons.miranda-im.org/details.php?action=viewlog&id={$item->id}">{_"Show changelog"}</a>
+| <a href="http://addons.miranda-im.org/details.php?action=viewlog&id={$item->addons_id}" target="_blank">{_"Show changelog"}</a>
 
 </p>
 

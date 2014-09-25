@@ -130,4 +130,45 @@ final class AddonsPresenter extends BasePresenter
 		return $this->search->highlight($text, $word, $truncate);
 	}
 
+	public function actionDownload($id, $type = "file") {
+		$item = $this->addonsModel->get($id);
+		if (!$item) {
+			$this->error($this->translator->translate("Item was not found."));
+		}
+
+		$wwwDir = $this->context->getParameters()["wwwDir"];
+
+		switch ($type) {
+			case "file":
+			{
+				$folder = "files";
+				$name = $item->filename;
+				break;
+			}
+			case "source":
+			{
+				$folder = "sources";
+				$name = $item->source_filename;
+				break;
+			}
+			default:
+			{
+				$this->error($this->translator->translate("Unknown type for download."));
+			}
+		}
+
+		// Just to be sure we're pointing to safe file
+		$name = preg_replace("#\\.\\.(\\\\|\\/)#", "", $name);
+		$path = implode(DIRECTORY_SEPARATOR, [ $wwwDir, "upload", $folder, $name ]);
+
+		if (!$name || !is_file($path)) {
+			$this->error($this->translator->translate("File doesn't exists."));
+		}
+
+		// Increment download count
+		$this->addonsModel->incDownloadCount($item, $type);
+
+		$this->sendResponse(new Nette\Application\Responses\FileResponse($path, $name));
+	}
+
 }

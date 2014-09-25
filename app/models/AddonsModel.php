@@ -2,6 +2,10 @@
 
 namespace Models;
 
+use DateTime;
+use Nette\Database\SqlLiteral;
+use Nette\Database\Table\ActiveRow;
+
 /**
  * @table addons
  */
@@ -26,6 +30,38 @@ final class AddonsModel extends BaseModel {
 		return $res;
 	}
 
+	public function incDownloadCount(ActiveRow $item, $type = "file") {
+		switch ($type) {
+			case "file":
+				$column = "downloads";
+				break;
+			case "source":
+				$column = "source_downloads";
+				break;
+			default:
+				throw new \InvalidArgumentException("Unknown type '$type'.");
+		}
 
+		$item->update([
+			$column => new SqlLiteral("downloads + 1"),
+		]);
+
+		$this->database->beginTransaction();
+
+		$download = $this->database->table("addons_downloads")->where("addons_id", $item->id)->where("date", new DateTime())->fetch();
+		if ($download) {
+			$download->update([
+				$column => new SqlLiteral("$column + 1"),
+			]);
+		} else {
+			$this->database->table("addons_downloads")->insert([
+				"addons_id" => $item->id,
+				"date" => new DateTime(),
+				$column => 1,
+			]);
+		}
+
+		$this->database->commit();
+	}
 
 }
