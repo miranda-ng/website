@@ -2,7 +2,10 @@
 
 final class DevelopmentPresenter extends BasePresenter
 {
+	/** @var \Models\PagesModel @inject */
+	public $pagesModel;
+
 	function renderDefault() {
-		$this->template->page = $this->context->database->table("pages")->get(2);
+		$this->template->page = $this->pagesModel->get(2);
 	}
 }

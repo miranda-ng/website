@@ -4,17 +4,20 @@ namespace AdminModule;
 
 class NewsPresenter extends SecuredPresenter
 {
+	/** @var \Models\NewsModel @inject */
+	public $newsModel;
+
 	public function renderDefault() {
-		$this->template->news = $this->context->database->table('news')->order('important DESC, date DESC');
+		$this->template->news = $this->newsModel->findNews(FALSE)->order('important DESC, date DESC');
 	}
 
 	public function renderEdit($id) {
-		$news = $this->context->database->table('news')->get($id);
+		$news = $this->newsModel->get($id);
 		if (!$news) {
 			$this->flashMessage($this->translator->translate("News with this id doesn't exists."), "error");
 			$this->redirect("default");
 		}
-		if ($this->lang == self::LANG_DEFAULT) {
+		if ($this->lang == \Models\LanguagesModel::LANG_DEFAULT) {
 			$this['newsForm']['basic']->setValues($news);
 			$this['newsForm']['basic']['date']->value = $news["date"]->format("Y-m-d H:i:s");
 		}
@@ -24,7 +27,7 @@ class NewsPresenter extends SecuredPresenter
 	}
 
 	public function actionAdd() {
-		if ($this->lang != self::LANG_DEFAULT) {
+		if ($this->lang != \Models\LanguagesModel::LANG_DEFAULT) {
 			$this->flashMessage($this->translator->translate("News could be added only when using main language"), "error");
 			$this->redirect("default");
 		}
@@ -35,13 +38,13 @@ class NewsPresenter extends SecuredPresenter
 	}
 
 	public function actionDelete($id) {
-		if ($this->lang != self::LANG_DEFAULT) {
+		if ($this->lang != \Models\LanguagesModel::LANG_DEFAULT) {
 			$this->flashMessage($this->translator->translate("News could be deleted only when using main language"), "error");
 			$this->redirect("default");
 		}
 
 		try {
-			if (!$this->context->database->table('news')->wherePrimary($id)->delete())
+			if (!$this->newsModel->wherePrimary($id)->delete())
 				$this->flashMessage($this->translator->translate('Error when deleting news'), 'error');
 			else
 				$this->flashMessage($this->translator->translate('Succesfully deleted'), 'success');

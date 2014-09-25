@@ -47,20 +47,20 @@ final class AddonsModel extends BaseModel {
 		]);
 
 		$this->database->beginTransaction();
-
-		$download = $this->database->table("addons_downloads")->where("addons_id", $item->id)->where("date", new DateTime())->fetch();
-		if ($download) {
-			$download->update([
-				$column => new SqlLiteral("$column + 1"),
-			]);
-		} else {
-			$this->database->table("addons_downloads")->insert([
-				"addons_id" => $item->id,
-				"date" => new DateTime(),
-				$column => 1,
-			]);
+		{
+			$download = $this->getTable("_downloads")->where("addons_id", $item->id)->where("date", new DateTime())->fetch();
+			if ($download) {
+				$download->update([
+					$column => new SqlLiteral("$column + 1"),
+				]);
+			} else {
+				$this->getTable("_downloads")->insert([
+					"addons_id" => $item->id,
+					"date" => new DateTime(),
+					$column => 1,
+				]);
+			}
 		}
-
 		$this->database->commit();
 	}
 

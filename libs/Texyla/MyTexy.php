@@ -14,7 +14,7 @@ use Nette\Templating\FileTemplate, Nette\Latte\Engine;
 class MyTexy extends Texy
 {
 	private $templatesDir;
-	private $lang = BasePresenter::LANG_DEFAULT;
+	private $lang = \Models\LanguagesModel::LANG_DEFAULT;
 
 	/**
 	 * Construct

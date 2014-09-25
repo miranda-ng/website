@@ -2,9 +2,12 @@
 
 final class NewsPresenter extends BasePresenter
 {
+	/** @var \Models\NewsModel @inject */
+	public $newsModel;
+
 	public function renderDefault($important = 0)
 	{
-		$news = $this->template->news = $this->context->database->table("news")->where("important", $important)->order("date DESC");
+		$news = $this->template->news = $this->newsModel->findNews()->where("important", $important)->order("date DESC");
 
 		$vp = $this["vp"];
 		$paginator = $vp->getPaginator();
