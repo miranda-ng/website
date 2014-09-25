@@ -870,7 +870,7 @@ behavior: url('/PIE.htc');
 background: yellow;
 padding: 2px 0;
 }
-a.active {
+aside.addons menu a.active {
 font-weight: bold;
 }
 .changelog {

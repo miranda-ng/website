@@ -718,7 +718,7 @@ iframe.facebook {
 	padding: 2px 0;
 }
 
-a.active {
+aside.addons menu a.active {
 	font-weight: bold;
 }
 
