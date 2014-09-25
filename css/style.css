@@ -873,3 +873,16 @@ padding: 2px 0;
 a.active {
 font-weight: bold;
 }
+.changelog {
+line-height: 18px;
+}
+.changelogVersion {
+font-weight: bold;
+font-size: 14px;
+}
+.indentText {
+padding-left: 20px;
+}
+.medium {
+font-style: italic;
+}

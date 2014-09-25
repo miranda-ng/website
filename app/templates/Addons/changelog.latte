@@ -1,0 +1,7 @@
+{block content}
+<a n:href="detail, $item->id" class="more rfloat">&laquo; {_"Back to detail"}</a>
+<h1 n:block="title">{_"Changelog"}: {$item->name}</h1>
+
+<div class="changelog">
+	{!$item->changelog}
+</div>

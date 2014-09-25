@@ -1,4 +1,5 @@
 {block content}
+<a n:if="$item->changelog" n:href="changelog, $item->id" class="more rfloat">{_"Show changelog"} &raquo;</a>
 <h1 n:block="title">{$item->name} {$item->version}</h1>
 
 {var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
@@ -22,9 +23,8 @@
 
 	<br><br><a n:href="download, $item->id, 'file'" style="font-weight: bold; font-size: 18px" title="{_'Version'}: {$item->version}">{_"Download"}</a>
 {if $item->source_filename}
-| <a n:href="download, $item->id, 'source'" title="{_'Version'}: {$item->source_version}">{_"Download source"}</a>
+	| <a n:href="download, $item->id, 'source'" title="{_'Version'}: {$item->source_version}">{_"Download source"}</a>
 {/if}
-| <a href="http://addons.miranda-im.org/details.php?action=viewlog&id={$item->addons_id}" target="_blank">{_"Show changelog"}</a>
 
 </p>
 

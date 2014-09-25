@@ -137,4 +137,38 @@ final class PrivatePresenter extends BasePresenter
 		$this->terminate();
 	}
 
+	public function actionDownloadChangelogs()
+	{
+		ob_end_flush();
+
+		$i = 0;
+		$items = $this->context->database->table("addons")->where("changelog IS NULL");//->where("downloaded", 0);
+		foreach ($items as $item) {
+			set_time_limit(30);
+
+			$url = 'http://addons.miranda-im.org/details.php?action=viewlog&id=' . $item->addons_id;
+
+			echo "Downloading $item->name - $url\n<br>";
+
+			if (($i = ($i + 1) % 10) == 0)
+				flush();
+
+			$content = file_get_contents($url);
+
+			preg_match('|View file information</a>.*?<div align="left">(.*?)<hr />|is', $content, $matches);
+
+			if (!isset($matches[1])) {
+				continue;
+			}
+
+			$changelog = $matches[1];
+			$item->update([
+				"changelog" => $changelog,
+				//"downloaded" => 1,
+			]);
+		}
+
+		$this->terminate();
+	}
+
 }

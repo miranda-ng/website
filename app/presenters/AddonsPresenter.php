@@ -88,6 +88,16 @@ final class AddonsPresenter extends BasePresenter
 		$this->template->activeCategoryId = $item->categories_id;
 	}
 
+	public function renderChangelog($id)
+	{
+		$item = $this->addonsModel->findAddons()->where("id", $id)->fetch();
+		if (!$item) {
+			$this->error($this->translator->translate("Item was not found."));
+		}
+		$this->template->item = $item;
+		$this->template->activeCategoryId = $item->categories_id;
+	}
+
 	public function createComponentVp($name) {
 		$vp = new Components\VisualPaginator($this, $name, $this->translator, $this->texy);
 		$vp->getPaginator()->itemsPerPage = 20;
