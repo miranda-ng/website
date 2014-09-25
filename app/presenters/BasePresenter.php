@@ -1,11 +1,20 @@
 <?php
 
-abstract class BasePresenter extends Nette\Application\UI\Presenter
+use Nette\Application\UI\Form;
+use Nette\Application\UI\Presenter;
+use Nette\Diagnostics\Debugger;
+use Nette\Forms\Controls\SelectBox;
+use Nette\Forms\Rules;
+use Nette\Latte\Engine;
+use Nette\Utils\Strings;
+use WebLoader\Filter\VariablesFilter;
+
+abstract class BasePresenter extends Presenter
 {
 	/** @persistent */
 	public $lang;
 
-	/** @var GettextTranslator\Gettext @inject */
+	/** @var \GettextTranslator\Gettext @inject */
 	public $translator;
 
 	/** @var MyTexy @inject */
@@ -22,7 +31,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			return $this->redirect("this", array("lang" => $lang));
 		}
 
+		$this->translator->setLang($this->lang);
 		$this->texy->setLang($this->lang);
+
+		// Translate form's default error messages
+		array_walk(Rules::$defaultMessages, function($message) {
+			return $this->translator->translate($message);
+		});
 	}
 
 	public function getTransData($item, $table) {
@@ -66,7 +81,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		$this->session->start();
 
 		if ($this->user->isLoggedIn() && !$this->isAjax())
-			\Nette\Diagnostics\Debugger::enable(\Nette\Diagnostics\Debugger::DEVELOPMENT);
+			Debugger::enable(Debugger::DEVELOPMENT);
 
 		$year = $this->context->parameters["year"];
 		$this->template->copy = $year . (date("Y") > $year ? " - " . date("Y") : "");
@@ -105,7 +120,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 				$wikiLink = MAcros::GetWikiLink("Hlavn%C3%A1_str%C3%A1nka");
 				break;
 		}
-		if (\Nette\Utils\Strings::startsWith($wikiLink, "http://"))
+		if (Strings::startsWith($wikiLink, "http://"))
 			$wikiLink = substr($wikiLink, 5);
 
 		$this->template->lang = $this->lang;
@@ -124,13 +139,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			$this->template->menu["Admin:Home:"] = $this->translator->translate("Admin");
 		}
 
-		$quotes = array();
+		/*$quotes = array();
 		$quotes[] = "„Do you know that <strong>Miranda NG</strong><br>is smaller, faster and easier?“";
 		//$quotes[] = "„Sun takes no prisoners!“";
 		$quotes[] = "„Miranda NG is better than sex!“<br><b>Satisfied user</b>";
 		$quotes[] = "„I don't always use Instant messengers...<br>But when I do, I use <strong>Miranda NG</strong>!";
 
-		$this->template->quote = $quotes[array_rand($quotes)];
+		$this->template->quote = $quotes[array_rand($quotes)];*/
     }
 
 	/**
@@ -140,16 +155,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	 */
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);
-
-		// if not set, the default language will be used
-        if (!isset($this->lang)) {
-            $this->lang = $this->translator->getLang();
-        } else {
-            $this->translator->setLang($this->lang);
-        }
-
         $template->setTranslator($this->translator);
-		return \Macros::setupTemplate($template, $this->texy);
+		return Macros::setupTemplate($template, $this->texy);
 	}
 
 	/**
@@ -158,8 +165,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	 */
 	public function templatePrepareFilters($template)
 	{
-		$template->registerFilter($latte = new \Nette\Latte\Engine);
-		\Macros::setupMacros($latte->compiler);
+		$template->registerFilter($latte = new Engine);
+		Macros::setupMacros($latte->compiler);
 	}
 
 	protected function makeDescription($content) {
@@ -170,7 +177,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		if (mb_strlen($str, "utf8") < 50)
 			return NULL;
 
-		return \Nette\Utils\Strings::truncate($str, 255);
+		return Strings::truncate($str, 255);
 	}
 
 	/**
@@ -180,7 +187,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	protected function createComponentTexyla()
 	{
 		$baseUri = $this->context->httpRequest->url->baseUrl;
-		$filter = new WebLoader\Filter\VariablesFilter(array(
+		$filter = new VariablesFilter(array(
 			"baseUri" => $baseUri,
 			"previewPath" => $this->link("Texyla:preview"),
 			"filesPath" => $this->link("Texyla:listFiles"),
