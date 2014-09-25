@@ -11,6 +11,7 @@ use Nette\Http\Request;
 final class LanguagesModel extends BaseModel
 {
 	const LANG_DEFAULT = "en";
+	const WIKI_LINK = "http://wiki.miranda-ng.org";
 
 	/** @var Request */
 	private $httpRequest;
@@ -28,6 +29,15 @@ final class LanguagesModel extends BaseModel
 
 	public function getLanguages() {
 		return $this->getTable()->order("code = ? DESC, code", self::LANG_DEFAULT);
+	}
+
+	public function getWikiLink($lang) {
+		$item = $this->getTable()->get($lang);
+		if (!$item || !$item->wiki_link) {
+			return self::WIKI_LINK;
+		}
+
+		return \Macros::GetWikiLink($item->wiki_link);
 	}
 
 }

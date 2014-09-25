@@ -22,7 +22,7 @@ abstract class BasePresenter extends Presenter
 
 	/** @var \Models\LanguagesModel @inject */
 	public $languagesModel;
-	
+
 	/** @var \Models\NewsModel @inject */
 	public $newsModel;
 
@@ -95,34 +95,7 @@ abstract class BasePresenter extends Presenter
 		$this->template->important_news_panel = $this->newsModel->findNews()->where("important", 1)->order("date DESC")->limit(3);
 		$this->template->langs = $this->languagesModel->getLanguages();
 
-		$wikiLink = "//wiki.miranda-ng.org";
-		// TODO: load this wiki link from database
-		switch ($this->lang) {
-			case "by":
-				$wikiLink = MAcros::GetWikiLink("%D0%93%D0%B0%D0%BB%D0%BE%D1%9E%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%BE%D0%BD%D0%BA%D0%B0");
-				break;
-			case "cs":
-				$wikiLink = MAcros::GetWikiLink("Hlavn%C3%AD_strana");
-				break;
-			case "de":
-				$wikiLink = MAcros::GetWikiLink("Hauptseite");
-				break;
-			case "en":
-				$wikiLink = MAcros::GetWikiLink("Main_Page");
-				break;
-			case "fr":
-				$wikiLink = MAcros::GetWikiLink("Page_principale");
-				break;
-			case "pl":
-				$wikiLink = MAcros::GetWikiLink("Strona_g%C5%82%C3%B3wna");
-				break;
-			case "ru":
-				$wikiLink = MAcros::GetWikiLink("%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0");
-				break;
-			case "sk":
-				$wikiLink = MAcros::GetWikiLink("Hlavn%C3%A1_str%C3%A1nka");
-				break;
-		}
+		$wikiLink = $this->languagesModel->getWikiLink($this->lang);
 		if (Strings::startsWith($wikiLink, "http://"))
 			$wikiLink = substr($wikiLink, 5);
 
@@ -141,14 +114,6 @@ abstract class BasePresenter extends Presenter
 		if ($this->user->isLoggedIn()) {
 			$this->template->menu["Admin:Home:"] = $this->translator->translate("Admin");
 		}
-
-		/*$quotes = array();
-		$quotes[] = "„Do you know that <strong>Miranda NG</strong><br>is smaller, faster and easier?“";
-		//$quotes[] = "„Sun takes no prisoners!“";
-		$quotes[] = "„Miranda NG is better than sex!“<br><b>Satisfied user</b>";
-		$quotes[] = "„I don't always use Instant messengers...<br>But when I do, I use <strong>Miranda NG</strong>!";
-
-		$this->template->quote = $quotes[array_rand($quotes)];*/
     }
 
 	/**
