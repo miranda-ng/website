@@ -26,6 +26,7 @@ services:
 	- Models\AddonsModel
 	- Models\CategoriesModel
 	- Models\LanguagesModel
+	- Models\PagesModel
 
 extensions:
 	gettextTranslator: GettextTranslator\DI\Extension

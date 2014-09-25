@@ -2,6 +2,9 @@
 
 final class DownloadsPresenter extends BasePresenter
 {
+	/** @var \Models\PagesModel @inject */
+	public $pagesModel;
+
 	/*public function startup() {
 		parent::startup();
 		$httpResponse = $this->context->httpResponse;
@@ -11,6 +14,6 @@ final class DownloadsPresenter extends BasePresenter
 	}*/
 	
 	function renderDefault() {
-		$this->template->page = $this->context->database->table("pages")->get(3);
+		$this->template->page = $this->pagesModel->get(3);
 	}
 }
