@@ -1,5 +1,31 @@
 {default $highlight = FALSE}
 
+<a n:href="detail, $item->id" n:class="addon-block, colorbox, $iterator->isOdd() ? odd : even" rel="addons">
+
+	<div n:href="detail, $item->id" rel="addon" class="image">
+		{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
+		<img src="{$imageUrl}" alt="">
+	</div>
+
+	<h2>{!$presenter->highlight($item->name, $highlight)} {$item->version}</h2>
+
+	<div class="info">
+		<span class="counts">{_"Downloaded"} <b>{$item->downloads}&times;</b></span>
+		<span class="author">{_"by"} <b>{$item->ref("old_authors", "author_id")->name}</b></span>
+	</div>
+
+	{var $text = htmlspecialchars_decode($item->description)}
+	{*<p>{!$presenter->highlight($text, $highlight, 100)}</p>*}
+
+	{*<div class="links">
+		<a n:href="download, $item->id, 'file'" class="file">{_"Download"}</a>
+		|
+		<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>
+	</div>*}
+
+</a>
+
+{*
 <h2><a n:href="detail, $item->id">{!$presenter->highlight($item->name, $highlight)} {$item->version}</a></h2>
 <p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong></p>
 
@@ -20,3 +46,4 @@
 	|
 	<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>
 </p>
+*}

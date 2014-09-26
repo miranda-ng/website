@@ -1,0 +1,8 @@
+{var $overlayStyle = "min-width: 600px;"}
+
+{block content}
+<a n:href="detail, $item->id" class="colorbox more rfloat">&laquo; {_"Back to detail"}</a>
+<h1 n:block="title">{_"Image"}: {$item->name} {$item->version}</h1>
+
+{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
+<img src="{$imageUrl}" style="margin: 10px;">

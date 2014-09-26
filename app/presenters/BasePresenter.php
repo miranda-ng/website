@@ -114,6 +114,8 @@ abstract class BasePresenter extends Presenter
 		if ($this->user->isLoggedIn()) {
 			$this->template->menu["Admin:Home:"] = $this->translator->translate("Admin");
 		}
+
+		$this->template->layout = "@html.latte";
     }
 
 	/**

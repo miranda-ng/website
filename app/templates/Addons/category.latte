@@ -4,8 +4,9 @@
 <p class="italic" style="margin: -10px 0 15px 0">{_"There are %d addons in this category.", $itemCount}</p>
 <hr>
 
-<div class="news" n:foreach="$addons as $item">
-	{include "@item.latte", "item" => $item}
+<div n:foreach="$addons as $item">
+	{include "@item.latte", "item" => $item, "iterator" => $iterator}
 </div>
 
+<hr>
 {control vp}
