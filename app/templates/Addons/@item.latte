@@ -14,8 +14,10 @@
 		<span class="author">{_"by"} <b>{$item->ref("old_authors", "author_id")->name}</b></span>
 	</div>
 
+	<hr style="margin: 15px 0 10px 0;">
+
 	{var $text = htmlspecialchars_decode($item->description)}
-	{*<p>{!$presenter->highlight($text, $highlight, 100)}</p>*}
+	<p style="overflow-x: hidden">{!$presenter->highlight($text, $highlight, 200)}</p>
 
 	{*<div class="links">
 		<a n:href="download, $item->id, 'file'" class="file">{_"Download"}</a>

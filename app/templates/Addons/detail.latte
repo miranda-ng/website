@@ -1,6 +1,6 @@
 {block content}
 <a n:if="$item->changelog" n:href="changelog, $item->id" n:class="more, rfloat, $isAjax ? colorbox">{_"Show changelog"} &raquo;</a>
-<h1 n:block="title">{$item->name} {$item->version}</h1>
+<h1 n:block="title">{!$item->name} {$item->version}</h1>
 
 {var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
 <a href="{if $isAjax}{plink image, $item->id}{else}{$imageUrl}{/if}" class="image colorbox" style="display: block; height: 200px; line-height: 200px; vertical-align: middle; width: 250px; overflow: hidden; float: left; margin: 0 10px 15px 0; text-align: center; margin: 0 10px 15px 0">
@@ -32,6 +32,6 @@
 
 <h2>{_"Description:"}</h2>
 
-<div class="description>
+<div class="description">
 	<p>{!$item->description}</p>
 </div>

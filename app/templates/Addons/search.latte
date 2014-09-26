@@ -3,12 +3,17 @@
 <h1 n:block="title">{_"Search results for „%s“", $search}{if !isset($invalid) && $page && $pageCount > 1} ({_"page"} {$page}/{$pageCount}){/if}</h1>
 
 <p class="italic" style="margin: -10px 0 15px 0">{ifset $invalid}{_"Invalid search query. Write at least one word with 2 or more characters."}{else}{_"We found %d addons.", $itemCount}{/ifset}</p>
-<hr>
 
 {if !isset($invalid)}
-<div class="news" n:foreach="$addons as $item">
-	{include "@item.latte", "item" => $item, "highlight" => $highlight}
-</div>
-{/if}
+	<hr>
 
-{control vp}
+	{control vp}
+	<hr style="margin-top: 20px">
+
+	<div n:foreach="$addons as $item">
+		{include "@item.latte", "item" => $item, "highlight" => $highlight, "iterator" => $iterator}
+	</div>
+
+	<hr>
+	{control vp}
+{/if}
