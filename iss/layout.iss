@@ -833,3 +833,33 @@ aside.addons menu a.active {
 		}
 	}
 }
+
+.overlay-box {
+	background: white;
+	padding: 20px;
+
+	h1 {
+		font-size: 20px;
+	}
+
+	&.sized {
+		width: 600px;
+		height: 550px;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	.description {
+		height: 200px;
+		margin-bottom: 0;
+		overflow-x: hidden;
+		overflox-y: auto;
+	}
+
+	.changelog {
+		height: 485px;
+		margin-bottom: 0;
+		overflow-x: hidden;
+		overflox-y: auto;
+	}
+}

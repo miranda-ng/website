@@ -95,6 +95,7 @@ final class AddonsPresenter extends BasePresenter
 
 		if ($this->isAjax()) {
 			$this->template->layout = "@colorbox.latte";
+			$this->template->overlayClass = "sized";
 		}
 	}
 
@@ -109,6 +110,7 @@ final class AddonsPresenter extends BasePresenter
 
 		if ($this->isAjax()) {
 			$this->template->layout = "@colorbox.latte";
+			$this->template->overlayClass = "sized";
 		}
 	}
 

@@ -1,11 +1,9 @@
-{var $overlayStyle = "width: 600px; height: 550px; overflow-x: hidden; overflow-y: auto;"}
-
 {block content}
 <a n:if="$item->changelog" n:href="changelog, $item->id" n:class="more, rfloat, $isAjax ? colorbox">{_"Show changelog"} &raquo;</a>
 <h1 n:block="title">{$item->name} {$item->version}</h1>
 
 {var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
-<a href="{if $isAjax}{plink image, $item->id}{else}{$imageUrl}{/if}" class="colorbox" style="display: block; height: 200px; line-height: 200px; vertical-align: middle; width: 250px; overflow: hidden; float: left; margin: 0 10px 15px 0; text-align: center; margin: 0 10px 15px 0">
+<a href="{if $isAjax}{plink image, $item->id}{else}{$imageUrl}{/if}" class="image colorbox" style="display: block; height: 200px; line-height: 200px; vertical-align: middle; width: 250px; overflow: hidden; float: left; margin: 0 10px 15px 0; text-align: center; margin: 0 10px 15px 0">
 	<img src="{$imageUrl}" style="max-width: 250px">
 </a>
 
@@ -34,4 +32,6 @@
 
 <h2>{_"Description:"}</h2>
 
-<p style="height: 200px; margin-bottom: 0; overflow-x: hidden; overflox-y: auto;">{!$item->description}</p>
+<div class="description>
+	<p>{!$item->description}</p>
+</div>
