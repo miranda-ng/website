@@ -886,3 +886,85 @@ padding-left: 20px;
 .medium {
 font-style: italic;
 }
+.addon-block {
+display: block;
+float: left;
+width: 270px;
+padding: 10px;
+background: #f8f8f8;
+border: solid 1px #d8d8d8;
+text-decoration: none;
+}
+.addon-block:hover {
+text-decoration: none;
+}
+.addon-block:hover,
+.addon-block:hover .image {
+border-color: #c0c0c0;
+}
+.addon-block h2 {
+text-align: center;
+font-size: 16px;
+clear: both;
+white-space: nowrap;
+overflow: hidden;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+margin: 0 0 5px;
+}
+.addon-block .counter:after {
+content: '.';
+}
+.addon-block .image {
+display: block;
+width: 100%;
+height: 130px;
+line-height: 130px;
+vertical-align: middle;
+overflow: hidden;
+margin: 0 0 10px 0;
+text-align: center;
+background: white;
+border: solid 1px #d8d8d8;
+}
+.addon-block img {
+max-width: 100%;
+vertical-align: middle;
+}
+.addon-block p {
+margin: 0;
+}
+.addon-block.odd {
+margin: 0 10px 20px 0;
+float: left;
+clear: both;
+}
+.addon-block.even {
+margin: 0 0 25px 10px;
+float: right;
+}
+.addon-block .info {
+color: #555555;
+zoom: 1;
+margin-top: 15px;
+}
+.addon-block .info:after {
+content: '';
+display: block;
+clear: both;
+}
+.addon-block .info .counts {
+float: left;
+}
+.addon-block .info .author {
+float: right;
+}
+.addon-block .links {
+display: none;
+text-align: right;
+clear: both;
+}
+.addon-block .links .file {
+font-weight: bold;
+font-size: 15px;
+}

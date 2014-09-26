@@ -22,12 +22,17 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
+		$itemsCounts = $this->addonsModel->getMostDownloadedCountsArray(20, "-7 days");
 
+		$order = "FIELD(id," . implode(",", array_keys($itemsCounts)) . ")";
+
+		$this->template->items = $this->addonsModel->findAddons()->wherePrimary(array_keys($itemsCounts))->order($order);
+		$this->template->itemsCounts = $itemsCounts;
 	}
 
 	public function renderCategory($id)
 	{
-		$category = $this->categoriesModel->findCategories()->where("id", $id)->fetch();
+		$category = $this->categoriesModel->findCategories()->wherePrimary($id)->fetch();
 		if (!$category) {
 			$this->error($this->translator->translate("Item was not found."));
 		}
@@ -80,7 +85,7 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderDetail($id)
 	{
-		$item = $this->addonsModel->findAddons()->where("id", $id)->fetch();
+		$item = $this->addonsModel->findAddons()->wherePrimary($id)->fetch();
 		if (!$item) {
 			$this->error($this->translator->translate("Item was not found."));
 		}
@@ -90,7 +95,7 @@ final class AddonsPresenter extends BasePresenter
 
 	public function renderChangelog($id)
 	{
-		$item = $this->addonsModel->findAddons()->where("id", $id)->fetch();
+		$item = $this->addonsModel->findAddons()->wherePrimary($id)->fetch();
 		if (!$item) {
 			$this->error($this->translator->translate("Item was not found."));
 		}
@@ -141,7 +146,7 @@ final class AddonsPresenter extends BasePresenter
 	}
 
 	public function actionDownload($id, $type = "file") {
-		$item = $this->addonsModel->get($id);
+		$item = $this->addonsModel->findAddons()->wherePrimary($id)->fetch();
 		if (!$item) {
 			$this->error($this->translator->translate("Item was not found."));
 		}

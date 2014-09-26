@@ -738,3 +738,98 @@ aside.addons menu a.active {
 .medium {
 	font-style: italic;
 }
+
+.addon-block {
+	display: block;
+	float: left;
+	width: 270px;
+	padding: 10px;
+	background: #f8f8f8;
+	border: solid 1px #d8d8d8;
+
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+
+		&, .image {
+			border-color: #c0c0c0;
+		}
+	}
+
+	h2 {
+		text-align: center;
+		font-size: 16px;
+		clear: both;
+		@ellipsis;
+		margin: 0 0 5px;
+	}
+
+	.counter {
+		//color: #555;
+		//font-size: 16px;
+
+		&:after {
+			content: ".";
+		}
+	}
+
+	.image {
+		display: block;
+		width: 100%;
+		height: 130px;
+		line-height: 130px;
+		vertical-align: middle;
+
+		overflow: hidden;
+		margin: 0 0 10px 0;
+		text-align: center;
+		background: white;
+		border: solid 1px #d8d8d8;
+	}
+
+	img	{
+		max-width: 100%;
+		vertical-align: middle;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	&.odd {
+		margin: 0 10px 20px 0;
+		float: left;
+		clear: both;
+	}
+
+	&.even {
+		margin: 0 0 25px 10px;
+		float: right;
+	}
+
+	.info {
+		//font-style: italic;
+		color: #555;
+		@self-clear;
+		margin-top: 15px;
+
+		.counts {
+			float: left;
+		}
+
+		.author {
+			float: right;
+		}
+	}
+
+	.links {
+		display: none;
+		text-align: right;
+		clear: both;
+
+		.file {
+			font-weight: bold;
+			font-size: 15px;
+		}
+	}
+}
