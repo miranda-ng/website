@@ -3,10 +3,11 @@
 namespace AdminModule\Forms;
 
 use Nette\Application\UI\Form;
+use Nette\Localization\ITranslator;
 
 class PagesForm extends Form
 {
-	/** @var GettextTranslator\Gettext */
+	/** @var ITranslator */
     public $translator;
 
 	public function __construct($parent = null, $name = null, $translator) {

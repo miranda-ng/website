@@ -33,7 +33,7 @@ services:
 	- Models\PagesModel
 	- Models\NewsModel
 
-	#translatorStorage: LiveTranslator\Storage\NetteDatabase(localization_text, localization)
-	translatorStorage: LiveTranslator\Storage\File(%appDir%/langs)
+	translatorStorage: FixedLiveTranslatorStorage\NetteDatabase(localization_text, localization)
+	#translatorStorage: LiveTranslator\Storage\File(%appDir%/langs)
 	translator: LiveTranslator\Translator(en)
 	translatorPanel: LiveTranslator\Panel

@@ -2,16 +2,17 @@
 namespace Components;
 
 use Nette\Application\UI\Control;
+use Nette\Localization\ITranslator;
 
 abstract class BaseControl extends Control
 {
 	/** @var MyTexy */
 	public $texy;
 
-	/** @var GettextTranslator\Gettext */
+	/** @var ITranslator */
 	public $translator;
 
-	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, \GettextTranslator\Gettext $translator, \MyTexy $texy) {
+	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, ITranslator $translator, \MyTexy $texy) {
 		$this->translator = $translator;
 		$this->texy = $texy;
 		parent::__construct($parent, $name);
