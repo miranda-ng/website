@@ -968,3 +968,28 @@ clear: both;
 font-weight: bold;
 font-size: 15px;
 }
+.overlay-box {
+background: white;
+padding: 20px;
+}
+.overlay-box h1 {
+font-size: 20px;
+}
+.overlay-box.sized {
+width: 600px;
+height: 550px;
+overflow-x: hidden;
+overflow-y: auto;
+}
+.overlay-box .description {
+height: 200px;
+margin-bottom: 0;
+overflow-x: hidden;
+overflox-y: auto;
+}
+.overlay-box .changelog {
+height: 485px;
+margin-bottom: 0;
+overflow-x: hidden;
+overflox-y: auto;
+}

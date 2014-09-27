@@ -1,22 +1,54 @@
 {default $highlight = FALSE}
+{default $tiles = TRUE}
 
-<h2><a n:href="detail, $item->id">{!$presenter->highlight($item->name, $highlight)} {$item->version}</a></h2>
-<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong></p>
+{if $tiles}
+	<a n:href="detail, $item->id" n:class="addon-block, colorbox, $iterator->isOdd() ? odd : even" rel="addons">
 
-{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
-<a n:tag-if="$item->screenshot" href="{$imageUrl}" rel="addon" class="colorbox" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
+		<div n:href="detail, $item->id" rel="addon" class="image">
+			{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
+			<img src="{$imageUrl}" alt="">
+		</div>
+
+		<h2>{!$presenter->highlight($item->name, $highlight)} {$item->version}</h2>
+
+		<div class="info">
+			<span class="counts">{_"Downloaded"} <b>{$item->downloads}&times;</b></span>
+			<span class="author">{_"by"} <b>{$item->ref("old_authors", "author_id")->name}</b></span>
+		</div>
+
+		<hr style="margin: 15px 0 10px 0;">
+
+		{var $text = htmlspecialchars_decode($item->description)}
+		<p style="overflow-x: hidden">{!$presenter->highlight($text, $highlight, 200)}</p>
+
+		{*<div class="links">
+			<a n:href="download, $item->id, 'file'" class="file">{_"Download"}</a>
+			|
+			<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>
+		</div>*}
+
+	</a>
+{else}
+	<h2><a n:href="detail, $item->id">{!$presenter->highlight($item->name, $highlight)} {$item->version}</a></h2>
+	<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong></p>
+
 	{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
-	<img src="{$imageUrl}" style="width: 180px; float: left" alt="">
-</a>
+	<a n:tag-if="$item->screenshot" href="{$imageUrl}" rel="addon" class="colorbox" style="display: inline-block; max-height: 150px; overflow: hidden; float: left; width: 180px; margin: 0 10px 15px 0">
+		{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
+		<img src="{$imageUrl}" style="width: 180px; float: left" alt="">
+	</a>
 
-{var $text = htmlspecialchars_decode($item->description)}
-<p style="padding-left: 200px;">{!$presenter->highlight($text, $highlight, 300)}</p>
+	{var $text = htmlspecialchars_decode($item->description)}
+	<p style="padding-left: 200px;">{!$presenter->highlight($text, $highlight, 300)}</p>
 
-<p style="text-align: right; clear: both;">
-	<a n:href="download, $item->id, 'file'" style="font-weight: bold; font-size: 15px">{_"Download"}</a>
-	{if $item->source_filename}
-	| <a n:href="download, $item->id, 'source'">{_"Download source"}</a>
-	{/if}
-	|
-	<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>
-</p>
+	<p style="text-align: right; clear: both;">
+		<a n:href="download, $item->id, 'file'" style="font-weight: bold; font-size: 15px">{_"Download"}</a>
+		{if $item->source_filename}
+		| <a n:href="download, $item->id, 'source'">{_"Download source"}</a>
+		{/if}
+		|
+		<a n:href="detail, $item->id">{_"Continue reading"} &raquo;</a>
+	</p>
+
+	{sep}<hr>{/sep}
+{/if}

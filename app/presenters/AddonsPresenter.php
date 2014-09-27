@@ -18,6 +18,7 @@ final class AddonsPresenter extends BasePresenter
 
 		$this->template->categories = $this->categoriesModel->getCategoriesArray();
 		$this->template->categoriesCounts = $this->categoriesModel->getCategoriesCountsArray();
+		$this->template->isAjax = $this->isAjax();
 	}
 
 	public function renderDefault()
@@ -91,6 +92,11 @@ final class AddonsPresenter extends BasePresenter
 		}
 		$this->template->item = $item;
 		$this->template->activeCategoryId = $item->categories_id;
+
+		if ($this->isAjax()) {
+			$this->template->layout = "@colorbox.latte";
+			$this->template->overlayClass = "sized";
+		}
 	}
 
 	public function renderChangelog($id)
@@ -101,6 +107,25 @@ final class AddonsPresenter extends BasePresenter
 		}
 		$this->template->item = $item;
 		$this->template->activeCategoryId = $item->categories_id;
+
+		if ($this->isAjax()) {
+			$this->template->layout = "@colorbox.latte";
+			$this->template->overlayClass = "sized";
+		}
+	}
+
+	public function renderImage($id)
+	{
+		$item = $this->addonsModel->findAddons()->wherePrimary($id)->fetch();
+		if (!$item) {
+			$this->error($this->translator->translate("Item was not found."));
+		}
+		$this->template->item = $item;
+		$this->template->activeCategoryId = $item->categories_id;
+
+		if ($this->isAjax()) {
+			$this->template->layout = "@colorbox.latte";
+		}
 	}
 
 	public function createComponentVp($name) {
