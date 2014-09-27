@@ -1,5 +1,7 @@
 <?php
 
+namespace FrontModule;
+
 final class HomePresenter extends BasePresenter
 {
 	/** @var \Models\PagesModel @inject */

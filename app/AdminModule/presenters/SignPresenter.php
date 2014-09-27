@@ -2,8 +2,9 @@
 
 namespace AdminModule;
 
-use Nette\Application\UI,
-	Nette\Security as NS;
+use Nette\Application\UI;
+use Nette\Application\UI\Form;
+use Nette\Security as NS;
 
 /**
  * Sign in/out presenters.
@@ -24,7 +25,7 @@ class SignPresenter extends BasePresenter
 
 	/**
 	 * Sign in form component factory.
-	 * @return Nette\Application\UI\Form
+	 * @return Form
 	 */
 	protected function createComponentSignInForm()
 	{

@@ -2,6 +2,8 @@
 
 namespace AdminModule\Forms;
 
+use DateTime;
+use Models\LanguagesModel;
 use Nette\Application\UI\Form;
 use Nette\Localization\ITranslator;
 
@@ -18,7 +20,7 @@ class NewsForm extends Form
 
 		$this->addProtection('Timeout for security token. Submit form again.');
 
-		if ($this->presenter->lang == \Models\LanguagesModel::LANG_DEFAULT) {
+		if ($this->presenter->lang == LanguagesModel::LANG_DEFAULT) {
 			$basic = $this->addContainer("basic");
 
 			$basic->addText('link', 'URL link:', 70, 255)
@@ -53,8 +55,8 @@ class NewsForm extends Form
 
 		$id = $this->presenter->getParameter('id');
 
-		if ($this->presenter->lang == \Models\LanguagesModel::LANG_DEFAULT) {
-			$values->basic->date = new \DateTime($values->basic->date);
+		if ($this->presenter->lang == LanguagesModel::LANG_DEFAULT) {
+			$values->basic->date = new DateTime($values->basic->date);
 
 			if (!$id) {
 				$res = $this->presenter->context->database->table('news')->insert($values->basic);

@@ -1,7 +1,11 @@
 <?php
 
-use Nette\Application\UI, Nette\Utils\Strings, Nette\Image;
-use Nette\Application\Responses\TextResponse, Nette\Application\Responses\JsonResponse;
+use Nette\Application\Responses\JsonResponse;
+use Nette\Application\Responses\TextResponse;
+use Nette\Application\UI\Presenter;
+use Nette\Image;
+use Nette\InvalidArgumentException;
+use Nette\Utils\Strings;
 
 /**
  * Texyla presenter
@@ -9,7 +13,7 @@ use Nette\Application\Responses\TextResponse, Nette\Application\Responses\JsonRe
  * @author Jan Marek
  * @license MIT
  */
-class TexylaPresenter extends BasePresenter
+class TexylaPresenter extends Presenter
 {
 	/** @var string */
 	private $baseFolderPath;
@@ -23,10 +27,10 @@ class TexylaPresenter extends BasePresenter
 	/** @var string */
 	private $tempUri;
 
-	/** @var \Texy @inject */
+	/** @var Texy @inject */
 	public $texy;
 
-	/** @var \Nette\Http\IRequest @inject */
+	/** @var Nette\Http\IRequest @inject */
 	public $httpRequest;
 
 
@@ -80,7 +84,7 @@ class TexylaPresenter extends BasePresenter
 		$folderPath = realpath($this->baseFolderPath . ($folder ? "/" . $folder : ""));
 
 		if (!is_dir($folderPath) || !is_writable($folderPath) || !Strings::startsWith($folderPath, realpath($this->baseFolderPath))) {
-			throw new \Nette\InvalidArgumentException;
+			throw new InvalidArgumentException;
 		}
 
 		return $folderPath;
@@ -130,7 +134,7 @@ class TexylaPresenter extends BasePresenter
 			$folders[] = array("type" => "up", "name" => "..", "key" => $key,);
 		}
 
-		foreach (new \DirectoryIterator($folderPath) as $fileInfo) {
+		foreach (new DirectoryIterator($folderPath) as $fileInfo) {
 			$fileName = $fileInfo->getFileName();
 
 			// skip hidden files, . and ..

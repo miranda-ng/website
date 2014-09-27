@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use Macros;
 use Nette\Database\Context;
 use Nette\Http\Request;
 
@@ -37,7 +38,7 @@ final class LanguagesModel extends BaseModel
 			return self::WIKI_LINK;
 		}
 
-		return \Macros::GetWikiLink($item->wiki_link);
+		return Macros::GetWikiLink($item->wiki_link);
 	}
 
 }

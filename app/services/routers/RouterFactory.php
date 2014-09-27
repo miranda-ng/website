@@ -1,17 +1,24 @@
 <?php
 
-use Nette\Application\Routers\RouteList,
-	Nette\Application\Routers\Route;
+use Nette\Application\IRouter;
+use Nette\Application\Routers\Route;
+use Nette\Application\Routers\RouteList;
 
 class RouterFactory
 {
 
 	/**
-	 * @return Nette\Application\IRouter
+	 * @return IRouter
 	 */
 	public function create()
 	{
 		$router = new RouteList();
+
+		$router[] = new Route('texyla/<action>/<id>', array(
+				'presenter' => 'Texyla',
+				'action' => 'default',
+				'id' => NULL,
+		));
 
 		$lang = "[<lang [a-z]{2}>/]";
 
@@ -25,32 +32,35 @@ class RouterFactory
 		$router[] = $adminRouter;
 
 		// Front routers
-		$router[] = new Route('index.php', 'Home:default', Route::ONE_WAY);
+		$frontRouter = new RouteList('Front');
+		$frontRouter[] = new Route('index.php', 'Home:default', Route::ONE_WAY);
 
-		$router[] = new Route($lang . 'news/<link>', array(
+		$frontRouter[] = new Route($lang . 'news/<link>', array(
 			'presenter' => 'News',
 			'action' => 'show',
 			//'lang' => "en"
 		));
 
-		$router[] = new Route('p/<id>', array(
+		$frontRouter[] = new Route('p/<id>', array(
 			'presenter' => 'Redirect',
 			'action' => 'plugin',
 		));
 
-		$router[] = new Route($lang . '<presenter>[/<action>]/page/<vp-page>', array(
+		$frontRouter[] = new Route($lang . '<presenter>[/<action>]/page/<vp-page>', array(
 				'presenter' => 'Home',
 				'action' => 'default',
 				'id' => NULL,
 				//'lang' => "en"
 		));
 
-		$router[] = new Route($lang . '<presenter>/<action>/<id>', array(
+		$frontRouter[] = new Route($lang . '<presenter>/<action>/<id>', array(
 				'presenter' => 'Home',
 				'action' => 'default',
 				'id' => NULL,
 				//'lang' => "en"
 		));
+
+		$router[] = $frontRouter;
 
 		return $router;
 	}

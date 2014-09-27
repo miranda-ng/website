@@ -2,9 +2,11 @@
 
 namespace AdminModule;
 
+use AdminModule\Forms\PagesForm;
+
 class PagesPresenter extends SecuredPresenter
 {
-	/** @var \Models\PagesModel @inject */
+	/** @var Models\PagesModel @inject */
 	public $pagesModel;
 
 	public function renderDefault() {
@@ -22,7 +24,7 @@ class PagesPresenter extends SecuredPresenter
 	}
 
 	public function createComponentPagesForm($name) {
-		$form = new Forms\PagesForm($this, $name, $this->translator);
+		$form = new PagesForm($this, $name, $this->translator);
 		return $form;
 	}
 

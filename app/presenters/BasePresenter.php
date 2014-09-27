@@ -1,12 +1,10 @@
 <?php
 
-use Nette\Application\UI\Form;
+use Models\LanguagesModel;
 use Nette\Application\UI\Presenter;
 use Nette\Diagnostics\Debugger;
-use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Rules;
 use Nette\Latte\Engine;
-use Nette\Localization\ITranslator;
 use Nette\Utils\Strings;
 use WebLoader\Filter\VariablesFilter;
 
@@ -21,15 +19,14 @@ abstract class BasePresenter extends Presenter
 	/** @var MyTexy @inject */
 	public $texy;
 
-	/** @var \Models\LanguagesModel @inject */
+	/** @var Models\LanguagesModel @inject */
 	public $languagesModel;
-
-	/** @var \Models\NewsModel @inject */
-	public $newsModel;
 
     public function  startup() {
 		parent::startup();
-		
+
+		$this->session->start();
+
 		$this->translator->setNamespace('front');
 
 		if (!$this->lang) {
@@ -60,7 +57,7 @@ abstract class BasePresenter extends Presenter
 		$data = null;
 		$data_default = null;
 
-		$res = $this->context->database->table("{$table}_content")->where("{$table}_id", $item->id)->where("lang", array($this->lang, \Models\LanguagesModel::LANG_DEFAULT))->order("lang = ? DESC", $this->lang)->limit(1)->fetch();
+		$res = $this->context->database->table("{$table}_content")->where("{$table}_id", $item->id)->where("lang", array($this->lang, LanguagesModel::LANG_DEFAULT))->order("lang = ? DESC", $this->lang)->limit(1)->fetch();
 		return $res;
 
 /*
@@ -94,8 +91,6 @@ abstract class BasePresenter extends Presenter
     {
         parent::beforeRender();
 
-		$this->session->start();
-
 		if ($this->user->isLoggedIn() && !$this->isAjax())
 			Debugger::enable(Debugger::DEVELOPMENT);
 
@@ -103,32 +98,8 @@ abstract class BasePresenter extends Presenter
 		$this->template->copy = $year . (date("Y") > $year ? " - " . date("Y") : "");
 
 		$this->template->sufix = $this->context->parameters["title"];
-
-		$this->template->news_panel = $this->newsModel->findNews()->where("important", 0)->order("date DESC")->limit(3);
-		$this->template->important_news_panel = $this->newsModel->findNews()->where("important", 1)->order("date DESC")->limit(3);
 		$this->template->langs = $this->languagesModel->getLanguages();
-
-		$wikiLink = $this->languagesModel->getWikiLink($this->lang);
-		if (Strings::startsWith($wikiLink, "http://"))
-			$wikiLink = substr($wikiLink, 5);
-
 		$this->template->lang = $this->lang;
-
-		$this->template->menu = array(
-			"Home:" => $this->translator->translate("Home"),
-			"News:" => $this->translator->translate("News"),
-			"Downloads:" => $this->translator->translate("Downloads"),
-			"Addons:" => $this->translator->translate("Addons"),
-			"Development:" => $this->translator->translate("Development"),
-			$wikiLink => $this->translator->translate("Wiki"),
-			"//forum.miranda-ng.org/" => $this->translator->translate("Forum"),
-		);
-
-		if ($this->user->isLoggedIn()) {
-			$this->template->menu["Admin:Home:"] = $this->translator->translate("Admin");
-		}
-
-		$this->template->layout = "@html.latte";
     }
 
 	/**
@@ -172,12 +143,12 @@ abstract class BasePresenter extends Presenter
 		$baseUri = $this->context->httpRequest->url->baseUrl;
 		$filter = new VariablesFilter(array(
 			"baseUri" => $baseUri,
-			"previewPath" => $this->link("Texyla:preview"),
-			"filesPath" => $this->link("Texyla:listFiles"),
-			"filesUploadPath" => $this->link("Texyla:upload"),
-			"filesMkDirPath" => $this->link("Texyla:mkDir"),
-			"filesRenamePath" => $this->link("Texyla:rename"),
-			"filesDeletePath" => $this->link("Texyla:delete"),
+			"previewPath" => $this->link(":Texyla:preview"),
+			"filesPath" => $this->link(":Texyla:listFiles"),
+			"filesUploadPath" => $this->link(":Texyla:upload"),
+			"filesMkDirPath" => $this->link(":Texyla:mkDir"),
+			"filesRenamePath" => $this->link(":Texyla:rename"),
+			"filesDeletePath" => $this->link(":Texyla:delete"),
 		));
 
 		$texyla = new TexylaLoader($filter, $baseUri."webtemp", $this->context->parameters["wwwDir"]);

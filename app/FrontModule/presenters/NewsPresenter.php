@@ -1,5 +1,9 @@
 <?php
 
+namespace FrontModule;
+
+use Components\VisualPaginator;
+
 final class NewsPresenter extends BasePresenter
 {
 	/** @var \Models\NewsModel @inject */
@@ -32,7 +36,7 @@ final class NewsPresenter extends BasePresenter
 	}
 
 	public function createComponentVp($name) {
-		$vp = new Components\VisualPaginator($this, $name, $this->translator, $this->texy);
+		$vp = new VisualPaginator($this, $name, $this->translator, $this->texy);
 		$vp->getPaginator()->itemsPerPage = 6;
 		return $vp;
 	}

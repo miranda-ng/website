@@ -1,5 +1,7 @@
 <?php
 
+namespace FrontModule;
+
 final class DownloadsPresenter extends BasePresenter
 {
 	/** @var \Models\PagesModel @inject */
@@ -12,7 +14,7 @@ final class DownloadsPresenter extends BasePresenter
 		$httpResponse->redirect('http://wiki.miranda-ng.org/index.php?title=Download');
 		exit;
 	}*/
-	
+
 	function renderDefault() {
 		$this->template->page = $this->pagesModel->get(3);
 	}

@@ -1,5 +1,7 @@
 <?php
 
+namespace FrontModule;
+
 final class PrivatePresenter extends BasePresenter
 {
 
@@ -9,6 +11,7 @@ final class PrivatePresenter extends BasePresenter
 	/** @var \Models\AddonsModel @inject */
 	public $addonsModel;
 
+	/** @var string */
 	private $wwwDir;
 
 	public function startup()
