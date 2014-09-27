@@ -13,6 +13,12 @@ class RouterFactory
 	{
 		$router = new RouteList();
 
+		$router[] = new Route('texyla/<action>/<id>', array(
+				'presenter' => 'Texyla',
+				'action' => 'default',
+				'id' => NULL,
+		));
+
 		$lang = "[<lang [a-z]{2}>/]";
 
 		// Admin routers
