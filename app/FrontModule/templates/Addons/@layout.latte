@@ -11,7 +11,7 @@
 	{foreach $cats as $category => $id}
 		{if is_array($id)}
 			<li style="list-style: none">
-				<h3 style="margin: 10px 0 5px">{$category}</h3>
+				<h3 style="margin: 10px 0 5px">{_$category}</h3>
 				<menu>
 				{include this, cats => $id}
 				</menu>
@@ -19,7 +19,7 @@
 		{else}
 			<li>
 				{default $activeCategoryId = ""}
-				<a n:href="category, $id" n:class="$activeCategoryId == $id ? active">{$category}</a> ({ifset $categoriesCounts[$id]}{$categoriesCounts[$id]}{else}0{/ifset})
+				<a n:href="category, $id" n:class="$activeCategoryId == $id ? active">{_$category}</a> ({ifset $categoriesCounts[$id]}{$categoriesCounts[$id]}{else}0{/ifset})
 			</li>
 		{/if}
 	{/foreach}
