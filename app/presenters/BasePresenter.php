@@ -1,5 +1,6 @@
 <?php
 
+use LiveTranslator\Translator;
 use Models\LanguagesModel;
 use Nette\Application\UI\Presenter;
 use Nette\Diagnostics\Debugger;
@@ -32,15 +33,8 @@ abstract class BasePresenter extends Presenter
 			return $this->redirect("this", array("lang" => $lang));
 		}
 
-		$langs = $this->languagesModel->getLanguages()->fetchPairs(NULL, "code");
-
-		//$this->translator->setCurrentLang($this->lang);
-        //$this->template->setTranslator($this->translator);
-
+		$langs = $this->languagesModel->getLanguages()->fetchPairs("code", "plural_forms");
 		$this->translator->setAvailableLanguages($langs);
-		// TODO: plurals
-			//en: "nplurals=2; plural=(n==1) ? 0 : 1;",
-            //cz: "nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));",
 		$this->translator->setPresenterLanguageParam("lang");
 
 		$this->texy->setLang($this->lang);
