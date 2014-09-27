@@ -32,6 +32,8 @@ $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/../libs')
 	->register();
 
+//Nette\Diagnostics\Debugger::getBar()->addPanel($container->getByType('LiveTranslator\Panel'));
+
 /*$configurator->onCompile[] = function ($config, Nette\DI\Compiler $compiler) {
 	$compiler->addExtension('arachne.resources', new \Arachne\Resources\ResourcesExtension());
 };*/

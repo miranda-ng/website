@@ -7,6 +7,8 @@ abstract class BasePresenter extends \BasePresenter
 	public function startup() {
 		parent::startup();
 		$this->session->start();
+		
+		$this->translator->setNamespace('admin');
 	}
 
 	public function beforeRender() {
