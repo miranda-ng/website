@@ -6,6 +6,7 @@ use Nette\Diagnostics\Debugger;
 use Nette\Forms\Rules;
 use Nette\Latte\Engine;
 use Nette\Utils\Strings;
+use WebLoader\Filter\VariablesFilter;
 
 abstract class BasePresenter extends Presenter
 {
@@ -140,7 +141,7 @@ abstract class BasePresenter extends Presenter
 	protected function createComponentTexyla()
 	{
 		$baseUri = $this->context->httpRequest->url->baseUrl;
-		$filter = new \WebLoader\Filter\VariablesFilter(array(
+		$filter = new VariablesFilter(array(
 			"baseUri" => $baseUri,
 			"previewPath" => $this->link(":Texyla:preview"),
 			"filesPath" => $this->link(":Texyla:listFiles"),
@@ -150,7 +151,7 @@ abstract class BasePresenter extends Presenter
 			"filesDeletePath" => $this->link(":Texyla:delete"),
 		));
 
-		$texyla = new \TexylaLoader($filter, $baseUri."webtemp", $this->context->parameters["wwwDir"]);
+		$texyla = new TexylaLoader($filter, $baseUri."webtemp", $this->context->parameters["wwwDir"]);
 		return $texyla;
 	}
 

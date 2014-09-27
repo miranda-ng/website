@@ -2,6 +2,8 @@
 
 namespace AdminModule;
 
+use Models\LanguagesModel;
+
 abstract class BasePresenter extends \BasePresenter
 {
 	public function startup() {
@@ -21,7 +23,7 @@ abstract class BasePresenter extends \BasePresenter
 			":Front:Home:" => $this->translator->translate("Home"),
 		);
 
-		$this->template->original = $this->lang == \Models\LanguagesModel::LANG_DEFAULT;
+		$this->template->original = $this->lang == LanguagesModel::LANG_DEFAULT;
 	}
 
 }

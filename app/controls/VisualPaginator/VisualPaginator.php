@@ -15,10 +15,10 @@
  */
 
 namespace Components;
- 
-use Nette\Application\Control;
 
-use Nette\Paginator;
+use Nette\Forms\Controls\BaseControl;
+use Nette\Utils\Paginator;
+
 
 
 
@@ -37,19 +37,19 @@ class VisualPaginator extends BaseControl
 	/** @persistent */
 	public $page = 1;
 
-	
+
 	/**
 	 * @return Nette\Paginator
 	 */
 	public function getPaginator()
 	{
 		if (!$this->paginator) {
-			$this->paginator = new \Nette\Utils\Paginator;
+			$this->paginator = new Paginator;
 		}
 		return $this->paginator;
 	}
 
-	
+
 
 	/**
 	 * Renders paginator.
@@ -75,7 +75,7 @@ class VisualPaginator extends BaseControl
 		$this->template->id =  $this->presenter->getParam('id');
 		$this->template->steps = $steps;
 		$this->template->paginator = $paginator;
-		
+
 		parent::render();
 	}
 

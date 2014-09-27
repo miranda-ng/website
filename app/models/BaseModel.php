@@ -2,9 +2,17 @@
 
 namespace Models;
 
-abstract class BaseModel extends \Nette\Object {
+use InvalidArgumentException;
+use Nette\Database\Context;
+use Nette\Database\Table\IRow;
+use Nette\Database\Table\Selection;
+use Nette\Object;
+use PDOException;
+use Traversable;
 
-	/** @var \Nette\Database\Context */
+abstract class BaseModel extends Object {
+
+	/** @var Context */
 	protected $database;
 
 	/** @var string */
@@ -12,9 +20,9 @@ abstract class BaseModel extends \Nette\Object {
 
 	/**
 	 * Constructor
-	 * @param \Nette\Database\Context $database
+	 * @param Context $database
 	 */
-	public function __construct(\Nette\Database\Context $database) {
+	public function __construct(Context $database) {
 		$this->database = $database;
 
 		// Try to get tableName from anotation
@@ -27,13 +35,13 @@ abstract class BaseModel extends \Nette\Object {
 	/**
 	 * Return whole table selection
 	 * @param string|NULL table name sufix
-	 * @throws \InvalidArgumentException
-	 * @return \Nette\Database\Table\Selection
+	 * @throws InvalidArgumentException
+	 * @return Selection
 	 */
 	protected function getTable($sufix = NULL) {
 		if (!$this->tableName) {
 			$class = $this->getReflection()->getName();
-			throw new \InvalidArgumentException("$class::tableName can't be NULL");
+			throw new InvalidArgumentException("$class::tableName can't be NULL");
 		}
 
 		return $this->database->table($this->tableName . $sufix);
@@ -41,8 +49,8 @@ abstract class BaseModel extends \Nette\Object {
 
 	/**
 	 * Inserts row in a table.
-	 * @param  array|\Traversable|Selection array($column => $value)|\Traversable|Selection for INSERT ... SELECT
-	 * @return \Nette\Database\Table\IRow|int|bool Returns IRow or number of affected rows for Selection or table without primary key
+	 * @param  array|Traversable|Selection array($column => $value)|\Traversable|Selection for INSERT ... SELECT
+	 * @return IRow|int|bool Returns IRow or number of affected rows for Selection or table without primary key
 	 */
 	public function insert($data) {
 		return $this->getTable()->insert($data);
@@ -51,7 +59,7 @@ abstract class BaseModel extends \Nette\Object {
 	/**
 	 * Updates all rows in result set.
 	 * Joins in UPDATE are supported only in MySQL
-	 * @param  array|\Traversable ($column => $value)
+	 * @param  array|Traversable ($column => $value)
 	 * @return int number of affected rows
 	 */
 	public function update($data) {
@@ -61,7 +69,7 @@ abstract class BaseModel extends \Nette\Object {
 	/**
 	 * Returns row specified by primary key.
 	 * @param  mixed primary key
-	 * @return \Nette\Database\Table\IRow or FALSE if there is no such row
+	 * @return IRow or FALSE if there is no such row
 	 */
 	public function get($key) {
 		return $this->getTable()->get($key);
@@ -80,7 +88,7 @@ abstract class BaseModel extends \Nette\Object {
 	 * Inserts or updates row
 	 * @param type $data
 	 * @param type $key
-	 * @throws \PDOException
+	 * @throws PDOException
 	 * @return string Id of inserted or updated item
 	 */
 	protected function save($data, $key) {
@@ -98,10 +106,10 @@ abstract class BaseModel extends \Nette\Object {
 
 	/**
 	 * Workaround for broken ->count("*") in Nette\Database in grouped selection
-	 * @param \Nette\Database\Table\Selection $selection
+	 * @param Selection $selection
 	 * @return int number of rows
 	 */
-	public static function getSelectionCount(\Nette\Database\Table\Selection $selection) {
+	public static function getSelectionCount(Selection $selection) {
 		// FIXME: remove when this will work in Nette
 		if ($selection->getSqlBuilder()->getGroup()) {
 			$query = "SELECT COUNT(*) FROM (" . $selection->getSql() . ") AS _";
