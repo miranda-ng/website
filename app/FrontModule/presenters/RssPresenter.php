@@ -1,5 +1,7 @@
 <?php
 
+namespace FrontModule;
+
 final class RssPresenter extends BasePresenter
 {
 	/** @var \Models\NewsModel @inject */

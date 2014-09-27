@@ -25,32 +25,35 @@ class RouterFactory
 		$router[] = $adminRouter;
 
 		// Front routers
-		$router[] = new Route('index.php', 'Home:default', Route::ONE_WAY);
+		$frontRouter = new RouteList('Front');
+		$frontRouter[] = new Route('index.php', 'Home:default', Route::ONE_WAY);
 
-		$router[] = new Route($lang . 'news/<link>', array(
+		$frontRouter[] = new Route($lang . 'news/<link>', array(
 			'presenter' => 'News',
 			'action' => 'show',
 			//'lang' => "en"
 		));
 
-		$router[] = new Route('p/<id>', array(
+		$frontRouter[] = new Route('p/<id>', array(
 			'presenter' => 'Redirect',
 			'action' => 'plugin',
 		));
 
-		$router[] = new Route($lang . '<presenter>[/<action>]/page/<vp-page>', array(
+		$frontRouter[] = new Route($lang . '<presenter>[/<action>]/page/<vp-page>', array(
 				'presenter' => 'Home',
 				'action' => 'default',
 				'id' => NULL,
 				//'lang' => "en"
 		));
 
-		$router[] = new Route($lang . '<presenter>/<action>/<id>', array(
+		$frontRouter[] = new Route($lang . '<presenter>/<action>/<id>', array(
 				'presenter' => 'Home',
 				'action' => 'default',
 				'id' => NULL,
 				//'lang' => "en"
 		));
+
+		$router[] = $frontRouter;
 
 		return $router;
 	}

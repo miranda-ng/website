@@ -6,8 +6,7 @@ abstract class BasePresenter extends \BasePresenter
 {
 	public function startup() {
 		parent::startup();
-		$this->session->start();
-		
+
 		$this->translator->setNamespace('admin');
 	}
 
@@ -19,7 +18,7 @@ abstract class BasePresenter extends \BasePresenter
 			"Home:" => $this->translator->translate("Admin"),
 			"Pages:" => $this->translator->translate("Pages"),
 			"News:" => $this->translator->translate("News"),
-			":Home:" => $this->translator->translate("Home"),
+			":Front:Home:" => $this->translator->translate("Home"),
 		);
 
 		$this->template->original = $this->lang == \Models\LanguagesModel::LANG_DEFAULT;

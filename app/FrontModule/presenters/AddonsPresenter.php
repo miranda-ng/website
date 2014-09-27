@@ -1,5 +1,12 @@
 <?php
 
+namespace FrontModule;
+
+use Components\VisualPaginator;
+use Nette\Application\Responses\FileResponse;
+use Nette\Application\UI\Form;
+use Nette\Utils\Strings;
+
 final class AddonsPresenter extends BasePresenter
 {
 
@@ -129,13 +136,13 @@ final class AddonsPresenter extends BasePresenter
 	}
 
 	public function createComponentVp($name) {
-		$vp = new Components\VisualPaginator($this, $name, $this->translator, $this->texy);
+		$vp = new VisualPaginator($this, $name, $this->translator, $this->texy);
 		$vp->getPaginator()->itemsPerPage = 20;
 		return $vp;
 	}
 
 	public function createComponentSearchForm($name) {
-		$form = new \Nette\Application\UI\Form($this, $name);
+		$form = new Form($this, $name);
 		$form->setTranslator($this->translator);
 
 		$form->getElementPrototype()->class = "search";
@@ -162,7 +169,7 @@ final class AddonsPresenter extends BasePresenter
 
 		if (!$word) {
 			if ($truncate !== NULL)
-				return \Nette\Utils\Strings::truncate($text, $truncate);
+				return Strings::truncate($text, $truncate);
 			else
 				return $text;
 		}
@@ -208,7 +215,7 @@ final class AddonsPresenter extends BasePresenter
 		// Increment download count
 		$this->addonsModel->incDownloadCount($item, $type);
 
-		$this->sendResponse(new Nette\Application\Responses\FileResponse($path, $name));
+		$this->sendResponse(new FileResponse($path, $name));
 	}
 
 }
