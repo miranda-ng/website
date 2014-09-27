@@ -37,3 +37,6 @@ services:
 	#translatorStorage: LiveTranslator\Storage\File(%appDir%/langs)
 	translator: LiveTranslator\Translator(en)
 	translatorPanel: LiveTranslator\Panel
+
+extensions:
+	debugger.session: Kdyby\SessionPanel\DI\SessionPanelExtension

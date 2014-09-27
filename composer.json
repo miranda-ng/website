@@ -19,6 +19,7 @@
 		"janmarek/webloader": "@dev",
 		"dg/ftp-deployment": ">=1.1",
 		"dg/adminer-custom": "1.*",
-		"vladahejda/livetranslator": "@dev"
+		"vladahejda/livetranslator": "@dev",
+		"kdyby/nette-session-panel": "@dev"
 	}
 }
