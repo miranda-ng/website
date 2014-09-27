@@ -27,8 +27,6 @@ abstract class BasePresenter extends Presenter
 
 		$this->session->start();
 
-		$this->translator->setNamespace('front');
-
 		if (!$this->lang) {
 			$lang = $this->languagesModel->getDefaultLanguage();
 			return $this->redirect("this", array("lang" => $lang));
@@ -49,7 +47,7 @@ abstract class BasePresenter extends Presenter
 
 		// Translate form's default error messages
 		array_walk(Rules::$defaultMessages, function($message) {
-			//return $this->translator->translate($message);
+			return @$this->translator->translate($message);
 		});
 	}
 
