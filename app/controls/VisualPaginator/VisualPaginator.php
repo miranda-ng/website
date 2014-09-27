@@ -16,7 +16,6 @@
 
 namespace Components;
 
-use Nette\Forms\Controls\BaseControl;
 use Nette\Utils\Paginator;
 
 
