@@ -16,9 +16,9 @@ nette:
 	application:
 		#errorPresenter: Error
 
-	debugger:
-		bar:
-			- LiveTranslator\Panel
+	#debugger:
+		#bar:
+			#- LiveTranslator\Panel
 
 services:
 	routerFactory: RouterFactory

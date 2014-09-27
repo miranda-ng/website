@@ -32,8 +32,6 @@ $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/../libs')
 	->register();
 
-//Nette\Diagnostics\Debugger::getBar()->addPanel($container->getByType('LiveTranslator\Panel'));
-
 /*$configurator->onCompile[] = function ($config, Nette\DI\Compiler $compiler) {
 	$compiler->addExtension('arachne.resources', new \Arachne\Resources\ResourcesExtension());
 };*/
@@ -52,6 +50,9 @@ $local = in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'));
 $configurator->addConfig(__DIR__ . '/config/' . ($local ? 'local' : 'server') . '.neon', FALSE);
 
 $container = $configurator->createContainer();
+
+// Show translation bar
+Nette\Diagnostics\Debugger::getBar()->addPanel($container->getByType('LiveTranslator\Panel'));
 
 // Setup other functions
 require __DIR__ . '/functions.php';
