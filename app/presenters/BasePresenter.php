@@ -1,5 +1,6 @@
 <?php
 
+use LiveTranslator\Translator;
 use Models\LanguagesModel;
 use Nette\Application\UI\Presenter;
 use Nette\Diagnostics\Debugger;
@@ -27,29 +28,20 @@ abstract class BasePresenter extends Presenter
 
 		$this->session->start();
 
-		$this->translator->setNamespace('front');
-
 		if (!$this->lang) {
 			$lang = $this->languagesModel->getDefaultLanguage();
 			return $this->redirect("this", array("lang" => $lang));
 		}
 
-		$langs = $this->languagesModel->getLanguages()->fetchPairs(NULL, "code");
-
-		//$this->translator->setCurrentLang($this->lang);
-        //$this->template->setTranslator($this->translator);
-
+		$langs = $this->languagesModel->getLanguages()->fetchPairs("code", "plural_forms");
 		$this->translator->setAvailableLanguages($langs);
-		// TODO: plurals
-			//en: "nplurals=2; plural=(n==1) ? 0 : 1;",
-            //cz: "nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));",
 		$this->translator->setPresenterLanguageParam("lang");
 
 		$this->texy->setLang($this->lang);
 
 		// Translate form's default error messages
 		array_walk(Rules::$defaultMessages, function($message) {
-			//return $this->translator->translate($message);
+			return @$this->translator->translate($message);
 		});
 	}
 

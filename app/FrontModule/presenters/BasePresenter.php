@@ -9,12 +9,6 @@ abstract class BasePresenter extends \BasePresenter
 	/** @var \Models\NewsModel @inject */
 	public $newsModel;
 
-    public function  startup() {
-		parent::startup();
-
-		$this->translator->setNamespace('front');
-	}
-
     public function beforeRender()
     {
         parent::beforeRender();

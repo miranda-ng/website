@@ -2,6 +2,9 @@
 
 namespace FrontModule;
 
+use InvalidArgumentException;
+use Nette\Utils\Strings;
+
 final class PrivatePresenter extends BasePresenter
 {
 
@@ -25,6 +28,84 @@ final class PrivatePresenter extends BasePresenter
 		$this->wwwDir = $this->context->getParameters()["wwwDir"];
 	}
 
+
+	/**
+	 * Parse dictionary file
+	 * @param string $file file path
+	 * @param string
+	 */
+	private function parseFile($file, $identifier)
+	{
+		$f = @fopen($file, 'rb');
+		if (@filesize($file) < 10) {
+			throw new InvalidArgumentException("'$file' is not a gettext file.");
+		}
+
+		$endian = FALSE;
+		$read = function ($bytes) use ($f, $endian) {
+			$data = fread($f, 4 * $bytes);
+			return $endian === FALSE ? unpack('V' . $bytes, $data) : unpack('N' . $bytes, $data);
+		};
+
+		$input = $read(1);
+		if (Strings::lower(substr(dechex($input[1]), -8)) == '950412de') {
+			$endian = FALSE;
+
+		} elseif (Strings::lower(substr(dechex($input[1]), -8)) == 'de120495') {
+			$endian = TRUE;
+
+		} else {
+			throw new InvalidArgumentException("'$file' is not a gettext file.");
+		}
+
+		$input = $read(1);
+
+		$input = $read(1);
+		$total = $input[1];
+
+		$input = $read(1);
+		$originalOffset = $input[1];
+
+		$input = $read(1);
+		$translationOffset = $input[1];
+
+		fseek($f, $originalOffset);
+		$orignalTmp = $read(2 * $total);
+		fseek($f, $translationOffset);
+		$translationTmp = $read(2 * $total);
+
+		$dictionary = array();
+
+		for ($i = 0; $i < $total; ++$i) {
+			if ($orignalTmp[$i * 2 + 1] != 0) {
+				fseek($f, $orignalTmp[$i * 2 + 2]);
+				$original = @fread($f, $orignalTmp[$i * 2 + 1]);
+
+			} else {
+				$original = '';
+			}
+
+			if ($translationTmp[$i * 2 + 1] != 0) {
+				fseek($f, $translationTmp[$i * 2 + 2]);
+				$translation = fread($f, $translationTmp[$i * 2 + 1]);
+				/*if ($original === '') {
+					$this->metadata = $this->fileManager->parseMetadata($translation, $identifier, $this->metadata);
+					continue;
+				}*/
+
+				$original = explode("\0", $original);
+				$translation = explode("\0", $translation);
+
+				$key = isset($original[0]) ? $original[0] : $original;
+				$dictionary[$key]['original'] = $original;
+				$dictionary[$key]['translation'] = $translation;
+				$dictionary[$key]['file'] = $identifier;
+			}
+		}
+
+		return $dictionary;
+	}
+
 	private function getRealFilename($headers, $url)
 	{
 		foreach($headers as $header)
@@ -38,6 +119,62 @@ final class PrivatePresenter extends BasePresenter
 
 		$stripped_url = preg_replace('|\\?.*|', '', $url);
 		return basename($stripped_url);
+	}
+
+	private function updateTranslationsDb($lang)
+	{
+		$identifier = $lang;
+		$file = $this->wwwDir . "/app/langs/$lang.front.mo";
+
+		$trans = $this->parseFile($file, $identifier);
+
+		$arr = array();
+
+		foreach ($trans as $original => $data) {
+			$translation = $data["translation"];
+
+			if ($original)
+				$arr[$original] = $translation[0];
+		}
+
+		//print_r($arr);
+
+
+		foreach ($this->context->database->table("localization_text") as $item) {
+			if (isset($arr[$item->text])) {
+				if ($this->context->database->table("localization")
+						->where("text_id", $item->id)
+						->where("lang", $lang)
+						->where("variant", 0)
+						->fetch() != NULL) {
+					// It is already in DB
+					continue;
+				}
+
+				$this->context->database->table("localization")->insert([
+					"text_id" => $item->id,
+					"lang" => $lang,
+					"variant" => 0,
+					"translation" => $arr[$item->text],
+				]);
+
+				echo "Added translation: '{$item->text}' -> '{$arr[$item->text]}'<br>";
+				flush();
+			}
+		}
+	}
+
+	public function actionLoadTranslations()
+	{
+		ob_end_flush();
+
+		$items = ["be", "cs", "de", "en", "fr", "he", "pl", "ru"];
+
+		foreach ($items as $lang) {
+			$this->updateTranslationsDb($lang);
+		}
+
+		$this->terminate();
 	}
 
 	public function actionCheckFiles()
