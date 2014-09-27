@@ -15,6 +15,9 @@ class NetteDatabase implements \LiveTranslator\ITranslatorStorage
 	/** @var string */
 	private $translationTable;
 
+	/** @var array */
+	private $translations = array();
+
 
 
 	/**
@@ -40,6 +43,14 @@ class NetteDatabase implements \LiveTranslator\ITranslatorStorage
 
 	public function getTranslation($original, $lang, $variant = 0, $namespace = NULL)
 	{
+		if (!isset($this->translations[$lang . '/' . $namespace])) {
+			$this->getAllTranslations($lang, $namespace);
+		}
+
+		return isset($this->translations[$lang . '/' . $namespace][$original][$variant])
+				? $this->translations[$lang . '/' . $namespace][$original][$variant]
+				: NULL;
+
 		$arg = array();
 
 		$arg[0] = "SELECT t.`translation` FROM `$this->defaultTable` d
@@ -65,30 +76,34 @@ class NetteDatabase implements \LiveTranslator\ITranslatorStorage
 
 	public function getAllTranslations($lang, $namespace = NULL)
 	{
-		$arg = array();
+		if (!isset($this->translations[$lang . '/' . $namespace])) {
+			$arg = array();
 
-		$arg[0] = "SELECT d.`text`, t.`variant`, t.`translation` FROM `$this->defaultTable` d
-			JOIN `$this->translationTable` t ON d.`id` = t.`text_id`
-			WHERE ";
+			$arg[0] = "SELECT d.`text`, t.`variant`, t.`translation` FROM `$this->defaultTable` d
+				JOIN `$this->translationTable` t ON d.`id` = t.`text_id`
+				WHERE ";
 
-		if ($namespace){
-			$arg[0] .= 'd.`ns` = ? AND ';
-			$arg[] = $namespace;
-		}
-
-		$arg[0] .= "t.`lang` = ?";
-		$arg[] = $lang;
-
-		$translations = call_user_func_array(array($this->db, 'fetchAll'), $arg);
-
-		$output = array();
-		foreach ($translations as $translation){
-			if (!isset($output[$translation->text])){
-				$output[$translation->text] = array();
+			if ($namespace){
+				$arg[0] .= 'd.`ns` = ? AND ';
+				$arg[] = $namespace;
 			}
-			$output[$translation->text][$translation->variant] = $translation->translation;
+
+			$arg[0] .= "t.`lang` = ?";
+			$arg[] = $lang;
+
+			$translations = call_user_func_array(array($this->db, 'fetchAll'), $arg);
+
+			$output = array();
+			foreach ($translations as $translation){
+				if (!isset($output[$translation->text])){
+					$output[$translation->text] = array();
+				}
+				$output[$translation->text][$translation->variant] = $translation->translation;
+			}
+			$this->translations[$lang . '/' . $namespace] = $output;
 		}
-		return $output;
+
+		return $this->translations[$lang . '/' . $namespace];
 	}
 
 
