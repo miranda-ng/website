@@ -1,5 +1,5 @@
 {block content}
-<h1 n:block="title">{$categoryName}{*_"Addons from %s", $categoryName*}{if $page && $pageCount > 1} ({_"page"} {$page}/{$pageCount}){/if}</h1>
+<h1 n:block="title">{_$categoryName}{*_"Addons from %s", $categoryName*}{if $page && $pageCount > 1} ({_"page"} {$page}/{$pageCount}){/if}</h1>
 
 <p class="italic" style="margin: -10px 0 15px 0">{_"There are %d addons in this category.", $itemCount}</p>
 <hr>
