@@ -3,7 +3,9 @@
 
 {default $highlight = NULL}
 
-<div n:inner-foreach="$items as $item">
+<p n:if="empty($itemsCounts)" class="italic">{_"No addons was downloaded in last week."}</p>
+
+<div n:if="!empty($itemsCounts)" n:inner-foreach="$items as $item">
 
 	{var $count = isset($itemsCounts[$item->id]) ? $itemsCounts[$item->id] : 0}
 
