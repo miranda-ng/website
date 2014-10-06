@@ -28,12 +28,13 @@ abstract class BasePresenter extends Presenter
 
 		$this->session->start();
 
-		if (!$this->lang) {
+		$langs = $this->languagesModel->getLanguages()->fetchPairs("code", "plural_forms");
+		
+		if (!$this->lang || !in_array($this->lang, array_keys($langs))) {
 			$lang = $this->languagesModel->getDefaultLanguage();
 			return $this->redirect("this", array("lang" => $lang));
 		}
 
-		$langs = $this->languagesModel->getLanguages()->fetchPairs("code", "plural_forms");
 		$this->translator->setAvailableLanguages($langs);
 		$this->translator->setPresenterLanguageParam("lang");
 
