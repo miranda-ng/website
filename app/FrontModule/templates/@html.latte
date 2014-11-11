@@ -110,22 +110,60 @@ UserVoice.push(['showTab', 'classic_widget', {
 <script src="/js/colorbox/jquery.colorbox-min.js"></script>
 
 <script>
+function showColorbox(url) {
+	$.colorbox({
+		maxWidth: "95%",
+		maxHeight: "95%",
+		minWidth: "15%",
+		minHeight: "25%",
+		initialWidth: 400,
+		initialHeight: 300,
+		opacity: 0.7,
+		preloading: true,
+		fixed: true,
+		open: true,
+		href: url
+	});	
+}
+
 $(function(){
+	window.onpopstate = function(event) {
+		
+		if (event.state && event.state.original) {
+			alert(event.state.original);
+			document.location = event.state.original;
+			return;
+		}
+		
+		
+		if (!event.state) {
+			if ($("#colorbox").css("display") == "block") {
+				$.colorbox.close();
+			} else {
+				document.reload();
+			}
+		} else if (event.state.page) {
+		//alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+		//document.location = event.state.page;
+		
+			if (event.state.colorbox) {
+				//if (event.state.page != document.location)
+					showColorbox(event.state.page);
+			} else {
+				document.location = event.state.page;
+			}
+		}
+		
+	};
+
 	if ($().colorbox) {
 		$(document).on("click", "a.colorbox", function() {
-			$.colorbox({
-				maxWidth: "95%",
-				maxHeight: "95%",
-				minWidth: "15%",
-				minHeight: "25%",
-				initialWidth: 400,
-				initialHeight: 300,
-				opacity: 0.7,
-				preloading: true,
-				fixed: true,
-				open: true,
-				href: this.href
-			});
+			//if (window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/)) {
+				var originalUrl = document.location.href;
+				history.pushState({ original: originalUrl, page: this.href, colorbox: true }, 'detail', this.href);
+			//}
+	
+			showColorbox(this.href);
 
 			return false;
 		});
