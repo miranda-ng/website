@@ -6,7 +6,7 @@ use AdminModule\Forms\PagesForm;
 
 class PagesPresenter extends SecuredPresenter
 {
-	/** @var Models\PagesModel @inject */
+	/** @var \Models\PagesModel @inject */
 	public $pagesModel;
 
 	public function renderDefault() {

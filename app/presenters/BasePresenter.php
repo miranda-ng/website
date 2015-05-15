@@ -14,13 +14,13 @@ abstract class BasePresenter extends Presenter
 	/** @persistent */
 	public $lang;
 
-	/** @var Nette\Localization\ITranslator @inject */
+	/** @var \Nette\Localization\ITranslator @inject */
 	public $translator;
 
-	/** @var MyTexy @inject */
+	/** @var \MyTexy @inject */
 	public $texy;
 
-	/** @var Models\LanguagesModel @inject */
+	/** @var \Models\LanguagesModel @inject */
 	public $languagesModel;
 
     public function  startup() {

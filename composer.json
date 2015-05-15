@@ -13,13 +13,13 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"nette/nette": "~2.1.0",
+		"nette/nette": "~2.3.0",
 		"dg/texy": ">=2.3",
 		"enumag/ivory": "@dev",
 		"janmarek/webloader": "@dev",
 		"dg/ftp-deployment": ">=1.1",
 		"dg/adminer-custom": "1.*",
 		"vladahejda/livetranslator": "@dev",
-		"kdyby/nette-session-panel": "@dev"
+		"dg/composer-cleaner": "0.1"
 	}
 }

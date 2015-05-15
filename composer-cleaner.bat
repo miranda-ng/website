@@ -1,0 +1,1 @@
+php vendor/dg/composer-cleaner/bin/composer-cleaner.php

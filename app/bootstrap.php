@@ -1,7 +1,7 @@
 <?php
 
 // Normalized internal encoding
-iconv_set_encoding('internal_encoding', 'UTF-8');
+//iconv_set_encoding('internal_encoding', 'UTF-8'); // is deprecated since PHP 5.5
 mb_internal_encoding('UTF-8');
 
 // Normalized locale settings
@@ -54,7 +54,12 @@ $container = $configurator->createContainer();
 // Show translation bar
 Nette\Diagnostics\Debugger::getBar()->addPanel($container->getByType('LiveTranslator\Panel'));
 
-// Setup other functions
-require __DIR__ . '/functions.php';
+// Catch PHP notices as exceptions
+/*set_error_handler(function($severity, $message, $file, $line) {
+    if (($severity & error_reporting()) === $severity) {
+        throw new ErrorException($message, 0, $severity, $file, $line);
+    }
+    return FALSE;
+});*/
 
 return $container;
