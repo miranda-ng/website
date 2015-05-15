@@ -1,0 +1,53 @@
+{block content}
+<a n:href="default" class="more rfloat">{_"Register own VI account"} &raquo;</a>
+<h1 n:block="title">{_"Statistics"} - {_"Version Info"}</h1>
+
+<h2>{_"Users statistics"}</h2>
+<table style="width: auto">
+	<tr>
+		<th>{_"Registered users"}:</th>
+		<td>{$usersCount}</td>
+	</tr>
+	<tr>
+		<th>{_"Users with Version Info"}:</th>
+		<td>{$viCount}</td>
+	</tr>
+	<tr>
+		<th>{_"Plugins per user"}:</th>
+		<td>{_"Average"}: {= round($pluginsCount / $viCount)}, {_"Minimum"}: {$minPlugins}, {_"Maximum"}: {$maxPlugins}</td>
+	</tr>
+</table>
+
+<h2>{_"Miranda NG statistics"}</h2>
+<table style="width: auto">
+	<thead>
+		<tr>
+			<th>{_"Version"}</th>
+			<th>{_"Used"}</th>
+		</tr>
+	</thead>
+	<tbody n:inner-foreach="$cores as $core">
+		<tr>
+			<td>{$core->version}</td>
+			<td>{$core->count}&times;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>{_"Plugins statistics"}</h2>
+<table style="width: auto">
+	<thead>
+		<tr>
+			<th>{_"Filename"}</th>
+			<th>{_"Plugin name"}</th>
+			<th>{_"Used"}</th>
+		</tr>
+	</thead>
+	<tbody n:inner-foreach="$plugins as $plugin">
+		<tr>
+			<td>{$plugin->dllName}</td>
+			<td>{$plugin->name}</td>
+			<td>{$plugin->count}&times;</td>
+		</tr>
+	</tbody>
+</table>

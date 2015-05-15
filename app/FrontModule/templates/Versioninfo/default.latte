@@ -1,0 +1,17 @@
+{var $page_content = $presenter->getPagesData($page)}
+{block content}
+<a n:href="stats" class="more rfloat">{_"Show statistics"} &raquo;</a>
+<h1 n:block="title">{$page_content->title}</h1>
+
+{!$page_content->content|texy}
+
+<hr>
+
+<h2>{_"Register new account"}</h2>
+
+{control registerForm}
+
+<hr>
+
+<h2>{_"Show Version Info"}</h2>
+{control showForm}

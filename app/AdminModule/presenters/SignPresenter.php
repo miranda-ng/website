@@ -17,7 +17,7 @@ class SignPresenter extends BasePresenter
 	public function beforeRender() {
 		parent::beforeRender();
 
-		if ($this->getUser()->isLoggedIn()) {
+		if (!$this->getRequest()->isMethod('POST') && $this->getUser()->isLoggedIn()) {
 			$this->flashMessage($this->translator->translate('You are already logged in.'), 'success');
 			$this->redirect(307, 'Home:');
 		}
@@ -57,7 +57,7 @@ class SignPresenter extends BasePresenter
 			}
 			$this->getUser()->login($values->login, $values->password);
 
-			$this->restoreRequest($this->backlink);
+			//$this->restoreRequest($this->backlink);
 			$this->flashMessage($this->translator->translate('You have been succesfully logged in.'), 'success');
             $this->redirect(307, 'Home:');
 		} catch (NS\AuthenticationException $e) {

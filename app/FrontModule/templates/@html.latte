@@ -59,7 +59,9 @@
 		<p n:if="$user->isLoggedIn()" class="loginbox">{_"Logged in as"} <strong>{$user->id}</strong> | <a n:href=":Admin:Sign:out">{_"Logout"}</a></p>
 	</header>
 
-	<section>
+	{default $noPanel = false}
+
+	<section n:class="$noPanel ? nopanel">
 		<div id="top" n:ifset="#top" n:class="isset($top_class) ? $top_class">
 			{include #top}
 		</div>
@@ -68,7 +70,7 @@
 			{include #content}
 		</article>
 
-		<aside n:class="isset($aside_class) ? $aside_class">
+		<aside n:if="!$noPanel" n:class="isset($aside_class) ? $aside_class">
 			{ifset #panel}
 				{include #panel}
 			{else}
@@ -131,6 +133,10 @@ $(function(){
 		});
 	}
 });
+
+{foreach $flashes as $flash}
+	alert({$flash->message});
+{/foreach}
 </script>
 
 </body>

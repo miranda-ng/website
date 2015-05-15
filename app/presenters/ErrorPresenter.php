@@ -13,6 +13,10 @@ class ErrorPresenter extends BasePresenter
 	 */
 	public function renderDefault($exception)
 	{
+		if ($exception->getCode() == 401) {
+			$this->terminate();
+		}
+
 		if ($this->isAjax()) { // AJAX request? Just note this error in payload.
 			$this->payload->error = TRUE;
 			$this->terminate();

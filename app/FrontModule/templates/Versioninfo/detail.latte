@@ -1,0 +1,11 @@
+{var $noPanel = TRUE}
+
+{block content}
+<a n:href="default" class="more rfloat">{_"Register own VI account"} &raquo;</a>
+<h1 n:block="title">{_"Version Info"} ({$item->login})</h1>
+
+<p>
+	<strong>{_"Uploaded:"}</strong> {if !$item->uploaded}{_"never"}{else}{$item->uploaded|date, "j.n.Y H:i:s"} (GMT{=date("P")}){/if}
+</p>
+
+<pre><code>{$item->vi}</code></pre>

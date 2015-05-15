@@ -36,7 +36,7 @@
 				<tr>
 				<td><a href="<?php echo $item["link"];?>"><?php $parts = explode("/", $item["link"]); echo isset($parts[4]) ? $parts[4] : "???"; ?></a></td>
 				<td><?php echo $item["dc:creator"]; ?></td>
-				<td style="line-height: 18px"><?php echo nl2br(trim($item["description"]));?></td>
+				<td style="line-height: 18px; max-width: 340px; text-overflow: ellipsis; overflow: hidden;"><?php echo nl2br(trim($item["description"]));?></td>
 				<td style="white-space: nowrap"><?php echo $item["pubDate"]; ?></td>
 				</tr>
 			<?php

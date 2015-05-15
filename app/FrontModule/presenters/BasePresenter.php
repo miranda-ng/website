@@ -25,6 +25,7 @@ abstract class BasePresenter extends \BasePresenter
 			"News:" => $this->translator->translate("News"),
 			"Downloads:" => $this->translator->translate("Downloads"),
 			"Addons:" => $this->translator->translate("Addons"),
+			"VersionInfo:" => $this->translator->translate("Version Info"),
 			"Development:" => $this->translator->translate("Development"),
 			$wikiLink => $this->translator->translate("Wiki"),
 			"//forum.miranda-ng.org/" => $this->translator->translate("Forum"),

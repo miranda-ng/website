@@ -72,7 +72,7 @@ header {
 		font-size: 25px;
 		font-weight: bold;
 		padding-top: 13px;
-		letter-spacing: 1px;
+		//letter-spacing: 1px;
 		line-height: 20px;
 		//text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
 
@@ -114,6 +114,7 @@ header {
 
 			a.active {
 				color: white;
+				text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
 			}
 
 			a.active, a:hover {
@@ -144,6 +145,19 @@ section {
 
 		box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 
+	&.nopanel {
+		article {
+			width: 900px;
+			display: block;
+			overflow-x: hidden;
+			white-space: normal;
+		}
+	}
+
+	pre {
+		max-width: 100%;
+		white-space: pre-wrap;
+	}
 
 	#top {
 		width: 100%;
