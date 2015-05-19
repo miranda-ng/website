@@ -158,7 +158,7 @@ final class VersioninfoPresenter extends BasePresenter
 		$form->addText("login", "Login:")
 				->setRequired()
 				->addRule(Form::MIN_LENGTH, NULL, 3)
-				->addRule(Form::PATTERN, "Login can contain only ascii characters (a-Z) and numbers (0-9).", "^[a-Z0-9]+$");
+				->addRule(Form::PATTERN, "Login can contain only ascii characters (a-Z) and numbers (0-9).", "^[a-z0-9]+$");
 
 		$form->addText("email", "E-mail:")
 				->setRequired()
