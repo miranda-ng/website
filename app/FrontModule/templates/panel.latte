@@ -12,10 +12,16 @@
 <div class="lastnews" n:if="$important_news_panel->count() > 0">
 	<h2>{_"Important announcements"}</h2>
 
-	<ul n:inner-foreach="$important_news_panel as $item">
+	<dl n:inner-foreach="$important_news_panel as $item">
+		{var $news_data = $presenter->getNewsData($item)}
+		<dt><span class="date">{$item->date|date,'j.n.Y'}</span></dt>
+		<dd><a n:href="News:show, $item->link">{$news_data->title}</a></dd>
+	</dl>
+	
+	{* <ul n:inner-foreach="$important_news_panel as $item">
 		{var $news_data = $presenter->getNewsData($item)}
 		<li><a n:href="News:show, $item->link">{$news_data->title}</a></li>
-	</ul>
+	</ul> *}
 
 	<a class="more" n:href="News:, important => 1">&raquo; {_"Show all"}</a>
 </div>
