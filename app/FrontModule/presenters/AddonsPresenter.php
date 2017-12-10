@@ -18,6 +18,20 @@ final class AddonsPresenter extends BasePresenter
 
 	/** @var \Models\AddonsModel @inject */
 	public $addonsModel;
+	
+	/** @persistent */
+	public $magic = false;
+	
+	public function startup()
+	{
+		parent::startup();
+		
+		// In magic mode we alow showing all categories and all addons
+		if ($this->magic) {
+			$this->categoriesModel->magic = true;
+			$this->addonsModel->magic = true;
+		}
+	}
 
 	public function beforeRender()
 	{

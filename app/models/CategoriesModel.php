@@ -6,6 +6,8 @@ namespace Models;
  * @table categories
  */
 final class CategoriesModel extends BaseModel {
+	
+	public $magic = false;
 
 	/**
 	 * Make array structurized by exploding keys and create new subarrays when needed.
@@ -44,7 +46,7 @@ final class CategoriesModel extends BaseModel {
 	public function findCategories($published = TRUE) {
 		$res = $this->getTable();
 
-		if ($published) {
+		if ($published && !$this->magic) {
 			$res->where("hidden", 0);
 		}
 

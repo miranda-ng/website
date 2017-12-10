@@ -13,10 +13,12 @@ use Nette\Database\Table\ActiveRow;
  */
 final class AddonsModel extends BaseModel {
 
+	public $magic = false;
+
 	public function findAddons($published = TRUE) {
 		$res = $this->getTable();
 
-		if ($published) {
+		if ($published && !$this->magic) {
 			$ids = $this->database->table("categories")->where("hidden", 0)->fetchPairs(NULL, "id");
 			$res->where("categories_id", $ids);
 		}
