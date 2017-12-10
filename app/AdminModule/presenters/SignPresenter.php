@@ -19,7 +19,7 @@ class SignPresenter extends BasePresenter
 
 		if (!$this->getRequest()->isMethod('POST') && $this->getUser()->isLoggedIn()) {
 			$this->flashMessage($this->translator->translate('You are already logged in.'), 'success');
-			$this->redirect(307, 'Home:');
+			$this->redirect(303, 'Home:');
 		}
 	}
 
@@ -59,7 +59,7 @@ class SignPresenter extends BasePresenter
 
 			//$this->restoreRequest($this->backlink);
 			$this->flashMessage($this->translator->translate('You have been succesfully logged in.'), 'success');
-            $this->redirect(307, 'Home:');
+            $this->redirect(303, 'Home:');
 		} catch (NS\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
@@ -69,7 +69,7 @@ class SignPresenter extends BasePresenter
 	{
 		$this->getUser()->logout();
 		$this->flashMessage($this->translator->translate('You have been logged out.'));
-		$this->redirect(307, 'default');
+		$this->redirect(303, 'default');
 	}
 
 }
