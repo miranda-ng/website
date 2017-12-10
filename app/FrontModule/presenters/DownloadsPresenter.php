@@ -11,7 +11,7 @@ final class DownloadsPresenter extends BasePresenter
 		parent::startup();
 		$httpResponse = $this->context->httpResponse;
 		$httpResponse->setCode(Nette\Http\IResponse::S301_MOVED_PERMANENTLY);
-		$httpResponse->redirect('http://wiki.miranda-ng.org/index.php?title=Download');
+		$httpResponse->redirect('https://wiki.miranda-ng.org/index.php?title=Download');
 		exit;
 	}*/
 

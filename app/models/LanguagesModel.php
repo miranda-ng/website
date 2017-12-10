@@ -12,7 +12,7 @@ use Nette\Http\Request;
 final class LanguagesModel extends BaseModel
 {
 	const LANG_DEFAULT = "en";
-	const WIKI_LINK = "http://wiki.miranda-ng.org";
+	const WIKI_LINK = "https://wiki.miranda-ng.org";
 
 	/** @var Request */
 	private $httpRequest;

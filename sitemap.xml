@@ -6,42 +6,54 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>http://miranda-ng.org/</loc>
+  <loc>https://miranda-ng.org/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/</loc>
+  <loc>https://vi.miranda-ng.org/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/downloads/</loc>
+  <loc>https://addons.miranda-ng.org/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/development/</loc>
+  <loc>https://wiki.miranda-ng.org/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/webpage-improvements</loc>
+  <loc>https://forum.miranda-ng.org/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/0-94-4</loc>
+  <loc>https://miranda-ng.org/news/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/0-94-3</loc>
+  <loc>https://miranda-ng.org/downloads/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/rss/news/</loc>
+  <loc>https://miranda-ng.org/development/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/0-94-2</loc>
+  <loc>https://miranda-ng.org/news/webpage-improvements</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/plugin-updater-for-miranda-im</loc>
+  <loc>https://miranda-ng.org/news/0-94-4</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/0-94-1</loc>
+  <loc>https://miranda-ng.org/news/0-94-3</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/page/2</loc>
+  <loc>https://miranda-ng.org/rss/news/</loc>
 </url>
 <url>
-  <loc>http://miranda-ng.org/news/0-93-5</loc>
+  <loc>https://miranda-ng.org/news/0-94-2</loc>
+</url>
+<url>
+  <loc>https://miranda-ng.org/news/plugin-updater-for-miranda-im</loc>
+</url>
+<url>
+  <loc>https://miranda-ng.org/news/0-94-1</loc>
+</url>
+<url>
+  <loc>https://miranda-ng.org/news/page/2</loc>
+</url>
+<url>
+  <loc>https://miranda-ng.org/news/0-93-5</loc>
 </url>
 </urlset>

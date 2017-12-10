@@ -45,7 +45,7 @@
 			<br><span class="subtitle">{_"Next Generation of Miranda IM"}</span></a>
 
 		<menu class="main" n:inner-foreach="$menu as $id => $item">
-			{var $href = ($id[0] == "/") ? $id : $presenter->link($id)}
+			{var $href = ($id[0] == "/" || substr($id, 0, 4) === "http") ? $id : $presenter->link($id)}
 			<li><a n:class="$presenter->isLinkCurrent($id . '*') ? active" href="{$href}">{$item}</a></li>
 		</menu>
 

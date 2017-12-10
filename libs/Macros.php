@@ -35,7 +35,7 @@ class Macros
 			$page .= '/' . $lang;
 		}
 
-		return 'http://wiki.miranda-ng.org/index.php?title=' . $page . $anchor;
+		return 'https://wiki.miranda-ng.org/index.php?title=' . $page . $anchor;
 	}
 
 	/**

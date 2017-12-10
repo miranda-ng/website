@@ -19,6 +19,8 @@ abstract class BasePresenter extends \BasePresenter
 		$wikiLink = $this->languagesModel->getWikiLink($this->lang);
 		if (Strings::startsWith($wikiLink, "http://"))
 			$wikiLink = substr($wikiLink, 5);
+		if (Strings::startsWith($wikiLink, "https://"))
+			$wikiLink = substr($wikiLink, 6);
 
 		$this->template->menu = array(
 			"Home:" => $this->translator->translate("Home"),
