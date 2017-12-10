@@ -1,6 +1,15 @@
+{define column-title}
+	<a n:href="this, $sort_id => $sort_value" title="{_'Sort by this column'}">{_$name}</a>
+	{if $presenter->$sort_id == $sort_value} &darr;{/if}
+{/define}
+
 {block content}
 <a n:href="default" class="more rfloat">{_"Register own VI account"} &raquo;</a>
 <h1 n:block="title">{_"Statistics"} - {_"Version Info"}</h1>
+
+<p n:if="$filter" style="padding: 5px 10px; background: #57C6F5; color: white; border-radius: 6px">
+	{_"Filtering by keyword:"} <b>{$filter}</b> <a n:href="this, filter => NULL" style="float:right; color: white;">{_"Clear filter"} &times;</a>
+</p>
 
 <h2>{_"Users statistics"}</h2>
 <table style="width: auto">
@@ -14,40 +23,62 @@
 	</tr>
 	<tr>
 		<th>{_"Plugins per user"}:</th>
-		<td>{_"Average"}: {= round($pluginsCount / $viCount)}, {_"Minimum"}: {$minPlugins}, {_"Maximum"}: {$maxPlugins}</td>
+		<td>{_"Average"}: {= $viCount > 0 ? round($pluginsCount / $viCount) : 0}, {_"Minimum"}: {$minPlugins}, {_"Maximum"}: {$maxPlugins}</td>
 	</tr>
 </table>
 
-<h2>{_"Miranda NG statistics"}</h2>
+<h2>{_"Miranda NG statistics"} ({=count($cores)})</h2>
 <table style="width: auto">
 	<thead>
 		<tr>
-			<th>{_"Version"}</th>
-			<th>{_"Used"}</th>
+			<th>{include column-title, "sort_id" => "sort_core", "sort_value" => "name", "name" => "Version"}</th>
+			<th>{include column-title, "sort_id" => "sort_core", "sort_value" => "count", "name" => "Used"}</th>
+			<th>{_"Ratio"}</th>
 		</tr>
 	</thead>
 	<tbody n:inner-foreach="$cores as $core">
 		<tr>
-			<td>{$core->version}</td>
+			<td><a n:href="this, filter => $core->raw">{$core->version}</a></td>
 			<td>{$core->count}&times;</td>
+			<td>{= $viCount > 0 ? round($core->count / $viCount * 100) : 0}&nbsp;%</td>
 		</tr>
 	</tbody>
 </table>
 
-<h2>{_"Plugins statistics"}</h2>
+<h2>{_"Language packs statistics"} ({=count($languages)})</h2>
+<table style="width: auto">
+	<thead>
+		<tr>
+			<th>{include column-title, "sort_id" => "sort_lang", "sort_value" => "name", "name" => "Language pack"}</th>
+			<th>{include column-title, "sort_id" => "sort_lang", "sort_value" => "count", "name" => "Used"}</th>
+			<th>{_"Ratio"}</th>
+		</tr>
+	</thead>
+	<tbody n:inner-foreach="$languages as $lang">
+		<tr>
+			<td><a n:href="this, filter => $lang->name">{$lang->name}</a></td>
+			<td>{$lang->count}&times;</td>
+			<td>{= $viCount > 0 ? round($lang->count / $viCount * 100) : 0}&nbsp;%</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>{_"Plugins statistics"} ({=count($plugins)})</h2>
 <table style="width: auto">
 	<thead>
 		<tr>
 			<th>{_"Filename"}</th>
-			<th>{_"Plugin name"}</th>
-			<th>{_"Used"}</th>
+			<th>{include column-title, "sort_id" => "sort_plugins", "sort_value" => "name", "name" => "Plugin name"}</th>
+			<th>{include column-title, "sort_id" => "sort_plugins", "sort_value" => "count", "name" => "Used"}</th>
+			<th>{_"Ratio"}</th>
 		</tr>
 	</thead>
 	<tbody n:inner-foreach="$plugins as $plugin">
 		<tr>
 			<td>{$plugin->dllName}</td>
-			<td>{$plugin->name}</td>
+			<td><a n:href="this, filter => $plugin->name">{$plugin->name}</a></td>
 			<td>{$plugin->count}&times;</td>
+			<td>{= $viCount > 0 ? round($plugin->count / $viCount * 100) : 0}&nbsp;%</td>
 		</tr>
 	</tbody>
 </table>

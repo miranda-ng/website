@@ -10,6 +10,18 @@ final class VersioninfoPresenter extends BasePresenter
 {
 	/** @var \Models\PagesModel @inject */
 	public $pagesModel;
+	
+	/** @persistent */
+	public $sort_core = "count";
+	
+	/** @persistent */
+	public $sort_lang = "count";
+	
+	/** @persistent */
+	public $sort_plugins = "count";
+	
+	/** @persistent */
+	public $filter;
 
 	const PASSWORD_MAX_LENGTH = 4096;
 
@@ -38,6 +50,7 @@ final class VersioninfoPresenter extends BasePresenter
 		$pluginsCount = 0;
 		$plugins = array();
 		$cores = array();
+		$langs = array();
 		$maxPlugins = false;
 		$minPlugins = false;
 
@@ -48,6 +61,10 @@ final class VersioninfoPresenter extends BasePresenter
 				continue;
 			}
 
+			if ($this->filter && mb_stripos($user->vi, $this->filter) === false) {
+				continue;
+			}
+			
 			$viCount++;
 
 			$parsingPlugins = false;
@@ -60,23 +77,28 @@ final class VersioninfoPresenter extends BasePresenter
 					}
 
 					if (preg_match("/([^\(\)]+)\.dll .*? - (.*)/", $line, $matches)) {
-						$dllName = strtolower(trim($matches[1])) . ".dll";
+						$dllName = strtolower(trim($matches[1], "¤  \r\n\t")) . ".dll";
 						$pluginName = $matches[2];
-
-						if (isset($plugins[$dllName])) {
-							$plugins[$dllName]->count++;
+						
+						if (preg_match("/^(.*?)(\|(ANSI|Unicode aware)\|.*?)?$/", $pluginName, $nameMatches)) {
+							$pluginName = $nameMatches[1];
+						}
+						$id = strtolower(trim($pluginName));
+						
+						if (isset($plugins[$id])) {
+							$plugins[$id]->count++;
 						} else {
-							$plugins[$dllName] = (object)array();
-							$plugins[$dllName]->count = 1;
-							$plugins[$dllName]->name = $pluginName;
-							$plugins[$dllName]->dllName = $dllName;
+							$plugins[$id] = (object)array();
+							$plugins[$id]->count = 1;
+							$plugins[$id]->name = $pluginName;
+							$plugins[$id]->dllName = $dllName;
 						}
 						//$pluginsCount++;
 					}
 				} else {
 					//if (preg_match("/^Miranda NG Version: ([^\[]+)/", $line, $matches)) {
 					if (preg_match("/^Miranda NG Version: (.+) build(.*)/", $line, $matches)) {
-						$core = strtolower(trim($matches[1]));
+						$core = $raw = strtolower(trim($matches[1]));
 						if (strpos($matches[2], "x64") !== false)
 							$core .= " x64";
 
@@ -86,6 +108,19 @@ final class VersioninfoPresenter extends BasePresenter
 							$cores[$core] = (object)array();
 							$cores[$core]->count = 1;
 							$cores[$core]->version = $core;
+							$cores[$core]->raw = $raw;
+						}
+					}
+					
+					if (preg_match("/^Language pack: (.*)/", $line, $matches)) {
+						$lang = strtolower(trim($matches[1]));
+
+						if (isset($langs[$lang])) {
+							$langs[$lang]->count++;
+						} else {
+							$langs[$lang] = (object)array();
+							$langs[$lang]->count = 1;
+							$langs[$lang]->name = $lang;
 						}
 					}
 
@@ -117,12 +152,27 @@ final class VersioninfoPresenter extends BasePresenter
 				return -1;
 		};
 
-		usort($plugins, $countSort);
-		usort($cores, $countSort);
-
+		if ($this->sort_core == "name")
+			ksort($cores);
+		else
+			usort($cores, $countSort);
+		
+		if ($this->sort_lang == "name")
+			ksort($langs);
+		else
+			usort($langs, $countSort);
+		
+		if ($this->sort_plugins == "name")
+			ksort($plugins);
+		else
+			usort($plugins, $countSort);
+		
+		$this->template->filter = $this->filter;
+		
 		$this->template->usersCount = $count;
 		$this->template->viCount = $viCount;
 		$this->template->cores = $cores;
+		$this->template->languages = $langs;
 		$this->template->plugins = $plugins;
 		$this->template->pluginsCount = $pluginsCount;
 
@@ -136,7 +186,9 @@ final class VersioninfoPresenter extends BasePresenter
 		$form->setTranslator($this->translator);
 
 		$form->addText("login", "Login:")
-				->setRequired();
+				->setRequired(); // TODO: As long as in DB are old weird logins, we can't check rules here
+				//->addRule(Form::MIN_LENGTH, NULL, 3)
+				//->addRule(Form::PATTERN, "Login can contain only ascii characters (a-Z) and numbers (0-9).", "^[a-zA-Z0-9]+$");
 
 		$form->addSubmit('submit', 'Show');
 
@@ -156,9 +208,10 @@ final class VersioninfoPresenter extends BasePresenter
 		$form->addProtection('Timeout for security token. Submit form again.');
 
 		$form->addText("login", "Login:")
+				->setOption("description", "Use only ascii characters (a-Z) and numbers (0-9).")
 				->setRequired()
 				->addRule(Form::MIN_LENGTH, NULL, 3)
-				->addRule(Form::PATTERN, "Login can contain only ascii characters (a-Z) and numbers (0-9).", "^[a-z0-9]+$");
+				->addRule(Form::PATTERN, "Login can contain only ascii characters (a-Z) and numbers (0-9).", "^[a-zA-Z0-9]+$");
 
 		$form->addText("email", "E-mail:")
 				->setRequired()
