@@ -60,6 +60,12 @@ class RouterFactory
 			//'lang' => "en"
 		), Route::SECURED);
 		
+		$frontRouter[] = new Route('//oauth.%domain%/' . $lang . '<action>[/<id>]', array(
+			'presenter' => 'Oauth',
+			'action' => 'default',
+			//'lang' => "en"
+		), Route::SECURED);
+		
 		$frontRouter[] = new Route($domain . $lang . '<presenter>[/<action>]/page/<vp-page>', array(
 				'presenter' => 'Home',
 				'action' => 'default',
