@@ -1,6 +1,6 @@
 {var $page_content = $presenter->getPagesData($page)}
 {block head}
-	<link rel="alternate" href="http://trac.miranda-ng.org/log/?format=rss&amp;limit=30&amp;mode=stop_on_copy&verbose=on" type="application/rss+xml" class="rss" title="RSS channel for commits">
+	<link title="Recent Commits to miranda-ng:master" href="https://github.com/miranda-ng/miranda-ng/commits/master.atom" rel="alternate" type="application/atom+xml">
 {/block}
 {block content}
 <h1 n:block="title">{$page_content->title}</h1>
@@ -9,7 +9,9 @@
 
 <h2>{_"Latest changes"}</h2>
 
-<table>
+<ul><li><a href="https://github.com/miranda-ng/miranda-ng/commits/" title="Revision log">{_"Show complete log"}</a></li></ul>
+
+{*<table>
 <tr>
 <th>{_"Rev."}</th>
 <th>{_"Author"}</th>
@@ -28,7 +30,8 @@
 	$rss->cache_dir = TEMP_DIR;
 	$rss->CDATA = 'content';
 
-	$value = "http://trac.miranda-ng.org/log/?format=rss&limit=30&mode=stop_on_copy&verbose=on";
+	//$value = "http://trac.miranda-ng.org/log/?format=rss&limit=30&mode=stop_on_copy&verbose=on";
+	$value = "https://github.com/miranda-ng/miranda-ng/commits/master.atom";
 	$data = array();
 	if ($rs = $rss->get($value)) {
 		foreach ($rs['items'] as $item) {
@@ -49,4 +52,4 @@
 ?>
 </table>
 
-<a href="http://trac.miranda-ng.org/log/" title="Revision log" class="rfloat">&raquo; {_"Show complete log"}</a>
+<a href="https://github.com/miranda-ng/miranda-ng/commits/" title="Revision log" class="rfloat">&raquo; {_"Show complete log"}</a> *}
