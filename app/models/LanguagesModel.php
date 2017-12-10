@@ -29,7 +29,7 @@ final class LanguagesModel extends BaseModel
 	}
 
 	public function getLanguages() {
-		return $this->getTable()->order("code = ? DESC, code", self::LANG_DEFAULT);
+		return $this->getTable()->where("disabled", 0)->order("code = ? DESC, code", self::LANG_DEFAULT);
 	}
 
 	public function getWikiLink($lang) {
