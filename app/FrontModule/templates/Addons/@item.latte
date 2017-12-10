@@ -4,10 +4,13 @@
 {if $tiles}
 	<a n:href="detail, $item->id" n:class="addon-block, colorbox, $iterator->isOdd() ? odd : even" rel="addons">
 
+		<strong n:if="$item->deprecated == 1" class="deprecated-small">{_"Warning: This addon is deprecated!"}</strong>
+	
 		<div n:href="detail, $item->id" rel="addon" class="image">
 			{var $imageUrl = $item->screenshot ? "/upload/images/" . $item->id . "_" . $item->screenshot : "/images/placeholder.png"}
 			<img src="{$imageUrl}" alt="">
 		</div>
+		
 
 		<h2>{!$presenter->highlight($item->name, $highlight)} {$item->version}</h2>
 
@@ -29,6 +32,8 @@
 
 	</a>
 {else}
+	<strong n:if="$item->deprecated == 1" class="deprecated-small">{_"Warning: This addon is deprecated!"}</strong>
+	
 	<h2><a n:href="detail, $item->id">{!$presenter->highlight($item->name, $highlight)} {$item->version}</a></h2>
 	<p class="date">{_"Added"} {$item->added|date,'j.n.Y'}{if $item->updated} ({_"updated"} {$item->updated|date,'j.n.Y'}){/if} | <strong>{$item->ref("old_authors", "author_id")->name}</strong></p>
 

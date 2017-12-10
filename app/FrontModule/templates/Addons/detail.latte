@@ -1,4 +1,6 @@
 {block content}
+<strong n:if="$item->deprecated == 1" class="deprecated">{_"Warning: This addon is deprecated!"}</strong>
+
 <a n:if="$item->changelog" n:href="changelog, $item->id" n:class="more, rfloat, $isAjax ? colorbox">{_"Show changelog"} &raquo;</a>
 <h1 n:block="title">{!$item->name} {$item->version}</h1>
 

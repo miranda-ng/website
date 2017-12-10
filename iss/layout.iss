@@ -851,6 +851,7 @@ aside.addons menu a.active {
 .overlay-box {
 	background: white;
 	padding: 20px;
+	position: relative;
 
 	h1 {
 		font-size: 20px;
@@ -858,7 +859,7 @@ aside.addons menu a.active {
 
 	&.sized {
 		width: 600px;
-		height: 550px;
+		height: 590px;
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
@@ -876,4 +877,18 @@ aside.addons menu a.active {
 		overflow-x: hidden;
 		overflox-y: auto;
 	}
+}
+
+.deprecated, .deprecated-small { 
+	clear: both;
+	background: #CC2222;
+	color: white;
+	display: block;
+	margin: -20px -25px 20px;
+	padding: 10px;
+	text-align: center;
+}
+
+.deprecated-small {
+	margin: -10px -10px 10px;
 }
