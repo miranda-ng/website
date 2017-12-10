@@ -6,22 +6,19 @@ php:
 	date.timezone: Europe/Prague
 	# zlib.output_compression: yes
 
-session:
-	expiration: 31 days
-	autoStart: smart
-	#savePath: "%tempDir%/sessions"
-	#cookieDomain: ".%domain%"
+nette:
+	session:
+		expiration: 31 days
+		autoStart: smart
+		#savePath: "%tempDir%/sessions"
+		#cookieDomain: ".%domain%"
 
-application:
-	#errorPresenter: Error
+	application:
+		#errorPresenter: Error
 
-di:
-	# FIXME: remove this
-	accessors: True
-
-#tracy:
-	#bar:
-		#- LiveTranslator\Panel
+	#debugger:
+		#bar:
+			#- LiveTranslator\Panel
 
 services:
 	routerFactory: RouterFactory
@@ -40,3 +37,6 @@ services:
 	#translatorStorage: LiveTranslator\Storage\File(%appDir%/langs)
 	translator: LiveTranslator\Translator(en)
 	translatorPanel: LiveTranslator\Panel
+
+extensions:
+	debugger.session: Kdyby\SessionPanel\DI\SessionPanelExtension

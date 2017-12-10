@@ -1,21 +1,22 @@
-application:
-	debugger: true
-	catchExceptions: false
+nette:
+	application:
+		debugger: true
+		catchExceptions: false
 
-routing:
-	debugger: true
+	routing:
+		debugger: true
 
-security:
-	debugger: true
+	security:
+		debugger: true
 
-di:
-	debugger: true
+	container:
+		debugger: true
 
-session:
-	debugger: true
+	session:
+		debugger: false
 
-tracy:
-	strictMode: true
-	showLocation: true
-	maxLen: 250
-	maxDepth: 3
+	debugger:
+		strictMode: true
+		showLocation: true
+		maxLen: 250
+		maxDepth: 3
