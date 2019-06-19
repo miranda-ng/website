@@ -59,10 +59,10 @@ class RouterFactory
 			'action' => 'default',
 			//'lang' => "en"
 		), Route::SECURED);
-		
-		$frontRouter[] = new Route('//oauth.%domain%/' . $lang . '<action>[/<id>]', array(
+
+		$frontRouter[] = new Route('//www.%domain%/verification', array(
 			'presenter' => 'Oauth',
-			'action' => 'default',
+			'action' => 'verification',
 			//'lang' => "en"
 		), Route::SECURED);
 		
